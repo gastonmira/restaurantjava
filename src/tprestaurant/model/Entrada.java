@@ -31,12 +31,6 @@ public class Entrada extends Producto {
         return costo;
     }
 
-    @Override
-    public float precio() {
-        
-        return costo*((porcentajeGanancia/100)+1);
-    }
-
     /**
      * @param costo the costo to set
      */

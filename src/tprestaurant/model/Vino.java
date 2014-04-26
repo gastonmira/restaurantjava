@@ -12,6 +12,17 @@ public class Vino extends Bebida {
     private Varietales varietal;
     private Provincias provincia;
 
+    public Vino(Varietales varietal, Provincias provincia) {
+        this.varietal = varietal;
+        this.provincia = provincia;
+    }
+
+    public Vino(Varietales varietal, Provincias provincia, float p, String desc) {
+        super(p, desc);
+        this.varietal = varietal;
+        this.provincia = provincia;
+    }
+
     /**
      * @return the varietal
      */

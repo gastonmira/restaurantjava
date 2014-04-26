@@ -18,4 +18,10 @@ public class Restaurant {
         productos = new ArrayList<Producto>();
         ingredientes = new ArrayList<Ingrediente>();
     }
+
+    public Restaurant(ArrayList<Menu> menus, ArrayList<Producto> productos, ArrayList<Ingrediente> ingredientes) {
+        this.menus = menus;
+        this.productos = productos;
+        this.ingredientes = ingredientes;
+    }
 }

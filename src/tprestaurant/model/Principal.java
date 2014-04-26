@@ -13,6 +13,18 @@ import java.util.ArrayList;
  */
 public class Principal extends Producto {
 
+    public Principal() {
+        this.ingredientes = new ArrayList<IngredienteDePrincipal>();
+        this.porcentajeGanancia = 0;
+        setDescripcion("");
+    }
+    
+    public Principal(ArrayList<IngredienteDePrincipal> ingredientes, float porcentajeGanancia, String desc) {
+        this.ingredientes = new ArrayList<IngredienteDePrincipal>(ingredientes);
+        this.porcentajeGanancia = porcentajeGanancia;
+        setDescripcion(desc);
+    }
+
     private ArrayList<IngredienteDePrincipal> ingredientes;
     private float porcentajeGanancia;
 
