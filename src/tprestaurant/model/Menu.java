@@ -24,6 +24,8 @@ public class Menu {
 
     private Date fechaVigenciaInicial;
     private Date fechaVigenciaFinal;
+    
+    private String descripcion;
 
     public Menu()
     {
@@ -33,6 +35,7 @@ public class Menu {
         postres = new ArrayList<ItemMenu>();
         vinos = new ArrayList<ItemMenu>();
         fechaVigenciaInicial = new Date();
+        fechaVigenciaFinal = null;
     }
 
     public void Metodo()
@@ -44,6 +47,48 @@ public class Menu {
             bebida = itbebida.next();
             //do something
         }
+    }
+
+    /**
+     * @return the fechaVigenciaInicial
+     */
+    public Date getFechaVigenciaInicial() {
+        return fechaVigenciaInicial;
+    }
+
+    /**
+     * @param fechaVigenciaInicial the fechaVigenciaInicial to set
+     */
+    public void setFechaVigenciaInicial(Date fechaVigenciaInicial) {
+        this.fechaVigenciaInicial = fechaVigenciaInicial;
+    }
+
+    /**
+     * @return the fechaVigenciaFinal
+     */
+    public Date getFechaVigenciaFinal() {
+        return fechaVigenciaFinal;
+    }
+
+    /**
+     * @param fechaVigenciaFinal the fechaVigenciaFinal to set
+     */
+    public void setFechaVigenciaFinal(Date fechaVigenciaFinal) {
+        this.fechaVigenciaFinal = fechaVigenciaFinal;
+    }
+
+    /**
+     * @return the descripcion
+     */
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
 
 }

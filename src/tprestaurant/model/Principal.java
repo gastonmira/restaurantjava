@@ -13,5 +13,31 @@ import java.util.ArrayList;
  */
 public class Principal extends Producto {
 
-    private ArrayList ingredientes;
+    private ArrayList<IngredienteDePrincipal> ingredientes;
+    private float porcentajeGanancia;
+
+    @Override
+    public float costo() {
+        float result = 0;
+        for(IngredienteDePrincipal ing: ingredientes)
+        {
+            result += ing.getCostoPorUnidad()*ing.getCantidadUtilizada();
+        }
+        return result;
+    }
+
+    /**
+     * @return the porcentajeGanancia
+     */
+    @Override
+    public float getPorcentajeGanancia() {
+        return porcentajeGanancia;
+    }
+
+    /**
+     * @param porcentajeGanancia the porcentajeGanancia to set
+     */
+    public void setPorcentajeGanancia(float porcentajeGanancia) {
+        this.porcentajeGanancia = porcentajeGanancia;
+    }
 }

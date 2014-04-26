@@ -11,4 +11,51 @@ package tprestaurant.model;
  */
 public class Entrada extends Producto {
 
+    public Entrada() {
+        this.costo = 0;
+        this.porcentajeGanancia = 0;
+        setDescripcion("");
+    }
+    public Entrada(float costo, float porcentajeGanancia, String desc) {
+        this.costo = costo;
+        this.porcentajeGanancia = porcentajeGanancia;
+        setDescripcion(desc);
+    }
+    
+    private float costo;
+    private float porcentajeGanancia;
+
+    @Override
+    public float costo() {
+        
+        return costo;
+    }
+
+    @Override
+    public float precio() {
+        
+        return costo*((porcentajeGanancia/100)+1);
+    }
+
+    /**
+     * @param costo the costo to set
+     */
+    public void setCosto(float costo) {
+        this.costo = costo;
+    }
+
+    /**
+     * @return the porcentajeGanancia
+     */
+    @Override
+    public float getPorcentajeGanancia() {
+        return porcentajeGanancia;
+    }
+
+    /**
+     * @param porcentajeGanancia the porcentajeGanancia to set
+     */
+    public void setPorcentajeGanancia(float porcentajeGanancia) {
+        this.porcentajeGanancia = porcentajeGanancia;
+    }
 }
