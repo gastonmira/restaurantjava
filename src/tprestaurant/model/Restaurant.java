@@ -1,12 +1,13 @@
 package tprestaurant.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  *
  * @author jmdapice
  */
-public class Restaurant {
+public class Restaurant implements Serializable{
     
     private ArrayList<Menu> menus;
     private ArrayList<Producto> productos;
