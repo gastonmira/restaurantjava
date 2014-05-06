@@ -5,11 +5,13 @@
 
 package tprestaurant.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Usuario
  */
-public abstract class Producto {
+public abstract class Producto implements Comparable, Serializable{
     
     private String descripcion;
     
@@ -42,5 +44,15 @@ public abstract class Producto {
             return false;
         
         return this.descripcion.equals(((Producto)o).getDescripcion());
+    }
+    
+    @Override
+    public int compareTo(Object o){
+        Producto p = (Producto)o;
+        String pClassName = this.getClass().getName();
+        String oClassName = p.getClass().getName();
+        int compClass = pClassName.compareTo(oClassName);
+        
+        return compClass!=0 ? compClass : this.getDescripcion().compareTo(p.getDescripcion());
     }
 }
