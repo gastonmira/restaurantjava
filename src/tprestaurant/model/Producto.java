@@ -35,6 +35,12 @@ public abstract class Producto {
         this.descripcion = descripcion;
     }
     
-    
-
+    @Override
+    public boolean equals(Object o) {
+        
+        if(!(o instanceof Producto))
+            return false;
+        
+        return this.descripcion.equals(((Producto)o).getDescripcion());
+    }
 }

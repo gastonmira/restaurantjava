@@ -16,11 +16,7 @@ import java.util.Iterator;
 public class Menu {
 
     //Coleccion de items (productos)
-    private ArrayList<ItemMenu> bebidas;
-    private ArrayList<ItemMenu> entradas;
-    private ArrayList<ItemMenu> principales;
-    private ArrayList<ItemMenu> postres;
-    private ArrayList<ItemMenu> vinos;
+    private ArrayList<ItemMenu> productos;
 
     private Date fechaVigenciaInicial;
     private Date fechaVigenciaFinal;
@@ -29,39 +25,16 @@ public class Menu {
 
     public Menu()
     {
-        bebidas = new ArrayList<ItemMenu>();
-        entradas = new ArrayList<ItemMenu>();
-        principales = new ArrayList<ItemMenu>();
-        postres = new ArrayList<ItemMenu>();
-        vinos = new ArrayList<ItemMenu>();
+        productos = new ArrayList<ItemMenu>();
+        
         fechaVigenciaInicial = new Date();
         fechaVigenciaFinal = null;
         descripcion = "";
     }
 
-    public void agregarVino(Vino v)
+    public void agregarProducto(Producto p)
     {
-        vinos.add(new ItemMenu(v));
-    }
-    
-    public void agregarEntrada(Entrada v)
-    {
-        entradas.add(new ItemMenu(v));
-    }
-    
-    public void agregarPrincipal(Principal v)
-    {
-        principales.add(new ItemMenu(v));
-    }
-    
-    public void agregarPostre(Postre v)
-    {
-        postres.add(new ItemMenu(v));
-    }
-    
-    public void agregarBebida(Bebida v)
-    {
-        bebidas.add(new ItemMenu(v));
+        productos.add(new ItemMenu(p));
     }
     
     /**
@@ -107,73 +80,16 @@ public class Menu {
     }
 
     /**
-     * @return the bebidas
+     * @return the productos
      */
-    public ArrayList<ItemMenu> getBebidas() {
-        return bebidas;
+    public ArrayList<ItemMenu> getProductos() {
+        return productos;
     }
 
     /**
-     * @param bebidas the bebidas to set
+     * @param productos the bebidas to set
      */
-    public void setBebidas(ArrayList<ItemMenu> bebidas) {
-        this.bebidas = bebidas;
+    public void setBebidas(ArrayList<ItemMenu> productos) {
+        this.productos = productos;
     }
-
-    /**
-     * @return the entradas
-     */
-    public ArrayList<ItemMenu> getEntradas() {
-        return entradas;
-    }
-
-    /**
-     * @param entradas the entradas to set
-     */
-    public void setEntradas(ArrayList<ItemMenu> entradas) {
-        this.entradas = entradas;
-    }
-
-    /**
-     * @return the principales
-     */
-    public ArrayList<ItemMenu> getPrincipales() {
-        return principales;
-    }
-
-    /**
-     * @param principales the principales to set
-     */
-    public void setPrincipales(ArrayList<ItemMenu> principales) {
-        this.principales = principales;
-    }
-
-    /**
-     * @return the postres
-     */
-    public ArrayList<ItemMenu> getPostres() {
-        return postres;
-    }
-
-    /**
-     * @param postres the postres to set
-     */
-    public void setPostres(ArrayList<ItemMenu> postres) {
-        this.postres = postres;
-    }
-
-    /**
-     * @return the vinos
-     */
-    public ArrayList<ItemMenu> getVinos() {
-        return vinos;
-    }
-
-    /**
-     * @param vinos the vinos to set
-     */
-    public void setVinos(ArrayList<ItemMenu> vinos) {
-        this.vinos = vinos;
-    }
-
 }
