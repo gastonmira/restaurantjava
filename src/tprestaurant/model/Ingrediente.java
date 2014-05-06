@@ -68,5 +68,14 @@ public class Ingrediente {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-
+    
+    
+    @Override
+    public boolean equals(Object o) {
+        
+        if(!(o instanceof Ingrediente))
+            return false;
+        
+        return this.descripcion.equals(((Ingrediente)o).getDescripcion());
+    }
 }

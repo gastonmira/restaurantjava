@@ -5,11 +5,13 @@
 
 package tprestaurant.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Usuario
  */
-public class ItemMenu {
+public class ItemMenu implements Serializable {
     private Producto producto;
     private float precio;
     

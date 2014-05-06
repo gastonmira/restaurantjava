@@ -5,11 +5,13 @@
 
 package tprestaurant.model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Usuario
  */
-public class Bebida extends Producto{
+public class Bebida extends Producto implements Serializable {
 
     private float precioVenta;
     
