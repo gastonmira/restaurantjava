@@ -6,6 +6,8 @@
 
 package tprestaurant;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author gastonmira
@@ -101,6 +103,11 @@ public class ProductosForm extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         btnAddEntrada.setText("Agregar Entrada");
+        btnAddEntrada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddEntradaMouseClicked(evt);
+            }
+        });
 
         jLabel1.setText("Para editar un producto haga doble click en el mismo");
 
@@ -169,6 +176,11 @@ public class ProductosForm extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable2);
 
         btnAddPrincipal.setText("Agregar plato principal");
+        btnAddPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddPrincipalMouseClicked(evt);
+            }
+        });
 
         jLabel2.setText("Para editar un producto haga doble click en el mismo");
 
@@ -237,6 +249,11 @@ public class ProductosForm extends javax.swing.JFrame {
         jScrollPane3.setViewportView(jTable3);
 
         btnAddPostre.setText("Agregar Postre");
+        btnAddPostre.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddPostreMouseClicked(evt);
+            }
+        });
 
         jLabel3.setText("Para editar un producto haga doble click en el mismo");
 
@@ -305,6 +322,11 @@ public class ProductosForm extends javax.swing.JFrame {
         jScrollPane4.setViewportView(jTable4);
 
         btnAddBebida.setText("Agregar Bebida");
+        btnAddBebida.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddBebidaMouseClicked(evt);
+            }
+        });
 
         jLabel4.setText("Para editar un producto haga doble click en el mismo");
 
@@ -373,6 +395,11 @@ public class ProductosForm extends javax.swing.JFrame {
         jScrollPane5.setViewportView(jTable5);
 
         btnAddVino.setText("Agregar Vino");
+        btnAddVino.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnAddVinoMouseClicked(evt);
+            }
+        });
 
         jLabel5.setText("Para editar un producto haga doble click en el mismo");
 
@@ -524,6 +551,41 @@ public class ProductosForm extends javax.swing.JFrame {
     private void btnLimpiarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarEntradaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnLimpiarEntradaActionPerformed
+
+    private void btnAddEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEntradaMouseClicked
+        // TODO add your handling code here:
+        JFrame altaEntrada = new AltaEntrada();
+        altaEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaEntrada.setVisible(true);
+    }//GEN-LAST:event_btnAddEntradaMouseClicked
+
+    private void btnAddPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPrincipalMouseClicked
+        // TODO add your handling code here:
+        JFrame altaPrincipal = new AltaPrincipal();
+        altaPrincipal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaPrincipal.setVisible(true);
+    }//GEN-LAST:event_btnAddPrincipalMouseClicked
+
+    private void btnAddPostreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPostreMouseClicked
+        // TODO add your handling code here:
+        JFrame altaPostre = new AltaPostre();
+        altaPostre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaPostre.setVisible(true);
+    }//GEN-LAST:event_btnAddPostreMouseClicked
+
+    private void btnAddBebidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddBebidaMouseClicked
+        // TODO add your handling code here:
+        JFrame altaBebida = new AltaBebida();
+        altaBebida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaBebida.setVisible(true);
+    }//GEN-LAST:event_btnAddBebidaMouseClicked
+
+    private void btnAddVinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddVinoMouseClicked
+        // TODO add your handling code here:
+        JFrame altaVino = new AltaVino();
+        altaVino.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaVino.setVisible(true);
+    }//GEN-LAST:event_btnAddVinoMouseClicked
 
     /**
      * @param args the command line arguments

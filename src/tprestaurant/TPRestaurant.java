@@ -6,6 +6,8 @@
 
 package tprestaurant;
 
+import javax.swing.JFrame;
+
 /**
  *
  * @author gastonmira
@@ -33,7 +35,8 @@ public class TPRestaurant extends javax.swing.JFrame {
         btnReportes = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,8 +63,11 @@ public class TPRestaurant extends javax.swing.JFrame {
 
         jMenu1.setText("Archivo");
 
-        jMenu3.setText("Cargar Ingredientes");
-        jMenu1.add(jMenu3);
+        jMenuItem1.setText("Cargar Porcentaje ganancia postres ");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setText("Cargar Ingredientes");
+        jMenu1.add(jMenuItem2);
 
         jMenuBar1.add(jMenu1);
 
@@ -96,16 +102,23 @@ public class TPRestaurant extends javax.swing.JFrame {
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
         // TODO add your handling code here: BOTON PRODUCTOS CLICKEADO
-        
+        JFrame productosForm = new ProductosForm();
+        productosForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        productosForm.setVisible(true);
     }//GEN-LAST:event_btnProductosMouseClicked
 
     private void btnMenuesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuesMouseClicked
         // TODO add your handling code here: BOTON MENUES CLICKEADO
-        
+        JFrame menuesForm = new MenuesForm();
+        menuesForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        menuesForm.setVisible(true);
     }//GEN-LAST:event_btnMenuesMouseClicked
 
     private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
         // TODO add your handling code here: BOTON REPORTES CLICKEADO
+        JFrame reportesForm = new ReportesForm();
+        reportesForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        reportesForm.setVisible(true);
     }//GEN-LAST:event_btnReportesMouseClicked
 
     /**
@@ -148,7 +161,8 @@ public class TPRestaurant extends javax.swing.JFrame {
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnReportes;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu3;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }
