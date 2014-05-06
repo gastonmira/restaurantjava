@@ -5,15 +5,15 @@
 
 package tprestaurant.model;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 
 /**
  *
  * @author Usuario
  */
-public class Menu {
+public class Menu implements Serializable {
 
     //Coleccion de items (productos)
     private ArrayList<ItemMenu> productos;
