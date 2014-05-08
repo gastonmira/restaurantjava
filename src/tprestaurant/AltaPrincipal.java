@@ -6,6 +6,8 @@
 
 package tprestaurant;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gastonmira
@@ -35,7 +37,7 @@ public class AltaPrincipal extends javax.swing.JFrame {
         btnCancelarPrin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txtPorGananciaPrin = new javax.swing.JTextField();
+        porcGananciaPrin = new javax.swing.JTextField();
         checkBoxPrin = new javax.swing.JCheckBox();
         jComboBox1 = new javax.swing.JComboBox();
         jSpinner1 = new javax.swing.JSpinner();
@@ -71,15 +73,17 @@ public class AltaPrincipal extends javax.swing.JFrame {
 
         jLabel5.setText("Porcentaje de ganancia");
 
-        txtPorGananciaPrin.setText("jTextField2");
+        porcGananciaPrin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                porcGananciaPrinKeyReleased(evt);
+            }
+        });
 
         checkBoxPrin.setText("¿Activo?");
 
         jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setText("jLabel6");
-
-        jTextField1.setText("jTextField1");
 
         jLabel7.setText("Nombre");
 
@@ -132,7 +136,7 @@ public class AltaPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txtPorGananciaPrin, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(porcGananciaPrin, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
             .addGroup(layout.createSequentialGroup()
                 .addComponent(btnGuardarPrin)
@@ -164,7 +168,7 @@ public class AltaPrincipal extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 43, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txtPorGananciaPrin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(porcGananciaPrin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarPrin)
@@ -175,6 +179,17 @@ public class AltaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void porcGananciaPrinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_porcGananciaPrinKeyReleased
+        // TODO add your handling code here:
+        try{
+           Float.parseFloat(porcGananciaPrin.getText());
+       }catch(NumberFormatException e){
+          porcGananciaPrin.setText("");
+          JOptionPane.showMessageDialog(null,"Porcentaje de Ganancia para Principal Inválido");
+       }
+        
+    }//GEN-LAST:event_porcGananciaPrinKeyReleased
 
     /**
      * @param args the command line arguments
@@ -228,6 +243,6 @@ public class AltaPrincipal extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JTable jTable2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField txtPorGananciaPrin;
+    private javax.swing.JTextField porcGananciaPrin;
     // End of variables declaration//GEN-END:variables
 }

@@ -6,6 +6,11 @@
 
 package tprestaurant;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import tprestaurant.model.ExcepcionLogica;
+
 /**
  *
  * @author gastonmira
@@ -32,10 +37,11 @@ public class AltaBebida extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        precioBebida = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -43,17 +49,26 @@ public class AltaBebida extends javax.swing.JFrame {
 
         jLabel2.setText("Descripción");
 
-        jTextField1.setText("jTextField1");
-
         jLabel3.setText("Precio de venta");
 
-        jTextField2.setText("jTextField2");
+        precioBebida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                precioBebidaActionPerformed(evt);
+            }
+        });
+        precioBebida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                precioBebidaKeyReleased(evt);
+            }
+        });
 
         jButton1.setText("Guardar");
 
         jButton2.setText("Eliminar");
 
         jButton3.setText("Cancelar");
+
+        jLabel4.setText("Precio decimal con \",\"");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -72,13 +87,18 @@ public class AltaBebida extends javax.swing.JFrame {
                             .addComponent(jLabel3)
                             .addComponent(jButton1))
                         .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(precioBebida))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton2)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, Short.MAX_VALUE)
                                 .addComponent(jButton3))
-                            .addComponent(jTextField2))))
-                .addContainerGap(102, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(0, 0, Short.MAX_VALUE)))))
+                .addContainerGap(69, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -92,7 +112,8 @@ public class AltaBebida extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(precioBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -103,6 +124,21 @@ public class AltaBebida extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void precioBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioBebidaActionPerformed
+       
+       
+    }//GEN-LAST:event_precioBebidaActionPerformed
+
+    private void precioBebidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precioBebidaKeyReleased
+        // TODO add your handling code here:
+        try{
+           Float.parseFloat(precioBebida.getText());
+       }catch(NumberFormatException e){
+          precioBebida.setText("");
+          JOptionPane.showMessageDialog(null,"Precio de Bebida Inválido");
+       }
+    }//GEN-LAST:event_precioBebidaKeyReleased
 
     /**
      * @param args the command line arguments
@@ -146,7 +182,8 @@ public class AltaBebida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField precioBebida;
     // End of variables declaration//GEN-END:variables
 }

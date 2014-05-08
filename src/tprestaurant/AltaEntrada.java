@@ -6,6 +6,8 @@
 
 package tprestaurant;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gastonmira
@@ -31,9 +33,9 @@ public class AltaEntrada extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         txtNombreEnt = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        txtCostoEnt = new javax.swing.JTextField();
+        costoEnt = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        txtPrecioEnt = new javax.swing.JTextField();
+        porcentajeEnt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnAddEntradaAProd = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
@@ -44,15 +46,21 @@ public class AltaEntrada extends javax.swing.JFrame {
 
         jLabel1.setText("Nombre");
 
-        txtNombreEnt.setText("jTextField1");
-
         jLabel3.setText("Costo");
 
-        txtCostoEnt.setText("jTextField2");
+        costoEnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                costoEntKeyReleased(evt);
+            }
+        });
 
         jLabel4.setText("Porcentaje ganancia");
 
-        txtPrecioEnt.setText("jTextField3");
+        porcentajeEnt.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                porcentajeEntKeyReleased(evt);
+            }
+        });
 
         jLabel5.setText("Alta Entrada");
 
@@ -81,7 +89,7 @@ public class AltaEntrada extends javax.swing.JFrame {
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel3)
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(txtCostoEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(costoEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                     .addComponent(jLabel1)
                                     .addGap(87, 87, 87)
@@ -89,7 +97,7 @@ public class AltaEntrada extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txtPrecioEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(porcentajeEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(btnAddEntradaAProd)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -113,11 +121,11 @@ public class AltaEntrada extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txtCostoEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(costoEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txtPrecioEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(porcentajeEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddEntradaAProd)
@@ -128,6 +136,27 @@ public class AltaEntrada extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void costoEntKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_costoEntKeyReleased
+        // TODO add your handling code here:
+        try{
+           Float.parseFloat(costoEnt.getText());
+       }catch(NumberFormatException e){
+          costoEnt.setText("");
+          JOptionPane.showMessageDialog(null,"Costo de Entrada Inválido");
+       }
+    }//GEN-LAST:event_costoEntKeyReleased
+
+    private void porcentajeEntKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_porcentajeEntKeyReleased
+        // TODO add your handling code here:
+        try{
+           Float.parseFloat(porcentajeEnt.getText());
+       }catch(NumberFormatException e){
+          porcentajeEnt.setText("");
+          JOptionPane.showMessageDialog(null,"Porcentaje de ganancia de Entrada Inválido");
+       }
+                                
+    }//GEN-LAST:event_porcentajeEntKeyReleased
 
     /**
      * @param args the command line arguments
@@ -167,14 +196,14 @@ public class AltaEntrada extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEntradaAProd;
     private javax.swing.JCheckBox checkBoxEnt;
+    private javax.swing.JTextField costoEnt;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField txtCostoEnt;
+    private javax.swing.JTextField porcentajeEnt;
     private javax.swing.JTextField txtNombreEnt;
-    private javax.swing.JTextField txtPrecioEnt;
     // End of variables declaration//GEN-END:variables
 }

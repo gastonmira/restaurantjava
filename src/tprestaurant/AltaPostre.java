@@ -6,6 +6,8 @@
 
 package tprestaurant;
 
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author gastonmira
@@ -31,7 +33,7 @@ public class AltaPostre extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        costoPostre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -42,11 +44,13 @@ public class AltaPostre extends javax.swing.JFrame {
 
         jLabel1.setText("Descripción");
 
-        jTextField1.setText("jTextField1");
-
         jLabel2.setText("Costo");
 
-        jTextField2.setText("jTextField2");
+        costoPostre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                costoPostreKeyReleased(evt);
+            }
+        });
 
         jLabel3.setText("Alta de Postre");
 
@@ -71,9 +75,9 @@ public class AltaPostre extends javax.swing.JFrame {
                             .addComponent(jLabel2))
                         .addGap(26, 26, 26)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addComponent(costoPostre)
+                                .addGap(83, 83, 83)
                                 .addComponent(jCheckBox2))
                             .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
@@ -99,7 +103,7 @@ public class AltaPostre extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(costoPostre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCheckBox2))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -111,6 +115,17 @@ public class AltaPostre extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void costoPostreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_costoPostreKeyReleased
+        // TODO add your handling code here:
+        try{
+           Float.parseFloat(costoPostre.getText());
+       }catch(NumberFormatException e){
+          costoPostre.setText("");
+          JOptionPane.showMessageDialog(null,"Costo de Postre Inválido");
+       }
+                                
+    }//GEN-LAST:event_costoPostreKeyReleased
 
     /**
      * @param args the command line arguments
@@ -148,6 +163,7 @@ public class AltaPostre extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField costoPostre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -156,6 +172,5 @@ public class AltaPostre extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     // End of variables declaration//GEN-END:variables
 }

@@ -120,8 +120,6 @@ public class ProductosForm extends javax.swing.JFrame {
 
         btnFiltrarEntrada.setText("Filtrar");
 
-        txtBuscadorEntrada.setText("jTextField1");
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -192,8 +190,6 @@ public class ProductosForm extends javax.swing.JFrame {
         });
 
         btnFiltrarPrincipal.setText("Filtrar");
-
-        txtBuscadorPrincipal.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -266,8 +262,6 @@ public class ProductosForm extends javax.swing.JFrame {
 
         btnFiltrarPostre.setText("Filtrar");
 
-        txtBuscadorPostre.setText("jTextField1");
-
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -338,8 +332,6 @@ public class ProductosForm extends javax.swing.JFrame {
         });
 
         btnFiltrarBebida.setText("Filtrar");
-
-        txtBuscadorBebida.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -412,8 +404,6 @@ public class ProductosForm extends javax.swing.JFrame {
 
         btnFiltrarVino.setText("Filtrar");
 
-        txtBuscadorVino.setText("jTextField1");
-
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -475,8 +465,6 @@ public class ProductosForm extends javax.swing.JFrame {
                 btnLimpiarActionPerformed(evt);
             }
         });
-
-        txtBuscador.setText("jTextField1");
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
