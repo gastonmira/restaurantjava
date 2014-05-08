@@ -19,8 +19,8 @@ import javax.swing.JOptionPane;
  */
 public class Carga {
     
-    public void cargaIngredientes(String ingredientes, Restaurant rest){
-        File archivo = new File("c:\\" + ingredientes + ".txt");
+    public void cargaIngredientes(String ubicacion, String ingredientes, Restaurant rest){
+        File archivo = new File(ubicacion);
         TreeSet<Ingrediente> listIngredientes = new TreeSet<Ingrediente>();
         try
         {
