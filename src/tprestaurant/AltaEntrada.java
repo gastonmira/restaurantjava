@@ -139,23 +139,33 @@ public class AltaEntrada extends javax.swing.JFrame {
 
     private void costoEntKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_costoEntKeyReleased
         // TODO add your handling code here:
+      
+          if (!Validator.esFloat(costoEnt.getText())){
+            costoEnt.setText("");
+            JOptionPane.showMessageDialog(null,"Costo de Entrada Inválido");
+          }
+        /*
         try{
            Float.parseFloat(costoEnt.getText());
        }catch(NumberFormatException e){
           costoEnt.setText("");
           JOptionPane.showMessageDialog(null,"Costo de Entrada Inválido");
-       }
+       }*/
     }//GEN-LAST:event_costoEntKeyReleased
 
     private void porcentajeEntKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_porcentajeEntKeyReleased
         // TODO add your handling code here:
-        try{
+        if (!Validator.esFloat(costoEnt.getText())){
+            costoEnt.setText("");
+             JOptionPane.showMessageDialog(null,"Porcentaje de ganancia de Entrada Inválido");
+        }
+        /* try{
            Float.parseFloat(porcentajeEnt.getText());
        }catch(NumberFormatException e){
           porcentajeEnt.setText("");
           JOptionPane.showMessageDialog(null,"Porcentaje de ganancia de Entrada Inválido");
        }
-                                
+         */                       
     }//GEN-LAST:event_porcentajeEntKeyReleased
 
     /**

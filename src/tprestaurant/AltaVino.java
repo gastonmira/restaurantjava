@@ -139,12 +139,18 @@ public class AltaVino extends javax.swing.JFrame {
 
     private void precioVinoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precioVinoKeyReleased
         // TODO add your handling code here:
+       if (!Validator.esFloat(precioVino.getText())){
+            precioVino.setText("");
+            JOptionPane.showMessageDialog(null,"Precio de Vino Inválido");
+          }
+        /*
         try{
            Float.parseFloat(precioVino.getText());
        }catch(NumberFormatException e){
           precioVino.setText("");
           JOptionPane.showMessageDialog(null,"Precio de Vino Inválido");
        }
+       */
     }//GEN-LAST:event_precioVinoKeyReleased
 
     /**

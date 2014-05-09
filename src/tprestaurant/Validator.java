@@ -20,7 +20,8 @@ public class Validator {
     
     
     public static boolean esFloat(String cadena)  {
-            return Pattern.matches("^[0-9]{1.5}(&#092;&#046;[0-9]{0.2})?$", cadena);
+         return Pattern.matches("^[0-9]{1,5}(\\.[0-9]{0,2})?$", cadena);   
+       
     }
     
     

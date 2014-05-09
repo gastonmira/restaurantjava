@@ -182,13 +182,19 @@ public class AltaPrincipal extends javax.swing.JFrame {
 
     private void porcGananciaPrinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_porcGananciaPrinKeyReleased
         // TODO add your handling code here:
+      if (!Validator.esFloat(porcGananciaPrin.getText())){
+            porcGananciaPrin.setText("");
+            JOptionPane.showMessageDialog(null,"Porcentaje de Ganancia para Principal Inválido");
+          }
+        
+      /*  
         try{
            Float.parseFloat(porcGananciaPrin.getText());
        }catch(NumberFormatException e){
           porcGananciaPrin.setText("");
           JOptionPane.showMessageDialog(null,"Porcentaje de Ganancia para Principal Inválido");
        }
-        
+        */
     }//GEN-LAST:event_porcGananciaPrinKeyReleased
 
     /**

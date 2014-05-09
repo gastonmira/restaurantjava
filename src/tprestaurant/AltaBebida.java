@@ -132,12 +132,18 @@ public class AltaBebida extends javax.swing.JFrame {
 
     private void precioBebidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precioBebidaKeyReleased
         // TODO add your handling code here:
-        try{
+    
+         if (!Validator.esFloat(precioBebida.getText())){
+            precioBebida.setText("");
+            JOptionPane.showMessageDialog(null,"Precio de Bebida Inválido");
+          }
+        
+        /*  try{
            Float.parseFloat(precioBebida.getText());
        }catch(NumberFormatException e){
           precioBebida.setText("");
           JOptionPane.showMessageDialog(null,"Precio de Bebida Inválido");
-       }
+       }*/
     }//GEN-LAST:event_precioBebidaKeyReleased
 
     /**

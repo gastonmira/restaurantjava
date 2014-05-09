@@ -118,13 +118,20 @@ public class AltaPostre extends javax.swing.JFrame {
 
     private void costoPostreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_costoPostreKeyReleased
         // TODO add your handling code here:
-        try{
-           Float.parseFloat(costoPostre.getText());
+       
+          if (!Validator.esFloat(costoPostre.getText())){
+            costoPostre.setText("");
+            JOptionPane.showMessageDialog(null,"Costo de Postre Inválido");
+          }
+        
+        /*try{
+        
+        Float.parseFloat(costoPostre.getText());
        }catch(NumberFormatException e){
           costoPostre.setText("");
           JOptionPane.showMessageDialog(null,"Costo de Postre Inválido");
        }
-                                
+          */                      
     }//GEN-LAST:event_costoPostreKeyReleased
 
     /**
