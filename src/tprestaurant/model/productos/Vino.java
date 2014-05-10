@@ -2,7 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package tprestaurant.model;
+package tprestaurant.model.productos;
+
+import tprestaurant.model.enums.Provincias;
+import tprestaurant.model.enums.Varietales;
 
 /**
  *

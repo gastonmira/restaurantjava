@@ -5,6 +5,7 @@
 
 package tprestaurant.model;
 
+import tprestaurant.model.productos.Producto;
 import java.io.Serializable;
 
 /**

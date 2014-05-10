@@ -5,6 +5,7 @@
 
 package tprestaurant.model;
 
+import tprestaurant.model.productos.Producto;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -87,9 +88,30 @@ public class Menu implements Serializable {
     }
 
     /**
-     * @param productos the bebidas to set
+     * @param productos the productos to set
      */
-    public void setBebidas(ArrayList<ItemMenu> productos) {
+    public void setProductos(ArrayList<ItemMenu> productos) {
         this.productos = productos;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    @Override
+    public String toString()
+    {
+        String header =  "Descripcion: "+descripcion+"\n"+
+                         "Fecha Inicio: "+fechaVigenciaInicial.toString()+"\n"+
+                         "Fecha Fin: "+fechaVigenciaFinal != null ? fechaVigenciaFinal.toString() : "menu vigente"+"\n"+
+                         "-------------------------------------------\n\n"+
+                         "Ingredientes: \n";
+        String productosString = "";
+        for(ItemMenu i : productos)
+        {
+            productosString+=i.getProducto().getDescripcion()+" $"+Float.toString(i.getPrecio())+"\n";
+        }
+        
+        return header+productosString;
     }
 }

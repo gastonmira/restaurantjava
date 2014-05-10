@@ -6,6 +6,7 @@
 
 package tprestaurant.model;
 
+import tprestaurant.model.enums.UnidadesDeMedida;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;

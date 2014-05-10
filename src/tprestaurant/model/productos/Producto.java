@@ -3,7 +3,7 @@
  * and open the template in the editor.
  */
 
-package tprestaurant.model;
+package tprestaurant.model.productos;
 
 import java.io.Serializable;
 
@@ -14,6 +14,7 @@ import java.io.Serializable;
 public abstract class Producto implements Comparable, Serializable{
     
     private String descripcion;
+    private boolean activo;
     
     public abstract float costo();
     public abstract float getPorcentajeGanancia();
@@ -54,5 +55,19 @@ public abstract class Producto implements Comparable, Serializable{
         int compClass = pClassName.compareTo(oClassName);
         
         return compClass!=0 ? compClass : this.getDescripcion().compareTo(p.getDescripcion());
+    }
+
+    /**
+     * @return the activo
+     */
+    public boolean isActivo() {
+        return activo;
+    }
+
+    /**
+     * @param activo the activo to set
+     */
+    public void setActivo(boolean activo) {
+        this.activo = activo;
     }
 }

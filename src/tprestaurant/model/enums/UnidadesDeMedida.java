@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package tprestaurant.model;
+package tprestaurant.model.enums;
 
 /**
  *
@@ -14,5 +14,7 @@ public enum UnidadesDeMedida {
     
     gr,
     kg,
-    cm3
+    cm3,
+    litro,
+    unidad
 }

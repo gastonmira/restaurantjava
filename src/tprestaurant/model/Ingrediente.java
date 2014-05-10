@@ -5,6 +5,8 @@
 
 package tprestaurant.model;
 
+import tprestaurant.model.enums.UnidadesDeMedida;
+
 /**
  *
  * @author Usuario

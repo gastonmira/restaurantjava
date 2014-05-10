@@ -3,39 +3,39 @@
  * and open the template in the editor.
  */
 
-package tprestaurant.model;
-
-import java.util.ArrayList;
+package tprestaurant.model.productos;
 
 /**
  *
  * @author Usuario
  */
-public class Principal extends Producto {
+public class Entrada extends Producto {
 
-    public Principal() {
-        this.ingredientes = new ArrayList<IngredienteDePrincipal>();
+    public Entrada() {
+        this.costo = 0;
         this.porcentajeGanancia = 0;
         setDescripcion("");
     }
-    
-    public Principal(ArrayList<IngredienteDePrincipal> ingredientes, float porcentajeGanancia, String desc) {
-        this.ingredientes = new ArrayList<IngredienteDePrincipal>(ingredientes);
+    public Entrada(float costo, float porcentajeGanancia, String desc) {
+        this.costo = costo;
         this.porcentajeGanancia = porcentajeGanancia;
         setDescripcion(desc);
     }
-
-    private ArrayList<IngredienteDePrincipal> ingredientes;
+    
+    private float costo;
     private float porcentajeGanancia;
 
     @Override
     public float costo() {
-        float result = 0;
-        for(IngredienteDePrincipal ing: ingredientes)
-        {
-            result += ing.getCostoPorUnidad()*ing.getCantidadUtilizada();
-        }
-        return result;
+        
+        return costo;
+    }
+
+    /**
+     * @param costo the costo to set
+     */
+    public void setCosto(float costo) {
+        this.costo = costo;
     }
 
     /**
