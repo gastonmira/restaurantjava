@@ -6,17 +6,25 @@
 
 package tprestaurant;
 
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import javax.swing.JFrame;
+import tprestaurant.model.*;
+
 
 /**
  *
  * @author gastonmira
  */
 public class TPRestaurant extends javax.swing.JFrame {
-
-    /**
-     * Creates new form NewJFrame
-     */
+    String xmlInputPath="Lugar donde esta el xml";
+    String xmlOutPutPath="Lugar donde queremos guardar el xml";
+    Restaurant restaurant = new Restaurant();
+    
+   
     public TPRestaurant() {
         initComponents();
     }
@@ -36,7 +44,9 @@ public class TPRestaurant extends javax.swing.JFrame {
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        cargarIngredientes = new javax.swing.JMenuItem();
+        cargarRestaurante = new javax.swing.JMenuItem();
+        guardarRestaurante = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -66,8 +76,29 @@ public class TPRestaurant extends javax.swing.JFrame {
         jMenuItem1.setText("Cargar Porcentaje ganancia postres ");
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Cargar Ingredientes");
-        jMenu1.add(jMenuItem2);
+        cargarIngredientes.setText("Cargar Ingredientes");
+        cargarIngredientes.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cargarIngredientesMouseClicked(evt);
+            }
+        });
+        jMenu1.add(cargarIngredientes);
+
+        cargarRestaurante.setText("Cargar Restaurante");
+        cargarRestaurante.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cargarRestauranteMouseClicked(evt);
+            }
+        });
+        jMenu1.add(cargarRestaurante);
+
+        guardarRestaurante.setText("Guardar Restaurante");
+        guardarRestaurante.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                guardarRestauranteMouseClicked(evt);
+            }
+        });
+        jMenu1.add(guardarRestaurante);
 
         jMenuBar1.add(jMenu1);
 
@@ -121,6 +152,30 @@ public class TPRestaurant extends javax.swing.JFrame {
         reportesForm.setVisible(true);
     }//GEN-LAST:event_btnReportesMouseClicked
 
+    private void cargarRestauranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarRestauranteMouseClicked
+        XStream xs = new XStream(new DomDriver());
+        try {
+            FileInputStream fileInput = new FileInputStream(xmlInputPath);
+            xs.fromXML(fileInput,restaurant);
+        } catch (FileNotFoundException ex) {
+            ex.printStackTrace();
+          }
+    }//GEN-LAST:event_cargarRestauranteMouseClicked
+
+    private void guardarRestauranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarRestauranteMouseClicked
+        XStream xs = new XStream();
+        try {
+            FileOutputStream fileOutPut = new FileOutputStream(xmlOutPutPath);
+            xs.toXML(restaurant, fileOutPut);
+        } catch (FileNotFoundException e1) {
+            e1.printStackTrace();
+        }
+    }//GEN-LAST:event_guardarRestauranteMouseClicked
+
+    private void cargarIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarIngredientesMouseClicked
+        
+    }//GEN-LAST:event_cargarIngredientesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -160,9 +215,11 @@ public class TPRestaurant extends javax.swing.JFrame {
     private javax.swing.JButton btnMenues;
     private javax.swing.JButton btnProductos;
     private javax.swing.JButton btnReportes;
+    private javax.swing.JMenuItem cargarIngredientes;
+    private javax.swing.JMenuItem cargarRestaurante;
+    private javax.swing.JMenuItem guardarRestaurante;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
     // End of variables declaration//GEN-END:variables
 }

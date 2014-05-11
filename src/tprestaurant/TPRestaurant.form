@@ -14,10 +14,29 @@
                 <Property name="text" type="java.lang.String" value="Cargar Porcentaje ganancia postres "/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem2">
+            <MenuItem class="javax.swing.JMenuItem" name="cargarIngredientes">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cargar Ingredientes"/>
               </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cargarIngredientesMouseClicked"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="cargarRestaurante">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Cargar Restaurante"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cargarRestauranteMouseClicked"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="guardarRestaurante">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Guardar Restaurante"/>
+              </Properties>
+              <Events>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="guardarRestauranteMouseClicked"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>
