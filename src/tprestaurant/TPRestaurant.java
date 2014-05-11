@@ -6,27 +6,27 @@
 
 package tprestaurant;
 
-import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.DomDriver;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
-import tprestaurant.model.*;
-
+import tprestaurant.model.ExcepcionLogica;
+import tprestaurant.model.Restaurant;
+import tprestaurant.model.Serializer;
 
 /**
  *
  * @author gastonmira
  */
 public class TPRestaurant extends javax.swing.JFrame {
-    String xmlInputPath="Lugar donde esta el xml";
-    String xmlOutPutPath="Lugar donde queremos guardar el xml";
-    Restaurant restaurant = new Restaurant();
-    
-   
-    public TPRestaurant() {
+
+    /**
+     * Creates new form NewJFrame
+     */
+    private  Restaurant restaurant;
+    public TPRestaurant() throws ExcepcionLogica {
         initComponents();
+        restaurant = new Restaurant();
+       // restaurant = Serializer.cargarArchivo("");
     }
 
     /**
@@ -140,7 +140,7 @@ public class TPRestaurant extends javax.swing.JFrame {
 
     private void btnMenuesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuesMouseClicked
         // TODO add your handling code here: BOTON MENUES CLICKEADO
-        JFrame menuesForm = new MenuesForm();
+        JFrame menuesForm = new MenuesForm(restaurant.getMenus());
         menuesForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         menuesForm.setVisible(true);
     }//GEN-LAST:event_btnMenuesMouseClicked
@@ -206,7 +206,11 @@ public class TPRestaurant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TPRestaurant().setVisible(true);
+                try {
+                    new TPRestaurant().setVisible(true);
+                } catch (ExcepcionLogica ex) {
+                    Logger.getLogger(TPRestaurant.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
