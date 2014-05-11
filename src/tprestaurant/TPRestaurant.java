@@ -11,22 +11,23 @@ import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
-import tprestaurant.model.*;
+import tprestaurant.model.ExcepcionLogica;
+import tprestaurant.model.Restaurant;
 
 
-/**
- *
- * @author gastonmira
- */
 public class TPRestaurant extends javax.swing.JFrame {
-    String xmlInputPath="Lugar donde esta el xml";
-    String xmlOutPutPath="Lugar donde queremos guardar el xml";
-    Restaurant restaurant = new Restaurant();
-    
-   
+
+    /**
+     * Creates new form NewJFrame
+     */
+    private  Restaurant restaurant;
     public TPRestaurant() {
         initComponents();
+        restaurant = new Restaurant();
+       // restaurant = Serializer.cargarArchivo("");
     }
 
     /**
@@ -140,7 +141,7 @@ public class TPRestaurant extends javax.swing.JFrame {
 
     private void btnMenuesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuesMouseClicked
         // TODO add your handling code here: BOTON MENUES CLICKEADO
-        JFrame menuesForm = new MenuesForm();
+        JFrame menuesForm = new MenuesForm(restaurant.getMenus());
         menuesForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         menuesForm.setVisible(true);
     }//GEN-LAST:event_btnMenuesMouseClicked
@@ -155,7 +156,7 @@ public class TPRestaurant extends javax.swing.JFrame {
     private void cargarRestauranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarRestauranteMouseClicked
         XStream xs = new XStream(new DomDriver());
         try {
-            FileInputStream fileInput = new FileInputStream(xmlInputPath);
+            FileInputStream fileInput = new FileInputStream("Path del xml");
             xs.fromXML(fileInput,restaurant);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -165,7 +166,7 @@ public class TPRestaurant extends javax.swing.JFrame {
     private void guardarRestauranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarRestauranteMouseClicked
         XStream xs = new XStream();
         try {
-            FileOutputStream fileOutPut = new FileOutputStream(xmlOutPutPath);
+            FileOutputStream fileOutPut = new FileOutputStream("Path para guardarlo");
             xs.toXML(restaurant, fileOutPut);
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
@@ -206,7 +207,7 @@ public class TPRestaurant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new TPRestaurant().setVisible(true);
+                    new TPRestaurant().setVisible(true);              
             }
         });
     }
