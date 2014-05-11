@@ -6,24 +6,21 @@
 
 package tprestaurant;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import com.thoughtworks.xstream.XStream;
+import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.*;
+import java.util.*;
 import javax.swing.JFrame;
-import tprestaurant.model.ExcepcionLogica;
-import tprestaurant.model.Restaurant;
-import tprestaurant.model.Serializer;
+import tprestaurant.model.*;
 
-/**
- *
- * @author gastonmira
- */
+
 public class TPRestaurant extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
     private  Restaurant restaurant;
-    public TPRestaurant() throws ExcepcionLogica {
+    public TPRestaurant()  {
         initComponents();
         restaurant = new Restaurant();
        // restaurant = Serializer.cargarArchivo("");
@@ -155,7 +152,7 @@ public class TPRestaurant extends javax.swing.JFrame {
     private void cargarRestauranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarRestauranteMouseClicked
         XStream xs = new XStream(new DomDriver());
         try {
-            FileInputStream fileInput = new FileInputStream(xmlInputPath);
+            FileInputStream fileInput = new FileInputStream("ruta");
             xs.fromXML(fileInput,restaurant);
         } catch (FileNotFoundException ex) {
             ex.printStackTrace();
@@ -165,7 +162,7 @@ public class TPRestaurant extends javax.swing.JFrame {
     private void guardarRestauranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarRestauranteMouseClicked
         XStream xs = new XStream();
         try {
-            FileOutputStream fileOutPut = new FileOutputStream(xmlOutPutPath);
+            FileOutputStream fileOutPut = new FileOutputStream("ruta");
             xs.toXML(restaurant, fileOutPut);
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
@@ -206,11 +203,7 @@ public class TPRestaurant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                try {
-                    new TPRestaurant().setVisible(true);
-                } catch (ExcepcionLogica ex) {
-                    Logger.getLogger(TPRestaurant.class.getName()).log(Level.SEVERE, null, ex);
-                }
+                  new TPRestaurant().setVisible(true);
             }
         });
     }
