@@ -11,14 +11,16 @@ import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.ListModel;
+import tprestaurant.misc.Callback;
 import tprestaurant.model.Menu;
+import tprestaurant.model.Restaurant;
 
 /**
  *
  * @author gastonmira
  */
 public class MenuesForm extends javax.swing.JFrame {
-
+Restaurant restaurant;
     /**
      * Creates new form MenuesForm
      */
@@ -27,9 +29,10 @@ public class MenuesForm extends javax.swing.JFrame {
         initComponents();
            
     }
-    public MenuesForm(ArrayList<Menu> menus) {
+    public MenuesForm(Restaurant restaurant) {
         initComponents();
-        cargarListaMenus(menus);
+        cargarListaMenus(restaurant.getMenus());
+        this.restaurant=restaurant;
     }
     private void cargarListaMenus(ArrayList<Menu> menus){
         DefaultListModel listModel = new DefaultListModel();   
@@ -105,8 +108,18 @@ public class MenuesForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JDialog nuevoMenuForm = new NuevoMenu(this, true);
-     
+        JDialog nuevoMenuForm = new NuevoMenu(this, true,restaurant, new Callback() {
+
+            @Override
+            public void onSuccess(String result) {
+                cargarListaMenus(restaurant.getMenus());
+            }
+
+            @Override
+            public void onFailure(String result) {
+                
+            }
+        });
         nuevoMenuForm.setVisible(true);
        
     }//GEN-LAST:event_jButton1ActionPerformed

@@ -6,20 +6,42 @@
 
 package tprestaurant;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.text.MaskFormatter;
+import tprestaurant.misc.Callback;
+import tprestaurant.model.ItemMenu;
+import tprestaurant.model.Menu;
+import tprestaurant.model.Restaurant;
 /**
  *
  * @author Administrador
  */
 public class NuevoMenu extends javax.swing.JDialog {
 
-    /**
+Restaurant restaurant; 
+Callback callback;
+/**
      * Creates new form NuevoMenu
      */
     public NuevoMenu(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setMask();
     }
-
+    public NuevoMenu(java.awt.Frame parent, boolean modal,Restaurant restaurant,Callback callback) {
+        super(parent, modal);
+        initComponents();
+        setMask();
+       this.callback=callback;
+        this.restaurant=restaurant;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -30,24 +52,30 @@ public class NuevoMenu extends javax.swing.JDialog {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        crearMenuButton = new javax.swing.JButton();
         txtFechaInicioVigencia = new javax.swing.JFormattedTextField();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txtDescripcion = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Nuevo Menu");
 
-        jButton1.setText("Crear Menú");
-
-        txtFechaInicioVigencia.addActionListener(new java.awt.event.ActionListener() {
+        crearMenuButton.setText("Crear Menú");
+        crearMenuButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtFechaInicioVigenciaActionPerformed(evt);
+                crearMenuButtonActionPerformed(evt);
             }
         });
 
         jLabel2.setText("Fecha Inicio de Vigencia");
+
+        jLabel3.setText("dd-mm-aaaa");
+
+        jLabel4.setText("Descripcion: ");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -59,34 +87,62 @@ public class NuevoMenu extends javax.swing.JDialog {
                         .addGap(143, 143, 143)
                         .addComponent(jLabel1))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(53, 53, 53)
-                        .addComponent(jLabel2)
-                        .addGap(29, 29, 29)
-                        .addComponent(txtFechaInicioVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(txtDescripcion))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(29, 29, 29)
+                                .addComponent(txtFechaInicioVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel3))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(129, 129, 129)
-                        .addComponent(jButton1)))
-                .addContainerGap(65, Short.MAX_VALUE))
+                        .addGap(125, 125, 125)
+                        .addComponent(crearMenuButton)))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addGap(38, 38, 38)
+                .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txtFechaInicioVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addComponent(jButton1)
-                .addContainerGap(37, Short.MAX_VALUE))
+                    .addComponent(txtFechaInicioVigencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(txtDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(33, 33, 33)
+                .addComponent(crearMenuButton)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtFechaInicioVigenciaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtFechaInicioVigenciaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtFechaInicioVigenciaActionPerformed
+    private void crearMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearMenuButtonActionPerformed
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        try {
+            Date date = sdf.parse(txtFechaInicioVigencia.getText());
+           restaurant.generarNuevoMenu(date, txtDescripcion.getText());
+            JOptionPane.showMessageDialog(rootPane, "El menu ha sido generado con exito.");
+            callback.onSuccess("");
+             dispose();
+        } catch (ParseException ex) {
+            Logger.getLogger(NuevoMenu.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, "Error al Generar el nuevo menu.");
+             callback.onFailure("");
+             dispose();
+        }
+      
+       
+        
+    }//GEN-LAST:event_crearMenuButtonActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,9 +187,22 @@ public class NuevoMenu extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton crearMenuButton;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JTextField txtDescripcion;
     private javax.swing.JFormattedTextField txtFechaInicioVigencia;
     // End of variables declaration//GEN-END:variables
+
+    private void setMask() {
+       MaskFormatter formatter;
+        try {
+            formatter = new MaskFormatter("##-##-####");
+            formatter.install(txtFechaInicioVigencia);
+        } catch (ParseException ex) {
+            Logger.getLogger(NuevoMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 }
