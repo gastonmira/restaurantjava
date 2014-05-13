@@ -14,11 +14,13 @@ public class Postre extends Producto{
     public Postre() {
         this.costo = 0;
         setDescripcion("");
+        setActivo(true);
     }
     
     public Postre(float costo, String desc) {
         this.costo = costo;
         setDescripcion(desc);
+        setActivo(true);
     }
     
     private float costo;

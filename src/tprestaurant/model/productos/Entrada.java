@@ -15,11 +15,13 @@ public class Entrada extends Producto {
         this.costo = 0;
         this.porcentajeGanancia = 0;
         setDescripcion("");
+        setActivo(true);
     }
     public Entrada(float costo, float porcentajeGanancia, String desc) {
         this.costo = costo;
         this.porcentajeGanancia = porcentajeGanancia;
         setDescripcion(desc);
+        setActivo(true);
     }
     
     private float costo;

@@ -18,6 +18,7 @@ public class Principal extends Producto {
         this.ingredientes = new ArrayList<IngredienteDePrincipal>();
         this.porcentajeGanancia = 0;
         setDescripcion("");
+        setActivo(true);
     }
     
     public Principal(ArrayList<IngredienteDePrincipal> ingredientes, float porcentajeGanancia, String desc) {

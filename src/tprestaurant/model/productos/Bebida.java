@@ -19,12 +19,14 @@ public class Bebida extends Producto implements Serializable {
     {
         precioVenta = 0;
         setDescripcion("");
+        setActivo(true);
     }
     
     public Bebida(float p, String desc)
     {
         precioVenta = p;
         setDescripcion(desc);
+        setActivo(true);
     }
     
     @Override

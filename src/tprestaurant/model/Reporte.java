@@ -60,13 +60,19 @@ public class Reporte {
     public List<Producto> rankingPrecios(List<String> grupos, Restaurant rest)
     {
         ArrayList<Producto> result = new ArrayList<Producto>();
-        
+
         if(grupos!=null && rest!=null)
         {
             Collections.sort(grupos);
             for(String grupo: grupos)
             {
-                result.addAll(rest.getProductosByType(grupo));
+                for(Producto p: rest.getProductosByType(grupo))
+                {
+                    if(p.isActivo())
+                    {
+                        result.add(p);
+                    }
+                }
             }
         
             Collections.sort(result, new Comparator<Producto>() {
