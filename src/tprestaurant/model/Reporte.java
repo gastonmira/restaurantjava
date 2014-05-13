@@ -3,12 +3,14 @@
 package tprestaurant.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import tprestaurant.model.productos.*;
 
 
 public class Reporte {
-    
     
     public List<Cambio> menuModificacion(Menu menu1, Menu menu2){
         List<Cambio> lista = new ArrayList<Cambio>();
@@ -55,4 +57,25 @@ public class Reporte {
     return lista;
     }
     
+    public List<Producto> rankingPrecios(List<String> grupos, Restaurant rest)
+    {
+        ArrayList<Producto> result = new ArrayList<Producto>();
+        
+        if(grupos!=null && rest!=null)
+        {
+            Collections.sort(grupos);
+            for(String grupo: grupos)
+            {
+                result.addAll(rest.getProductosByType(grupo));
+            }
+        
+            Collections.sort(result, new Comparator<Producto>() {
+                public int compare(Producto c1, Producto c2) {
+                    return (int)(c2.precio() - c1.precio());
+                }
+            });
+        }
+       
+       return result;
+    }
 }

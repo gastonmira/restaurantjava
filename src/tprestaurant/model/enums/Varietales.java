@@ -13,5 +13,7 @@ package tprestaurant.model.enums;
 public enum Varietales {
     Malbec,
     Cabernet,
-    Syrah
+    Syrah,
+    Merlot,
+    Pinot_noir
 }
