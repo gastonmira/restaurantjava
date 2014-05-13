@@ -150,23 +150,11 @@ public class TPRestaurant extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesMouseClicked
 
     private void cargarRestauranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarRestauranteMouseClicked
-        XStream xs = new XStream(new DomDriver());
-        try {
-            FileInputStream fileInput = new FileInputStream("ruta");
-            xs.fromXML(fileInput,restaurant);
-        } catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-          }
+        restaurant = Persister.cargarRestaurant("ruta");
     }//GEN-LAST:event_cargarRestauranteMouseClicked
 
     private void guardarRestauranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarRestauranteMouseClicked
-        XStream xs = new XStream();
-        try {
-            FileOutputStream fileOutPut = new FileOutputStream("ruta");
-            xs.toXML(restaurant, fileOutPut);
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-        }
+        Persister.guardarRestaurant("ruta",restaurant);
     }//GEN-LAST:event_guardarRestauranteMouseClicked
 
     private void cargarIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarIngredientesMouseClicked
