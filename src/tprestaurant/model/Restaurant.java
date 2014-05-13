@@ -69,7 +69,7 @@ public class Restaurant implements Serializable {
         
         return result;
     }
-
+ 
     /**
      * @param productos the productos to set
      */
