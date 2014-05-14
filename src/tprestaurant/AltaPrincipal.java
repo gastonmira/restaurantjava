@@ -6,9 +6,15 @@
 
 package tprestaurant;
 
+import java.util.Iterator;
+import java.util.TreeSet;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import tprestaurant.misc.Callback;
+import tprestaurant.model.Ingrediente;
 import tprestaurant.model.Restaurant;
+import tprestaurant.model.productos.Producto;
 
 /**
  *
@@ -21,11 +27,28 @@ public class AltaPrincipal extends javax.swing.JFrame {
      * Creates new form AltaPrincipal
      */
     public AltaPrincipal(Restaurant restaurant,Callback callback) {
-        initComponents();
-        this.callback=callback;
+         this.callback=callback;
        this.restaurant=restaurant;
+        initComponents();
+        cargaIngredientes();
+       
     }
+      private void cargaIngredientes(){
+          DefaultComboBoxModel<String> cbModel= new DefaultComboBoxModel<String>();
+          
+         
+          TreeSet<Ingrediente> ingredientes= restaurant.getIngredientes();
+          for (Iterator<Ingrediente> it = ingredientes.iterator(); it.hasNext();) 
+        {
+            Ingrediente i = it.next();
+            cbModel.addElement(i.getDescripcion());
+        }
+         jComboBox1.setModel(cbModel);
       
+      
+      
+      
+      }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

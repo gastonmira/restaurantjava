@@ -29,7 +29,7 @@ import tprestaurant.model.productos.Producto;
  */
 public class ProductosForm extends javax.swing.JFrame {
     private Restaurant restaurant;
-    private String[] colName = { "Nombre", "Precio","Precio","%Ganancia" };
+    private String[] colName = { "Nombre", "Precio","Tipo","%Ganancia" };
     private AltaBebida altaBebida;
     private AltaPostre altaPostre;
     private AltaEntrada altaEntrada;

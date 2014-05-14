@@ -40,7 +40,7 @@ private void AltaOMod(Bebida bebida){
       txtDescripcionBebida.setText(bebida.getDescripcion());
       precioBebida.setText(String.valueOf(bebida.precio()));
    }else{
-         txtDescripcionBebida.setText("");
+      txtDescripcionBebida.setText("");
       precioBebida.setText("");
    }
     

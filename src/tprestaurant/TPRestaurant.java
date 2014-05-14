@@ -10,6 +10,8 @@ import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 import java.io.*;
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import tprestaurant.model.*;
 
@@ -77,6 +79,9 @@ public class TPRestaurant extends javax.swing.JFrame {
         cargarIngredientes.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 cargarIngredientesMouseClicked(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                cargarIngredientesMouseReleased(evt);
             }
         });
         jMenu1.add(cargarIngredientes);
@@ -151,7 +156,12 @@ public class TPRestaurant extends javax.swing.JFrame {
     }//GEN-LAST:event_btnReportesMouseClicked
 
     private void cargarIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarIngredientesMouseClicked
-        
+        try {
+           restaurant.setIngredientes(Carga.cargaIngredientes("ingredientes.txt"));
+             System.out.println("Ingredientes: "+restaurant.getIngredientes().size() );
+        } catch (ExcepcionLogica ex) {
+            Logger.getLogger(TPRestaurant.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_cargarIngredientesMouseClicked
 
     private void cargarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRestauranteActionPerformed
@@ -163,6 +173,15 @@ public class TPRestaurant extends javax.swing.JFrame {
     private void guardarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarRestauranteActionPerformed
        Persister.guardarRestaurant("file.xml",restaurant);
     }//GEN-LAST:event_guardarRestauranteActionPerformed
+
+    private void cargarIngredientesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarIngredientesMouseReleased
+         try {
+           restaurant.setIngredientes(Carga.cargaIngredientes("ingredientes.txt"));
+            
+        } catch (ExcepcionLogica ex) {
+            Logger.getLogger(TPRestaurant.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_cargarIngredientesMouseReleased
 
     /**
      * @param args the command line arguments

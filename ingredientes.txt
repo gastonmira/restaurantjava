@@ -1,0 +1,2 @@
+lomo,kg,10
+crema,litro,2
