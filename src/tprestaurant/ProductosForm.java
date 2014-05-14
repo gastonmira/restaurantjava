@@ -162,6 +162,17 @@ public class ProductosForm extends javax.swing.JFrame {
         });
 
         btnFiltrarEntrada.setText("Filtrar");
+        btnFiltrarEntrada.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarEntradaActionPerformed(evt);
+            }
+        });
+
+        txtBuscadorEntrada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscadorEntradaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelEntradaLayout = new javax.swing.GroupLayout(panelEntrada);
         panelEntrada.setLayout(panelEntradaLayout);
@@ -233,6 +244,17 @@ public class ProductosForm extends javax.swing.JFrame {
         });
 
         btnFiltrarPrincipal.setText("Filtrar");
+        btnFiltrarPrincipal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarPrincipalActionPerformed(evt);
+            }
+        });
+
+        txtBuscadorPrincipal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscadorPrincipalKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
         panelPrincipal.setLayout(panelPrincipalLayout);
@@ -304,6 +326,17 @@ public class ProductosForm extends javax.swing.JFrame {
         });
 
         btnFiltrarPostre.setText("Filtrar");
+        btnFiltrarPostre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarPostreActionPerformed(evt);
+            }
+        });
+
+        txtBuscadorPostre.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscadorPostreKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelPostreLayout = new javax.swing.GroupLayout(panelPostre);
         panelPostre.setLayout(panelPostreLayout);
@@ -375,6 +408,17 @@ public class ProductosForm extends javax.swing.JFrame {
         });
 
         btnFiltrarBebida.setText("Filtrar");
+        btnFiltrarBebida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarBebidaActionPerformed(evt);
+            }
+        });
+
+        txtBuscadorBebida.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscadorBebidaKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBebidaLayout = new javax.swing.GroupLayout(panelBebida);
         panelBebida.setLayout(panelBebidaLayout);
@@ -446,6 +490,17 @@ public class ProductosForm extends javax.swing.JFrame {
         });
 
         btnFiltrarVino.setText("Filtrar");
+        btnFiltrarVino.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarVinoActionPerformed(evt);
+            }
+        });
+
+        txtBuscadorVino.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscadorVinoKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelVinoLayout = new javax.swing.GroupLayout(panelVino);
         panelVino.setLayout(panelVinoLayout);
@@ -501,11 +556,22 @@ public class ProductosForm extends javax.swing.JFrame {
         jScrollPane6.setViewportView(tablaTodos);
 
         btnFiltrar.setText("Filtrar");
+        btnFiltrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFiltrarActionPerformed(evt);
+            }
+        });
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnLimpiarActionPerformed(evt);
+            }
+        });
+
+        txtBuscador.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtBuscadorKeyReleased(evt);
             }
         });
 
@@ -560,27 +626,34 @@ public class ProductosForm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnLimpiarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarActionPerformed
-        // TODO add your handling code here:
+       txtBuscador.setText("");
+        setAllTableModel(tablaTodos, txtBuscador.getText(),1);
     }//GEN-LAST:event_btnLimpiarActionPerformed
 
     private void btnLimpiarVinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarVinoActionPerformed
-        // TODO add your handling code here:
+      txtBuscadorVino.setText("");
+       setTableModel(tablaVino,"Vino",txtBuscadorVino.getText(),1);
     }//GEN-LAST:event_btnLimpiarVinoActionPerformed
 
     private void btnLimpiarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarBebidaActionPerformed
-        // TODO add your handling code here:
+       txtBuscadorBebida.setText("");
+        setTableModel(tablaBebida,"Bebida",txtBuscadorBebida.getText(),1);
     }//GEN-LAST:event_btnLimpiarBebidaActionPerformed
 
     private void btnLimpiarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarPostreActionPerformed
-        // TODO add your handling code here:
+        txtBuscadorPostre.setText("");
+         setTableModel(tablaPostre,"Postre",txtBuscadorPostre.getText(),1);
     }//GEN-LAST:event_btnLimpiarPostreActionPerformed
 
     private void btnLimpiarPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarPrincipalActionPerformed
-        // TODO add your handling code here:
+       txtBuscadorPrincipal.setText("");
+        setTableModel(tablaPrincipal,"Principal",txtBuscadorPrincipal.getText(),1);
     }//GEN-LAST:event_btnLimpiarPrincipalActionPerformed
 
     private void btnLimpiarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnLimpiarEntradaActionPerformed
-        // TODO add your handling code here:
+       txtBuscadorEntrada.setText("");
+       setEntradaTableModel(tablaEntrada,"Entrada",txtBuscadorEntrada.getText(),1);
+       
     }//GEN-LAST:event_btnLimpiarEntradaActionPerformed
 
     private void btnAddEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEntradaMouseClicked
@@ -591,7 +664,7 @@ public class ProductosForm extends javax.swing.JFrame {
         @Override
         public void onSuccess(Restaurant restaurant) {
             
-            setEntradaTableModel(tablaEntrada, "Entrada");
+            setEntradaTableModel(tablaEntrada, "Entrada","",0);
             altaEntrada.dispose();
         }
     });
@@ -608,7 +681,7 @@ public class ProductosForm extends javax.swing.JFrame {
         @Override
         public void onSuccess(Restaurant restaurant) {
             
-            setTableModel(tablaPrincipal, "Principal");
+            setTableModel(tablaPrincipal, "Principal","",0);
             altaPrincipal.dispose();
         }
     });
@@ -622,7 +695,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
         @Override
         public void onSuccess(Restaurant restaurant) {
-            setTableModel(tablaPostre, "Postre");
+            setTableModel(tablaPostre, "Postre","",0);
             altaPostre.dispose();
         }
     });
@@ -640,7 +713,7 @@ public class ProductosForm extends javax.swing.JFrame {
         @Override
         public void onSuccess(Restaurant restaurant) {
            
-            setTableModel(tablaBebida, "Bebida");
+            setTableModel(tablaBebida, "Bebida","",0);
             altaBebida.dispose();
         }
     });
@@ -655,7 +728,7 @@ public class ProductosForm extends javax.swing.JFrame {
         @Override
         public void onSuccess(Restaurant restaurant) {
             
-            setTableModel(tablaVino, "Vino");
+            setTableModel(tablaVino, "Vino","",0);
             altaVino.dispose();
         }
     });
@@ -669,27 +742,27 @@ public class ProductosForm extends javax.swing.JFrame {
        switch (tabProductos.getSelectedIndex()){
         case 0:{
            
-            setEntradaTableModel(tablaEntrada, "Entrada");           
+            setEntradaTableModel(tablaEntrada, "Entrada","",0);           
         }
         break;
         case 1:{
-            setTableModel(tablaPrincipal, "Principal");
+            setTableModel(tablaPrincipal, "Principal","",0);
         }
         break;
         case 2:{
-            setTableModel(tablaPostre, "Postre");
+            setTableModel(tablaPostre, "Postre","",0);
         }
         break;
         case 3:{
-            setTableModel(tablaBebida, "Bebida");
+            setTableModel(tablaBebida, "Bebida","",0);
         }
         break;
          case 4:{
-            setTableModel(tablaVino,"Vino");
+            setTableModel(tablaVino,"Vino","",0);
         }
         break;
         case 5:{
-            setAllTableModel(tablaTodos);
+            setAllTableModel(tablaTodos,"",0);
         }
         break;
        } 
@@ -703,14 +776,68 @@ public class ProductosForm extends javax.swing.JFrame {
         
     }//GEN-LAST:event_tablaEntradaMouseClicked
 
-  
-    private void setTableModel(JTable table, String productType){
+    private void btnFiltrarEntradaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarEntradaActionPerformed
+       setEntradaTableModel(tablaEntrada,"Entrada",txtBuscadorEntrada.getText(),1);
+    }//GEN-LAST:event_btnFiltrarEntradaActionPerformed
+
+    private void btnFiltrarPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarPrincipalActionPerformed
+       setTableModel(tablaPrincipal,"Principal",txtBuscadorPrincipal.getText(),1);
+    }//GEN-LAST:event_btnFiltrarPrincipalActionPerformed
+
+    private void btnFiltrarPostreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarPostreActionPerformed
+          setTableModel(tablaPostre,"Postre",txtBuscadorPostre.getText(),1);
+    }//GEN-LAST:event_btnFiltrarPostreActionPerformed
+
+    private void btnFiltrarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarBebidaActionPerformed
+         setTableModel(tablaBebida,"Bebida",txtBuscadorBebida.getText(),1);
+    }//GEN-LAST:event_btnFiltrarBebidaActionPerformed
+
+    private void btnFiltrarVinoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarVinoActionPerformed
+         setTableModel(tablaVino,"Vino",txtBuscadorVino.getText(),1);
+    }//GEN-LAST:event_btnFiltrarVinoActionPerformed
+
+    private void btnFiltrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFiltrarActionPerformed
+        setAllTableModel(tablaTodos, txtBuscador.getText(),1);
+    }//GEN-LAST:event_btnFiltrarActionPerformed
+
+    private void txtBuscadorEntradaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorEntradaKeyReleased
+        setEntradaTableModel(tablaEntrada,"Entrada",txtBuscadorEntrada.getText(),1);
+    }//GEN-LAST:event_txtBuscadorEntradaKeyReleased
+
+    private void txtBuscadorPrincipalKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorPrincipalKeyReleased
+          setTableModel(tablaPrincipal,"Principal",txtBuscadorPrincipal.getText(),1);
+    }//GEN-LAST:event_txtBuscadorPrincipalKeyReleased
+
+    private void txtBuscadorPostreKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorPostreKeyReleased
+       setTableModel(tablaPostre,"Postre",txtBuscadorPostre.getText(),1);
+    }//GEN-LAST:event_txtBuscadorPostreKeyReleased
+
+    private void txtBuscadorBebidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorBebidaKeyReleased
+       setTableModel(tablaBebida,"Bebida",txtBuscadorBebida.getText(),1);
+    }//GEN-LAST:event_txtBuscadorBebidaKeyReleased
+
+    private void txtBuscadorVinoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorVinoKeyReleased
+        setTableModel(tablaVino,"Vino",txtBuscadorVino.getText(),1);
+    }//GEN-LAST:event_txtBuscadorVinoKeyReleased
+
+    private void txtBuscadorKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtBuscadorKeyReleased
+      setAllTableModel(tablaTodos, txtBuscador.getText(),1);
+    }//GEN-LAST:event_txtBuscadorKeyReleased
+
+     
+    
+    private void setTableModel(JTable table, String productType, String key, int tipoBusqueda){
        MyJTableModel tbModel = new MyJTableModel();
             tbModel.addColumn(colName[0]);
             tbModel.addColumn(colName[1]);
            
-            
-        SortedSet<Producto> list = restaurant.getProductosByType(productType);
+             SortedSet<Producto> list=null;  
+        if (tipoBusqueda==0)    
+             list = restaurant.getProductosByType(productType);
+        else{
+            if (tipoBusqueda==1)
+             list = restaurant.buscarProductoPorTipo(productType,key);
+        }
         if (list!=null){
             for (Producto p : list) {
                 String[] data = new String[2];
@@ -724,13 +851,20 @@ public class ProductosForm extends javax.swing.JFrame {
         }    
             
     }
-    private void setEntradaTableModel(JTable table, String productType){
+    //tipoBusqueda:  0 por tipo de producto
+       // 1  por descripcion incompleta. 
+    private void setEntradaTableModel(JTable table,String productType, String key, int tipoBusqueda){
        MyJTableModel tbModel = new MyJTableModel();
             tbModel.addColumn(colName[0]);
             tbModel.addColumn(colName[1]);
             tbModel.addColumn(colName[3]);
-            
-        SortedSet<Producto> list = restaurant.getProductosByType(productType);
+            SortedSet<Producto> list=null;
+        if (tipoBusqueda==0)    
+             list = restaurant.getProductosByType(productType);
+        else{
+            if (tipoBusqueda==1)
+             list = restaurant.buscarProductoPorTipo(productType,key);
+        }
         if (list!=null){
             for (Producto p : list) {
                 String[] data = new String[3];
@@ -744,13 +878,22 @@ public class ProductosForm extends javax.swing.JFrame {
         }    
             
     }
-    private void setAllTableModel(JTable table){
-       SortedSet<Producto> list = restaurant.getProductos();
+    private void setAllTableModel(JTable table,String key, int tipoBusqueda){
+       
         MyJTableModel tbModel = new MyJTableModel();
             tbModel.addColumn(colName[0]);
             tbModel.addColumn(colName[1]);
             tbModel.addColumn(colName[2]);
-        for (Producto p : list) {
+            SortedSet<Producto> list=null;
+        if (tipoBusqueda==0)    
+             list = restaurant.getProductos();
+        else{
+            if (tipoBusqueda==1)
+             list = restaurant.buscarProducto(key);
+        }
+            
+            
+            for (Producto p : list) {
             String[] data = new String[3];
         
             data[0] = p.getDescripcion();
@@ -779,7 +922,7 @@ public class ProductosForm extends javax.swing.JFrame {
         @Override
         public void onSuccess(Restaurant restaurant) {
            
-            setTableModel(tablaBebida, "Bebida");
+            setTableModel(tablaBebida, "Bebida","",0);
             altaBebida.dispose();
         }
     });
@@ -810,7 +953,7 @@ public class ProductosForm extends javax.swing.JFrame {
             @Override
             public void onSuccess(Restaurant restaurant) {
 
-                setEntradaTableModel(tablaEntrada, "Entrada");
+                setEntradaTableModel(tablaEntrada, "Entrada","",0);
                 altaEntrada.dispose();
              }   
             });
@@ -842,7 +985,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
         @Override
         public void onSuccess(Restaurant restaurant) {
-            setTableModel(tablaPostre, "Postre");
+            setTableModel(tablaPostre, "Postre","",0);
             altaPostre.dispose();
         }
     });
