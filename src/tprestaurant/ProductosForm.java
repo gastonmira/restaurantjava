@@ -6,12 +6,21 @@
 
 package tprestaurant;
 
+import java.awt.Point;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.SortedSet;
 import javax.swing.JFrame;
 import javax.swing.JTable;
+import javax.swing.ListSelectionModel;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 import tprestaurant.misc.Callback;
+import tprestaurant.misc.MyJTableModel;
 import tprestaurant.model.Restaurant;
+import tprestaurant.model.productos.Bebida;
+import tprestaurant.model.productos.Entrada;
+import tprestaurant.model.productos.Postre;
 import tprestaurant.model.productos.Producto;
 
 /**
@@ -20,15 +29,16 @@ import tprestaurant.model.productos.Producto;
  */
 public class ProductosForm extends javax.swing.JFrame {
     private Restaurant restaurant;
-    private String[] colName = { "Nombre", "Precio","Precio" };
+    private String[] colName = { "Nombre", "Precio","Precio","%Ganancia" };
     private AltaBebida altaBebida;
     private AltaPostre altaPostre;
     private AltaEntrada altaEntrada;
     private AltaPrincipal altaPrincipal;
     private AltaVino altaVino;
     public ProductosForm() {
+        
         initComponents();
-      
+     
     }
     /**
      * Creates new form ProductosForm
@@ -37,7 +47,7 @@ public class ProductosForm extends javax.swing.JFrame {
     public ProductosForm(Restaurant restaurant) {
          this.restaurant=restaurant;
         initComponents();
-       
+       createTableListeners();
     }
 
     /**
@@ -123,6 +133,14 @@ public class ProductosForm extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        tablaEntrada.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tablaEntradaMouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tablaEntradaMousePressed(evt);
             }
         });
         jScrollPane1.setViewportView(tablaEntrada);
@@ -568,12 +586,12 @@ public class ProductosForm extends javax.swing.JFrame {
     private void btnAddEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEntradaMouseClicked
         // TODO add your handling code here:
 
-          altaEntrada = new AltaEntrada(restaurant,new Callback<Restaurant>(){
+          altaEntrada = new AltaEntrada(null,restaurant,new Callback<Restaurant>(){
         
         @Override
         public void onSuccess(Restaurant restaurant) {
             
-            setTableModel(tablaEntrada, "Entrada");
+            setEntradaTableModel(tablaEntrada, "Entrada");
             altaEntrada.dispose();
         }
     });
@@ -600,7 +618,7 @@ public class ProductosForm extends javax.swing.JFrame {
 
     private void btnAddPostreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPostreMouseClicked
         // TODO add your handling code here:
-            altaPostre = new AltaPostre(restaurant,new Callback<Restaurant>(){
+            altaPostre = new AltaPostre(null,restaurant,new Callback<Restaurant>(){
         
         @Override
         public void onSuccess(Restaurant restaurant) {
@@ -615,7 +633,9 @@ public class ProductosForm extends javax.swing.JFrame {
 
     private void btnAddBebidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddBebidaMouseClicked
         // TODO add your handling code here:
-        altaBebida = new AltaBebida(restaurant,new Callback<Restaurant>(){
+       
+        
+        altaBebida = new AltaBebida(null,restaurant,new Callback<Restaurant>(){
         
         @Override
         public void onSuccess(Restaurant restaurant) {
@@ -649,7 +669,7 @@ public class ProductosForm extends javax.swing.JFrame {
        switch (tabProductos.getSelectedIndex()){
         case 0:{
            
-            setTableModel(tablaEntrada, "Entrada");           
+            setEntradaTableModel(tablaEntrada, "Entrada");           
         }
         break;
         case 1:{
@@ -675,11 +695,21 @@ public class ProductosForm extends javax.swing.JFrame {
        } 
     }//GEN-LAST:event_tabProductosStateChanged
 
+    private void tablaEntradaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEntradaMousePressed
+        
+    }//GEN-LAST:event_tablaEntradaMousePressed
+
+    private void tablaEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaEntradaMouseClicked
+        
+    }//GEN-LAST:event_tablaEntradaMouseClicked
+
   
     private void setTableModel(JTable table, String productType){
-       DefaultTableModel tbModel = new DefaultTableModel();
+       MyJTableModel tbModel = new MyJTableModel();
             tbModel.addColumn(colName[0]);
             tbModel.addColumn(colName[1]);
+           
+            
         SortedSet<Producto> list = restaurant.getProductosByType(productType);
         if (list!=null){
             for (Producto p : list) {
@@ -687,6 +717,27 @@ public class ProductosForm extends javax.swing.JFrame {
 
                 data[0] = p.getDescripcion();
                 data[1] = String.valueOf(p.precio());
+                
+                tbModel.addRow(data);
+         }    
+            table.setModel(tbModel);
+        }    
+            
+    }
+    private void setEntradaTableModel(JTable table, String productType){
+       MyJTableModel tbModel = new MyJTableModel();
+            tbModel.addColumn(colName[0]);
+            tbModel.addColumn(colName[1]);
+            tbModel.addColumn(colName[3]);
+            
+        SortedSet<Producto> list = restaurant.getProductosByType(productType);
+        if (list!=null){
+            for (Producto p : list) {
+                String[] data = new String[3];
+
+                data[0] = p.getDescripcion();
+                data[1] = String.valueOf(p.precio());
+                data[2] = String.valueOf(p.getPorcentajeGanancia());
                 tbModel.addRow(data);
          }    
             table.setModel(tbModel);
@@ -695,7 +746,7 @@ public class ProductosForm extends javax.swing.JFrame {
     }
     private void setAllTableModel(JTable table){
        SortedSet<Producto> list = restaurant.getProductos();
-        DefaultTableModel tbModel = new DefaultTableModel();
+        MyJTableModel tbModel = new MyJTableModel();
             tbModel.addColumn(colName[0]);
             tbModel.addColumn(colName[1]);
             tbModel.addColumn(colName[2]);
@@ -710,6 +761,102 @@ public class ProductosForm extends javax.swing.JFrame {
             
             table.setModel(tbModel);
     }
+   
+    private void createTableListeners(){
+      /*BEBIDA*/
+   tablaBebida.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mousePressed(MouseEvent me) {
+       
+        if (me.getClickCount() == 2) {
+        
+           // float p = Float.parseFloat((String) tablaBebida.getModel().getValueAt(tablaBebida.getSelectedRow(), 1));
+            String n = (String) tablaBebida.getModel().getValueAt(tablaBebida.getSelectedRow(), 0);
+           Bebida beb= (Bebida)restaurant.getProductobyDesc(n);
+           // Bebida beb= new Bebida(p,n);
+           altaBebida = new AltaBebida(beb,restaurant,new Callback<Restaurant>(){
+        
+        @Override
+        public void onSuccess(Restaurant restaurant) {
+           
+            setTableModel(tablaBebida, "Bebida");
+            altaBebida.dispose();
+        }
+    });
+        altaBebida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaBebida.setVisible(true); 
+           
+        }
+    }
+});
+   /*ENTRADA*/
+   
+   
+   tablaEntrada.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mousePressed(MouseEvent me) {
+       
+        if (me.getClickCount() == 2) {
+        
+            //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
+            String n = (String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 0);
+            Entrada ent= (Entrada)restaurant.getProductobyDesc(n);
+            
+           // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
+            
+            
+            altaEntrada = new AltaEntrada(ent,restaurant,new Callback<Restaurant>(){
+        
+            @Override
+            public void onSuccess(Restaurant restaurant) {
+
+                setEntradaTableModel(tablaEntrada, "Entrada");
+                altaEntrada.dispose();
+             }   
+            });
+
+       
+        altaEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaEntrada.setVisible(true);
+           
+        }
+    }
+});
+     /*POSTRE*/
+   
+   
+     tablaPostre.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mousePressed(MouseEvent me) {
+       
+        if (me.getClickCount() == 2) {
+        
+            //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
+            String n = (String) tablaPostre.getModel().getValueAt(tablaPostre.getSelectedRow(), 0);
+            Postre pos= (Postre)restaurant.getProductobyDesc(n);
+            
+           // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
+            
+            
+               altaPostre = new AltaPostre(pos,restaurant,new Callback<Restaurant>(){
+        
+        @Override
+        public void onSuccess(Restaurant restaurant) {
+            setTableModel(tablaPostre, "Postre");
+            altaPostre.dispose();
+        }
+    });
+      
+        altaPostre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaPostre.setVisible(true);
+           
+        }
+    }
+});
+}
+    
+    
+    
     
     
 

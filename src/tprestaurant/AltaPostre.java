@@ -6,9 +6,15 @@
 
 package tprestaurant;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import tprestaurant.misc.Callback;
+import tprestaurant.model.ExcepcionLogica;
 import tprestaurant.model.Restaurant;
+import tprestaurant.model.productos.Entrada;
+import tprestaurant.model.productos.Postre;
+import tprestaurant.model.productos.Producto;
 
 /**
  *
@@ -17,14 +23,30 @@ import tprestaurant.model.Restaurant;
 public class AltaPostre extends javax.swing.JFrame {
 Restaurant restaurant;
 Callback callback;
+    private Postre postre;
     /**
      * Creates new form AltaPostre
      */
-    public AltaPostre(Restaurant restaurant,Callback callback) {
-        initComponents();
-        this.callback=callback;
+    public AltaPostre(Postre postre,Restaurant restaurant,Callback callback) {
+         this.callback=callback;
        this.restaurant=restaurant;
+       this.postre=postre;
+        initComponents();
+       AltaOMod(postre); 
     }
+    private void AltaOMod(Postre postre){
+   
+    if (postre != null){
+      txtDescripcionPostre.setText(postre.getDescripcion());
+      costoPostre.setText(String.valueOf(postre.costo()));
+      checkBoxPostre.setSelected(postre.isActivo());   
+   }else{
+     txtDescripcionPostre.setText("");
+      costoPostre.setText("");
+      checkBoxPostre.setSelected(true);   
+   }
+    
+}
    
     /**
      * This method is called from within the constructor to initialize the form.
@@ -36,14 +58,14 @@ Callback callback;
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtDescripcionPostre = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         costoPostre = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jCheckBox2 = new javax.swing.JCheckBox();
+        checkBoxPostre = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -60,12 +82,27 @@ Callback callback;
         jLabel3.setText("Alta de Postre");
 
         jButton1.setText("Guardar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Eliminar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setText("Cancelar");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
-        jCheckBox2.setText("¿Activo?");
+        checkBoxPostre.setText("¿Activo?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -83,8 +120,8 @@ Callback callback;
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addComponent(costoPostre)
                                 .addGap(83, 83, 83)
-                                .addComponent(jCheckBox2))
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(checkBoxPostre))
+                            .addComponent(txtDescripcionPostre, javax.swing.GroupLayout.PREFERRED_SIZE, 258, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel3))
@@ -104,12 +141,12 @@ Callback callback;
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescripcionPostre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(costoPostre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox2))
+                    .addComponent(checkBoxPostre))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
@@ -139,16 +176,56 @@ Callback callback;
           */                      
     }//GEN-LAST:event_costoPostreKeyReleased
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+          Postre nuevaPostre = new Postre(Float.parseFloat(costoPostre.getText()),txtDescripcionPostre.getText());
+         try {
+        if(postre==null)
+        { 
+            restaurant.agregarProducto(nuevaPostre);
+        JOptionPane.showMessageDialog(rootPane, "Nuevo Postre agregado con exito! ");
+        }else{
+         restaurant.modificarProducto(nuevaPostre);
+        JOptionPane.showMessageDialog(rootPane, "Postre Modificado con exito ");
+        }             
+            
+        callback.onSuccess(restaurant);
+        
+    } catch (ExcepcionLogica ex) {
+        Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
+         JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+             
+    }
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+       dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    try {
+        restaurant.eliminarProducto(postre);
+        JOptionPane.showMessageDialog(rootPane, "Postre Eliminado con exito ");
+                   
+            
+        callback.onSuccess(restaurant); 
+    } catch (ExcepcionLogica ex) {
+        Logger.getLogger(AltaPostre.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+    }
+    }//GEN-LAST:event_jButton2ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JCheckBox checkBoxPostre;
     private javax.swing.JTextField costoPostre;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField txtDescripcionPostre;
     // End of variables declaration//GEN-END:variables
 }

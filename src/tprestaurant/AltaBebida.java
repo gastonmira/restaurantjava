@@ -22,17 +22,29 @@ import tprestaurant.model.productos.Producto;
 public class AltaBebida extends javax.swing.JFrame {
 Restaurant restaurant;
 Callback<Restaurant> callback;
+Bebida bebida;
     /**
      * Creates new form AltaBebida
      * @param restaurant
      * @param callback
      */
-    public AltaBebida(Restaurant restaurant,Callback<Restaurant> callback) {
-        initComponents();
-        this.callback=callback;
+    public AltaBebida(Bebida bebida,Restaurant restaurant,Callback<Restaurant> callback) {
+       this.callback=callback;
        this.restaurant=restaurant;
+       this.bebida=bebida;
+        initComponents();
+        AltaOMod(bebida);      
     }
-
+private void AltaOMod(Bebida bebida){
+   if (bebida != null){
+      txtDescripcionBebida.setText(bebida.getDescripcion());
+      precioBebida.setText(String.valueOf(bebida.precio()));
+   }else{
+         txtDescripcionBebida.setText("");
+      precioBebida.setText("");
+   }
+    
+}
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -79,8 +91,18 @@ Callback<Restaurant> callback;
         });
 
         btnEliminarBebida.setText("Eliminar");
+        btnEliminarBebida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarBebidaActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Precio decimal con \",\"");
 
@@ -161,20 +183,47 @@ Callback<Restaurant> callback;
     }//GEN-LAST:event_precioBebidaKeyReleased
 
     private void btnGuardarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarBebidaActionPerformed
-        Producto nuevaBebida = new Bebida(Float.parseFloat(precioBebida.getText()), txtDescripcionBebida.getText());
-    try {
-        restaurant.agregarProducto(nuevaBebida);
-        JOptionPane.showMessageDialog(rootPane, "Nueva Bebida agregada con exito.: ");
-        callback.onSuccess(restaurant);
+    
         
-    } catch (ExcepcionLogica ex) {
+        Producto nuevaBebida = new Bebida(Float.parseFloat(precioBebida.getText()), txtDescripcionBebida.getText());
+     try {
+        if (bebida==null){
+           
+            restaurant.agregarProducto(nuevaBebida);
+            JOptionPane.showMessageDialog(rootPane, "Nueva Bebida agregada con exito ");
+          
+        }else{
+           
+            restaurant.modificarProducto(nuevaBebida);
+            JOptionPane.showMessageDialog(rootPane, "Bebida Modificada con exito ");
+        }
+         callback.onSuccess(restaurant);
+             } catch (ExcepcionLogica ex) {
         Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
-         JOptionPane.showMessageDialog(rootPane, "Error al crear nueva bebida.");
-             
-    }
+         JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+        
+       
+        
+    
         
         
     }//GEN-LAST:event_btnGuardarBebidaActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+       dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
+    private void btnEliminarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarBebidaActionPerformed
+    try {
+        restaurant.eliminarProducto(bebida);
+         JOptionPane.showMessageDialog(rootPane, "Bebida Eilminada con exito ");
+        callback.onSuccess(restaurant);
+    } catch (ExcepcionLogica ex) {
+        Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+    }
+    }//GEN-LAST:event_btnEliminarBebidaActionPerformed
 
    
     // Variables declaration - do not modify//GEN-BEGIN:variables

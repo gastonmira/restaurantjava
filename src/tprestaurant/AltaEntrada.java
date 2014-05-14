@@ -6,9 +6,14 @@
 
 package tprestaurant;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import tprestaurant.misc.Callback;
+import tprestaurant.model.ExcepcionLogica;
 import tprestaurant.model.Restaurant;
+import tprestaurant.model.productos.Bebida;
+import tprestaurant.model.productos.Entrada;
 
 /**
  *
@@ -17,15 +22,31 @@ import tprestaurant.model.Restaurant;
 public class AltaEntrada extends javax.swing.JFrame {
 Callback callback;
     Restaurant restaurant;
+    Entrada entrada;
     /**
      * Creates new form AltaEntrada
      */
-    public AltaEntrada(Restaurant restaurant,Callback callback) {
-        initComponents();
-        this.callback=callback;
+    public AltaEntrada(Entrada entrada,Restaurant restaurant,Callback callback) {
+          this.callback=callback;
        this.restaurant=restaurant;
+       this.entrada=entrada;
+        initComponents();
+        AltaOMod(this.entrada);      
     }
-
+private void AltaOMod(Entrada entrada){
+   
+    if (entrada != null){
+      txtNombreEnt.setText(entrada.getDescripcion());
+      costoEnt.setText(String.valueOf(entrada.costo()));
+      porcentajeEnt.setText(String.valueOf(entrada.getPorcentajeGanancia()));
+      checkBoxEnt.setSelected(entrada.isActivo());   
+   }else{
+      txtNombreEnt.setText("");
+      costoEnt.setText("");
+      porcentajeEnt.setText("");
+   }
+    
+}
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -71,10 +92,25 @@ Callback callback;
         jLabel5.setText("Alta Entrada");
 
         btnAddEntradaAProd.setText("Guardar");
+        btnAddEntradaAProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddEntradaAProdActionPerformed(evt);
+            }
+        });
 
         jButton1.setText("Eliminar");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jButton2.setText("Cancelar");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         checkBoxEnt.setText("¿Activo?");
 
@@ -173,6 +209,45 @@ Callback callback;
        }
          */                       
     }//GEN-LAST:event_porcentajeEntKeyReleased
+
+    private void btnAddEntradaAProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEntradaAProdActionPerformed
+        Entrada nuevaEntrada = new Entrada(Float.parseFloat(costoEnt.getText()), Float.parseFloat(porcentajeEnt.getText()),txtNombreEnt.getText());
+        nuevaEntrada.setActivo(checkBoxEnt.isSelected());
+        try {
+         if (entrada==null){
+            
+            restaurant.agregarProducto(nuevaEntrada);
+            JOptionPane.showMessageDialog(rootPane, "Nueva Entrada agregada con exito");
+         }else{
+            restaurant.modificarProducto(nuevaEntrada);
+            JOptionPane.showMessageDialog(rootPane, "Entrada Modificada con exito ");
+         }
+        callback.onSuccess(restaurant);
+        
+    } catch (ExcepcionLogica ex) {
+        Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
+          JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+             
+    }
+        
+        
+    }//GEN-LAST:event_btnAddEntradaAProdActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+       dispose();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    try {
+        restaurant.eliminarProducto(entrada);
+        JOptionPane.showMessageDialog(rootPane, "Entrada Eliminada con exito ");
+         callback.onSuccess(restaurant);
+    } catch (ExcepcionLogica ex) {
+        Logger.getLogger(AltaEntrada.class.getName()).log(Level.SEVERE, null, ex);
+          JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+    }
+    
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
