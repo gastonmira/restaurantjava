@@ -157,8 +157,8 @@ public class TPRestaurant extends javax.swing.JFrame {
 
     private void cargarIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarIngredientesMouseClicked
         try {
-           restaurant.setIngredientes(Carga.cargaIngredientes("ingredientes.txt"));
-             System.out.println("Ingredientes: "+restaurant.getIngredientes().size() );
+           restaurant.agregarIngredientes(Carga.cargaIngredientes("ingredientes.txt"));
+           
         } catch (ExcepcionLogica ex) {
             Logger.getLogger(TPRestaurant.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -176,7 +176,7 @@ public class TPRestaurant extends javax.swing.JFrame {
 
     private void cargarIngredientesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarIngredientesMouseReleased
          try {
-           restaurant.setIngredientes(Carga.cargaIngredientes("ingredientes.txt"));
+           restaurant.agregarIngredientes(Carga.cargaIngredientes("ingredientes.txt"));
             
         } catch (ExcepcionLogica ex) {
             Logger.getLogger(TPRestaurant.class.getName()).log(Level.SEVERE, null, ex);
