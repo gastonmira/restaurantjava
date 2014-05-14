@@ -19,7 +19,7 @@ import java.util.TreeSet;
  */
 public class Carga {
     
-    public TreeSet<Ingrediente> cargaIngredientes(String ubicacion){
+    public static TreeSet<Ingrediente> cargaIngredientes(String ubicacion) throws ExcepcionLogica {
         File archivo = new File(ubicacion);
         TreeSet<Ingrediente> listIngredientes = new TreeSet<Ingrediente>();
         try
@@ -40,7 +40,7 @@ public class Carga {
         }
         catch(IOException e)
         {
-            
+            throw new ExcepcionLogica(e.getMessage());
         }
        
         return listIngredientes;

@@ -39,8 +39,14 @@ public class CargaTest {
     @Test
     public void testCargaIngredientes() {
         System.out.println("cargaIngredientes");
-        Carga instance = new Carga();
-        rest.setIngredientes(instance.cargaIngredientes("ingredientesTest.txt"));
+        try
+        {
+            rest.setIngredientes(Carga.cargaIngredientes("ingredientesTest.txt"));
+        }
+        catch(ExcepcionLogica ex)
+        {
+            
+        }
         ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>(rest.getIngredientes());
         assertEquals(rest.getIngredientes().size(), 2);
         assertEquals(ingredientes.get(0).getUnidad(), UnidadesDeMedida.litro);
