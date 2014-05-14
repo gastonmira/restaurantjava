@@ -130,7 +130,7 @@ public class TPRestaurant extends javax.swing.JFrame {
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
         // TODO add your handling code here: BOTON PRODUCTOS CLICKEADO
-        JFrame productosForm = new ProductosForm();
+        ProductosForm productosForm = new ProductosForm(restaurant);
         productosForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         productosForm.setVisible(true);
     }//GEN-LAST:event_btnProductosMouseClicked

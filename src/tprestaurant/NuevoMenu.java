@@ -136,8 +136,7 @@ Callback callback;
         } catch (ParseException ex) {
             Logger.getLogger(NuevoMenu.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(rootPane, "Error al Generar el nuevo menu.");
-             callback.onFailure("");
-             dispose();
+              dispose();
         }
       
        

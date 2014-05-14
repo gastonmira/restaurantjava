@@ -108,17 +108,13 @@ Restaurant restaurant;
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        JDialog nuevoMenuForm = new NuevoMenu(this, true,restaurant, new Callback() {
+        JDialog nuevoMenuForm = new NuevoMenu(this, true,restaurant, new Callback<String>() {
 
             @Override
             public void onSuccess(String result) {
                 cargarListaMenus(restaurant.getMenus());
             }
-
-            @Override
-            public void onFailure(String result) {
-                
-            }
+           
         });
         nuevoMenuForm.setVisible(true);
        

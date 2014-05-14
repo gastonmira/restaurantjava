@@ -6,19 +6,41 @@
 
 package tprestaurant;
 
+import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.Vector;
 import javax.swing.JFrame;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import tprestaurant.misc.Callback;
+import tprestaurant.model.Restaurant;
+import tprestaurant.model.productos.Bebida;
+import tprestaurant.model.productos.Producto;
 
 /**
  *
  * @author gastonmira
  */
 public class ProductosForm extends javax.swing.JFrame {
-
+private Restaurant restaurant;
+private String[] colName = { "Nombre", "Precio" };
+    private AltaBebida altaBebida;
+    private AltaPostre altaPostre;
+    private AltaEntrada altaEntrada;
+    private AltaPrincipal altaPrincipal;
+    private AltaVino altaVino;
+    
     /**
      * Creates new form ProductosForm
+     * @param restaurant
      */
-    public ProductosForm() {
+    public ProductosForm(Restaurant restaurant) {
         initComponents();
+        this.restaurant=restaurant;
     }
 
     /**
@@ -31,57 +53,63 @@ public class ProductosForm extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        tabProductos = new javax.swing.JTabbedPane();
+        panelEntrada = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaEntrada = new javax.swing.JTable();
         btnAddEntrada = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnLimpiarEntrada = new javax.swing.JButton();
         btnFiltrarEntrada = new javax.swing.JButton();
         txtBuscadorEntrada = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
+        panelPrincipal = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tablaPrincipal = new javax.swing.JTable();
         btnAddPrincipal = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         btnLimpiarPrincipal = new javax.swing.JButton();
         btnFiltrarPrincipal = new javax.swing.JButton();
         txtBuscadorPrincipal = new javax.swing.JTextField();
-        jPanel3 = new javax.swing.JPanel();
+        panelPostre = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable3 = new javax.swing.JTable();
+        tablaPostre = new javax.swing.JTable();
         btnAddPostre = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         btnLimpiarPostre = new javax.swing.JButton();
         btnFiltrarPostre = new javax.swing.JButton();
         txtBuscadorPostre = new javax.swing.JTextField();
-        jPanel4 = new javax.swing.JPanel();
+        panelBebida = new javax.swing.JPanel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable4 = new javax.swing.JTable();
+        tablaBebida = new javax.swing.JTable();
         btnAddBebida = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         btnLimpiarBebida = new javax.swing.JButton();
         btnFiltrarBebida = new javax.swing.JButton();
         txtBuscadorBebida = new javax.swing.JTextField();
-        jPanel5 = new javax.swing.JPanel();
+        panelVino = new javax.swing.JPanel();
         jScrollPane5 = new javax.swing.JScrollPane();
-        jTable5 = new javax.swing.JTable();
+        tablaVino = new javax.swing.JTable();
         btnAddVino = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         btnLimpiarVino = new javax.swing.JButton();
         btnFiltrarVino = new javax.swing.JButton();
         txtBuscadorVino = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
+        panelTodos = new javax.swing.JPanel();
         jScrollPane6 = new javax.swing.JScrollPane();
-        jTable6 = new javax.swing.JTable();
+        tablaTodos = new javax.swing.JTable();
         btnFiltrar = new javax.swing.JButton();
         btnLimpiar = new javax.swing.JButton();
         txtBuscador = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabProductos.addChangeListener(new javax.swing.event.ChangeListener() {
+            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+                tabProductosStateChanged(evt);
+            }
+        });
+
+        tablaEntrada.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -100,7 +128,7 @@ public class ProductosForm extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaEntrada);
 
         btnAddEntrada.setText("Agregar Entrada");
         btnAddEntrada.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -120,31 +148,31 @@ public class ProductosForm extends javax.swing.JFrame {
 
         btnFiltrarEntrada.setText("Filtrar");
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelEntradaLayout = new javax.swing.GroupLayout(panelEntrada);
+        panelEntrada.setLayout(panelEntradaLayout);
+        panelEntradaLayout.setHorizontalGroup(
+            panelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEntradaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFiltrarEntrada)
                     .addComponent(btnLimpiarEntrada)
                     .addComponent(txtBuscadorEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(panelEntradaLayout.createSequentialGroup()
                 .addComponent(btnAddEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelEntradaLayout.setVerticalGroup(
+            panelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelEntradaLayout.createSequentialGroup()
+                .addGroup(panelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(panelEntradaLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(txtBuscadorEntrada, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -152,15 +180,15 @@ public class ProductosForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpiarEntrada)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelEntradaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddEntrada)
                     .addComponent(jLabel1))
                 .addContainerGap(16, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Entrada", jPanel1);
+        tabProductos.addTab("Entrada", panelEntrada);
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -171,7 +199,7 @@ public class ProductosForm extends javax.swing.JFrame {
                 "Nombre", "Precio", "Title 3"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(tablaPrincipal);
 
         btnAddPrincipal.setText("Agregar plato principal");
         btnAddPrincipal.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -191,31 +219,31 @@ public class ProductosForm extends javax.swing.JFrame {
 
         btnFiltrarPrincipal.setText("Filtrar");
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
+        panelPrincipal.setLayout(panelPrincipalLayout);
+        panelPrincipalLayout.setHorizontalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFiltrarPrincipal)
                     .addComponent(btnLimpiarPrincipal)
                     .addComponent(txtBuscadorPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addComponent(btnAddPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel2)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelPrincipalLayout.setVerticalGroup(
+            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPrincipalLayout.createSequentialGroup()
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
+                    .addGroup(panelPrincipalLayout.createSequentialGroup()
                         .addGap(15, 15, 15)
                         .addComponent(txtBuscadorPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -223,15 +251,15 @@ public class ProductosForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpiarPrincipal)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddPrincipal)
                     .addComponent(jLabel2))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Principal", jPanel2);
+        tabProductos.addTab("Principal", panelPrincipal);
 
-        jTable3.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPostre.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -242,7 +270,7 @@ public class ProductosForm extends javax.swing.JFrame {
                 "Nombre", "Precio", "Title 3"
             }
         ));
-        jScrollPane3.setViewportView(jTable3);
+        jScrollPane3.setViewportView(tablaPostre);
 
         btnAddPostre.setText("Agregar Postre");
         btnAddPostre.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -262,31 +290,31 @@ public class ProductosForm extends javax.swing.JFrame {
 
         btnFiltrarPostre.setText("Filtrar");
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelPostreLayout = new javax.swing.GroupLayout(panelPostre);
+        panelPostre.setLayout(panelPostreLayout);
+        panelPostreLayout.setHorizontalGroup(
+            panelPostreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPostreLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelPostreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFiltrarPostre)
                     .addComponent(btnLimpiarPostre)
                     .addComponent(txtBuscadorPostre, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(48, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
+            .addGroup(panelPostreLayout.createSequentialGroup()
                 .addComponent(btnAddPostre, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel3)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelPostreLayout.setVerticalGroup(
+            panelPostreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelPostreLayout.createSequentialGroup()
+                .addGroup(panelPostreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(panelPostreLayout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(txtBuscadorPostre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -294,15 +322,15 @@ public class ProductosForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpiarPostre)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelPostreLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddPostre)
                     .addComponent(jLabel3))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Postre", jPanel3);
+        tabProductos.addTab("Postre", panelPostre);
 
-        jTable4.setModel(new javax.swing.table.DefaultTableModel(
+        tablaBebida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -313,7 +341,7 @@ public class ProductosForm extends javax.swing.JFrame {
                 "Nombre", "Precio", "Title 3"
             }
         ));
-        jScrollPane4.setViewportView(jTable4);
+        jScrollPane4.setViewportView(tablaBebida);
 
         btnAddBebida.setText("Agregar Bebida");
         btnAddBebida.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -333,31 +361,31 @@ public class ProductosForm extends javax.swing.JFrame {
 
         btnFiltrarBebida.setText("Filtrar");
 
-        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
-        jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelBebidaLayout = new javax.swing.GroupLayout(panelBebida);
+        panelBebida.setLayout(panelBebidaLayout);
+        panelBebidaLayout.setHorizontalGroup(
+            panelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBebidaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFiltrarBebida)
                     .addComponent(btnLimpiarBebida)
                     .addComponent(txtBuscadorBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(48, Short.MAX_VALUE))
-            .addGroup(jPanel4Layout.createSequentialGroup()
+            .addGroup(panelBebidaLayout.createSequentialGroup()
                 .addComponent(btnAddBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel4)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelBebidaLayout.setVerticalGroup(
+            panelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBebidaLayout.createSequentialGroup()
+                .addGroup(panelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
+                    .addGroup(panelBebidaLayout.createSequentialGroup()
                         .addGap(27, 27, 27)
                         .addComponent(txtBuscadorBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -365,15 +393,15 @@ public class ProductosForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpiarBebida)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelBebidaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddBebida)
                     .addComponent(jLabel4))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Bebida", jPanel4);
+        tabProductos.addTab("Bebida", panelBebida);
 
-        jTable5.setModel(new javax.swing.table.DefaultTableModel(
+        tablaVino.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -384,7 +412,7 @@ public class ProductosForm extends javax.swing.JFrame {
                 "Nombre", "Precio", "Title 3"
             }
         ));
-        jScrollPane5.setViewportView(jTable5);
+        jScrollPane5.setViewportView(tablaVino);
 
         btnAddVino.setText("Agregar Vino");
         btnAddVino.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -404,31 +432,31 @@ public class ProductosForm extends javax.swing.JFrame {
 
         btnFiltrarVino.setText("Filtrar");
 
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelVinoLayout = new javax.swing.GroupLayout(panelVino);
+        panelVino.setLayout(panelVinoLayout);
+        panelVinoLayout.setHorizontalGroup(
+            panelVinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVinoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelVinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFiltrarVino)
                     .addComponent(btnLimpiarVino)
                     .addComponent(txtBuscadorVino, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(54, Short.MAX_VALUE))
-            .addGroup(jPanel5Layout.createSequentialGroup()
+            .addGroup(panelVinoLayout.createSequentialGroup()
                 .addComponent(btnAddVino, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel5)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        panelVinoLayout.setVerticalGroup(
+            panelVinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelVinoLayout.createSequentialGroup()
+                .addGroup(panelVinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel5Layout.createSequentialGroup()
+                    .addGroup(panelVinoLayout.createSequentialGroup()
                         .addGap(32, 32, 32)
                         .addComponent(txtBuscadorVino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -436,15 +464,15 @@ public class ProductosForm extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnLimpiarVino)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(panelVinoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddVino)
                     .addComponent(jLabel5))
                 .addGap(0, 16, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Vino", jPanel5);
+        tabProductos.addTab("Vino", panelVino);
 
-        jTable6.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTodos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -455,7 +483,7 @@ public class ProductosForm extends javax.swing.JFrame {
                 "Nombre", "Tipo", "Precio"
             }
         ));
-        jScrollPane6.setViewportView(jTable6);
+        jScrollPane6.setViewportView(tablaTodos);
 
         btnFiltrar.setText("Filtrar");
 
@@ -466,28 +494,28 @@ public class ProductosForm extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelTodosLayout = new javax.swing.GroupLayout(panelTodos);
+        panelTodos.setLayout(panelTodosLayout);
+        panelTodosLayout.setHorizontalGroup(
+            panelTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodosLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(panelTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnFiltrar)
                     .addComponent(btnLimpiar)
                     .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(48, Short.MAX_VALUE))
         );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+        panelTodosLayout.setVerticalGroup(
+            panelTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodosLayout.createSequentialGroup()
+                .addGroup(panelTodosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTodosLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel6Layout.createSequentialGroup()
+                    .addGroup(panelTodosLayout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addComponent(txtBuscador, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -497,7 +525,7 @@ public class ProductosForm extends javax.swing.JFrame {
                 .addContainerGap(51, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Todos", jPanel6);
+        tabProductos.addTab("Todos", panelTodos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -505,12 +533,12 @@ public class ProductosForm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(tabProductos)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPane1)
+            .addComponent(tabProductos)
         );
 
         pack();
@@ -542,73 +570,149 @@ public class ProductosForm extends javax.swing.JFrame {
 
     private void btnAddEntradaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddEntradaMouseClicked
         // TODO add your handling code here:
-        JFrame altaEntrada = new AltaEntrada();
+
+          altaEntrada = new AltaEntrada(restaurant,new Callback<Restaurant>(){
+        
+        @Override
+        public void onSuccess(Restaurant restaurant) {
+            
+            setTableModel(tablaEntrada, "Entrada");
+            altaEntrada.dispose();
+        }
+    });
+        
+       
         altaEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaEntrada.setVisible(true);
     }//GEN-LAST:event_btnAddEntradaMouseClicked
 
     private void btnAddPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPrincipalMouseClicked
         // TODO add your handling code here:
-        JFrame altaPrincipal = new AltaPrincipal();
+           altaPrincipal = new AltaPrincipal(restaurant,new Callback<Restaurant>(){
+        
+        @Override
+        public void onSuccess(Restaurant restaurant) {
+            
+            setTableModel(tablaPrincipal, "Principal");
+            altaPrincipal.dispose();
+        }
+    });
         altaPrincipal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaPrincipal.setVisible(true);
     }//GEN-LAST:event_btnAddPrincipalMouseClicked
 
     private void btnAddPostreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPostreMouseClicked
         // TODO add your handling code here:
-        JFrame altaPostre = new AltaPostre();
+            altaPostre = new AltaPostre(restaurant,new Callback<Restaurant>(){
+        
+        @Override
+        public void onSuccess(Restaurant restaurant) {
+            setTableModel(tablaPostre, "Postre");
+            altaPostre.dispose();
+        }
+    });
+      
         altaPostre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaPostre.setVisible(true);
     }//GEN-LAST:event_btnAddPostreMouseClicked
 
     private void btnAddBebidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddBebidaMouseClicked
         // TODO add your handling code here:
-        JFrame altaBebida = new AltaBebida();
+        altaBebida = new AltaBebida(restaurant,new Callback<Restaurant>(){
+        
+        @Override
+        public void onSuccess(Restaurant restaurant) {
+           
+            setTableModel(tablaBebida, "Bebida");
+            altaBebida.dispose();
+        }
+    });
         altaBebida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaBebida.setVisible(true);
     }//GEN-LAST:event_btnAddBebidaMouseClicked
 
     private void btnAddVinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddVinoMouseClicked
         // TODO add your handling code here:
-        JFrame altaVino = new AltaVino();
+         altaVino = new AltaVino(restaurant,new Callback<Restaurant>(){
+        
+        @Override
+        public void onSuccess(Restaurant restaurant) {
+            
+            setTableModel(tablaVino, "Vino");
+            altaVino.dispose();
+        }
+    });
+        
+        
         altaVino.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaVino.setVisible(true);
     }//GEN-LAST:event_btnAddVinoMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ProductosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ProductosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ProductosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ProductosForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void tabProductosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabProductosStateChanged
+       switch (tabProductos.getSelectedIndex()){
+        case 0:{
+           
+            setTableModel(tablaEntrada, "Entrada");           
         }
-        //</editor-fold>
+        break;
+        case 1:{
+            setTableModel(tablaPrincipal, "Principal");
+        }
+        break;
+        case 2:{
+            setTableModel(tablaPostre, "Postre");
+        }
+        break;
+        case 3:{
+            setTableModel(tablaBebida, "Bebida");
+        }
+        break;
+         case 4:{
+            setTableModel(tablaVino,"Vino");
+        }
+        break;
+        case 5:{
+            setAllTableModel(tablaTodos);
+        }
+        break;
+       } 
+    }//GEN-LAST:event_tabProductosStateChanged
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ProductosForm().setVisible(true);
-            }
-        });
+  
+    private void setTableModel(JTable table, String productType){
+       DefaultTableModel tbModel = new DefaultTableModel();
+            tbModel.addColumn(colName[0]);
+            tbModel.addColumn(colName[1]);
+        SortedSet<Producto> list = restaurant.getProductosByType(productType);
+        if (list!=null){
+            for (Producto p : list) {
+                String[] data = new String[2];
+
+                data[0] = p.getDescripcion();
+                data[1] = String.valueOf(p.precio());
+                tbModel.addRow(data);
+         }    
+            table.setModel(tbModel);
+        }    
+            
     }
+    private void setAllTableModel(JTable table){
+       SortedSet<Producto> list = restaurant.getProductos();
+        DefaultTableModel tbModel = new DefaultTableModel();
+            tbModel.addColumn(colName[0]);
+            tbModel.addColumn(colName[1]);
+        for (Producto p : list) {
+            String[] data = new String[2];
+        
+            data[0] = p.getDescripcion();
+            data[1] = String.valueOf(p.precio());
+            tbModel.addRow(data);
+     }             
+            
+            table.setModel(tbModel);
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddBebida;
@@ -634,25 +738,25 @@ public class ProductosForm extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JScrollPane jScrollPane6;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTable jTable3;
-    private javax.swing.JTable jTable4;
-    private javax.swing.JTable jTable5;
-    private javax.swing.JTable jTable6;
+    private javax.swing.JPanel panelBebida;
+    private javax.swing.JPanel panelEntrada;
+    private javax.swing.JPanel panelPostre;
+    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelTodos;
+    private javax.swing.JPanel panelVino;
+    private javax.swing.JTabbedPane tabProductos;
+    private javax.swing.JTable tablaBebida;
+    private javax.swing.JTable tablaEntrada;
+    private javax.swing.JTable tablaPostre;
+    private javax.swing.JTable tablaPrincipal;
+    private javax.swing.JTable tablaTodos;
+    private javax.swing.JTable tablaVino;
     private javax.swing.JTextField txtBuscador;
     private javax.swing.JTextField txtBuscadorBebida;
     private javax.swing.JTextField txtBuscadorEntrada;

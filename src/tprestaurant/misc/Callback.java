@@ -10,9 +10,9 @@ package tprestaurant.misc;
  *
  * @author Administrador
  */
-public interface Callback {
+public interface Callback<T> {
     
-    void onSuccess(String result);
-     void onFailure(String result);
+    void onSuccess(T result);
+    // void onFailure(String result);
     
 }

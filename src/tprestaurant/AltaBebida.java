@@ -9,19 +9,28 @@ package tprestaurant;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import tprestaurant.misc.Callback;
 import tprestaurant.model.ExcepcionLogica;
+import tprestaurant.model.Restaurant;
+import tprestaurant.model.productos.Bebida;
+import tprestaurant.model.productos.Producto;
 
 /**
  *
  * @author gastonmira
  */
 public class AltaBebida extends javax.swing.JFrame {
-
+Restaurant restaurant;
+Callback<Restaurant> callback;
     /**
      * Creates new form AltaBebida
+     * @param restaurant
+     * @param callback
      */
-    public AltaBebida() {
+    public AltaBebida(Restaurant restaurant,Callback<Restaurant> callback) {
         initComponents();
+        this.callback=callback;
+       this.restaurant=restaurant;
     }
 
     /**
@@ -35,12 +44,12 @@ public class AltaBebida extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtDescripcionBebida = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         precioBebida = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnGuardarBebida = new javax.swing.JButton();
+        btnEliminarBebida = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -62,11 +71,16 @@ public class AltaBebida extends javax.swing.JFrame {
             }
         });
 
-        jButton1.setText("Guardar");
+        btnGuardarBebida.setText("Guardar");
+        btnGuardarBebida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarBebidaActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Eliminar");
+        btnEliminarBebida.setText("Eliminar");
 
-        jButton3.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
 
         jLabel4.setText("Precio decimal con \",\"");
 
@@ -81,20 +95,20 @@ public class AltaBebida extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel2)
                         .addGap(40, 40, 40)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtDescripcionBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel3)
-                            .addComponent(jButton1))
+                            .addComponent(btnGuardarBebida))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnEliminarBebida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(precioBebida))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(jButton3))
+                                .addComponent(btnCancelar))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(0, 0, Short.MAX_VALUE)))))
@@ -108,7 +122,7 @@ public class AltaBebida extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescripcionBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -116,9 +130,9 @@ public class AltaBebida extends javax.swing.JFrame {
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnGuardarBebida)
+                    .addComponent(btnEliminarBebida)
+                    .addComponent(btnCancelar))
                 .addContainerGap(157, Short.MAX_VALUE))
         );
 
@@ -146,50 +160,32 @@ public class AltaBebida extends javax.swing.JFrame {
        }*/
     }//GEN-LAST:event_precioBebidaKeyReleased
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AltaBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AltaBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AltaBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AltaBebida.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AltaBebida().setVisible(true);
-            }
-        });
+    private void btnGuardarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarBebidaActionPerformed
+        Producto nuevaBebida = new Bebida(Float.parseFloat(precioBebida.getText()), txtDescripcionBebida.getText());
+    try {
+        restaurant.agregarProducto(nuevaBebida);
+        JOptionPane.showMessageDialog(rootPane, "Nueva Bebida agregada con exito.: ");
+        callback.onSuccess(restaurant);
+        
+    } catch (ExcepcionLogica ex) {
+        Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
+         JOptionPane.showMessageDialog(rootPane, "Error al crear nueva bebida.");
+             
     }
+        
+        
+    }//GEN-LAST:event_btnGuardarBebidaActionPerformed
 
+   
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEliminarBebida;
+    private javax.swing.JButton btnGuardarBebida;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField precioBebida;
+    private javax.swing.JTextField txtDescripcionBebida;
     // End of variables declaration//GEN-END:variables
 }
