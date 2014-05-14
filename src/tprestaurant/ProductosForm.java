@@ -6,19 +6,12 @@
 
 package tprestaurant;
 
-import com.sun.org.apache.xalan.internal.xsltc.runtime.BasisLibrary;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.SortedSet;
-import java.util.TreeSet;
-import java.util.Vector;
 import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import tprestaurant.misc.Callback;
 import tprestaurant.model.Restaurant;
-import tprestaurant.model.productos.Bebida;
 import tprestaurant.model.productos.Producto;
 
 /**
@@ -26,21 +19,25 @@ import tprestaurant.model.productos.Producto;
  * @author gastonmira
  */
 public class ProductosForm extends javax.swing.JFrame {
-private Restaurant restaurant;
-private String[] colName = { "Nombre", "Precio" };
+    private Restaurant restaurant;
+    private String[] colName = { "Nombre", "Precio","Precio" };
     private AltaBebida altaBebida;
     private AltaPostre altaPostre;
     private AltaEntrada altaEntrada;
     private AltaPrincipal altaPrincipal;
     private AltaVino altaVino;
-    
+    public ProductosForm() {
+        initComponents();
+      
+    }
     /**
      * Creates new form ProductosForm
      * @param restaurant
      */
     public ProductosForm(Restaurant restaurant) {
+         this.restaurant=restaurant;
         initComponents();
-        this.restaurant=restaurant;
+       
     }
 
     /**
@@ -701,11 +698,13 @@ private String[] colName = { "Nombre", "Precio" };
         DefaultTableModel tbModel = new DefaultTableModel();
             tbModel.addColumn(colName[0]);
             tbModel.addColumn(colName[1]);
+            tbModel.addColumn(colName[2]);
         for (Producto p : list) {
-            String[] data = new String[2];
+            String[] data = new String[3];
         
             data[0] = p.getDescripcion();
             data[1] = String.valueOf(p.precio());
+            data[2] = p.getClass().getSimpleName();
             tbModel.addRow(data);
      }             
             

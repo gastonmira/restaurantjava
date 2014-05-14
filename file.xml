@@ -1,0 +1,56 @@
+<tprestaurant.model.Restaurant>
+  <menus>
+    <tprestaurant.model.Menu>
+      <productos>
+        <tprestaurant.model.ItemMenu>
+          <producto class="tprestaurant.model.productos.Entrada">
+            <descripcion>jamon con rusa</descripcion>
+            <activo>true</activo>
+            <costo>10.0</costo>
+            <porcentajeGanancia>15.0</porcentajeGanancia>
+          </producto>
+          <precio>11.5</precio>
+        </tprestaurant.model.ItemMenu>
+        <tprestaurant.model.ItemMenu>
+          <producto class="tprestaurant.model.productos.Entrada">
+            <descripcion>jamon crudo con rusa</descripcion>
+            <activo>true</activo>
+            <costo>20.0</costo>
+            <porcentajeGanancia>15.0</porcentajeGanancia>
+          </producto>
+          <precio>23.0</precio>
+        </tprestaurant.model.ItemMenu>
+        <tprestaurant.model.ItemMenu>
+          <producto class="tprestaurant.model.productos.Vino">
+            <descripcion>valmont</descripcion>
+            <activo>true</activo>
+            <precioVenta>100.0</precioVenta>
+            <varietal>Cabernet</varietal>
+            <provincia>Buenos_Aires</provincia>
+          </producto>
+          <precio>100.0</precio>
+        </tprestaurant.model.ItemMenu>
+        <tprestaurant.model.ItemMenu>
+          <producto class="tprestaurant.model.productos.Postre">
+            <descripcion>flan</descripcion>
+            <activo>true</activo>
+            <costo>23.0</costo>
+          </producto>
+          <precio>46.0</precio>
+        </tprestaurant.model.ItemMenu>
+      </productos>
+      <fechaVigenciaInicial>2014-05-13 20:52:27.25 ART</fechaVigenciaInicial>
+      <descripcion></descripcion>
+    </tprestaurant.model.Menu>
+  </menus>
+  <productos>
+    <no-comparator/>
+    <tprestaurant.model.productos.Entrada reference="../../menus/tprestaurant.model.Menu/productos/tprestaurant.model.ItemMenu/producto"/>
+    <tprestaurant.model.productos.Entrada reference="../../menus/tprestaurant.model.Menu/productos/tprestaurant.model.ItemMenu[2]/producto"/>
+    <tprestaurant.model.productos.Postre reference="../../menus/tprestaurant.model.Menu/productos/tprestaurant.model.ItemMenu[4]/producto"/>
+    <tprestaurant.model.productos.Vino reference="../../menus/tprestaurant.model.Menu/productos/tprestaurant.model.ItemMenu[3]/producto"/>
+  </productos>
+  <ingredientes>
+    <no-comparator/>
+  </ingredientes>
+</tprestaurant.model.Restaurant>

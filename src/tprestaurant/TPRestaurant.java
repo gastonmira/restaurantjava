@@ -130,7 +130,7 @@ public class TPRestaurant extends javax.swing.JFrame {
 
     private void btnProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductosMouseClicked
         // TODO add your handling code here: BOTON PRODUCTOS CLICKEADO
-        ProductosForm productosForm = new ProductosForm(restaurant);
+        JFrame productosForm = new ProductosForm(restaurant);
         productosForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         productosForm.setVisible(true);
     }//GEN-LAST:event_btnProductosMouseClicked
@@ -155,7 +155,9 @@ public class TPRestaurant extends javax.swing.JFrame {
     }//GEN-LAST:event_cargarIngredientesMouseClicked
 
     private void cargarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRestauranteActionPerformed
-       restaurant = Persister.cargarRestaurant("file.xml");
+      
+        
+        restaurant = Persister.cargarRestaurant("file.xml");
     }//GEN-LAST:event_cargarRestauranteActionPerformed
 
     private void guardarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarRestauranteActionPerformed
