@@ -70,4 +70,17 @@ public abstract class Producto implements Comparable, Serializable{
     public void setActivo(boolean activo) {
         this.activo = activo;
     }
+    
+     @Override
+    public String toString()
+    {
+        String estaActivo = "No";
+        if(activo){
+            estaActivo = "Si";
+        }
+        String header =  "Descripcion: "+descripcion+"\n"+
+                         "Activo: "+estaActivo+"\n"+
+                         "-------------------------------------------\n\n";
+        return header;
+    }
 }
