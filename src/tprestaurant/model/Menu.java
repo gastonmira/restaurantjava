@@ -84,16 +84,9 @@ public class Menu implements Serializable {
      * @return the productos
      */
     public ArrayList<ItemMenu> getProductos() {
-        return productos;
+        return new ArrayList<ItemMenu>(productos);
     }
 
-    /**
-     * @param productos the productos to set
-     */
-    public void setProductos(ArrayList<ItemMenu> productos) {
-        this.productos = productos;
-    }
-    
     /**
      *
      * @return

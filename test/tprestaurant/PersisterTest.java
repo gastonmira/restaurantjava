@@ -31,7 +31,7 @@ public class PersisterTest {
     
     Restaurant rest;
     Menu menu;
-    private static final String filePath = "file.xml";
+    private static final String filePath = "fileTest.xml";
     
     public PersisterTest() {
     }

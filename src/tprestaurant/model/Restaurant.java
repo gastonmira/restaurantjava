@@ -69,13 +69,6 @@ public class Restaurant implements Serializable {
         
         return result;
     }
- 
-    /**
-     * @param productos the productos to set
-     */
-    public void setProductos(TreeSet<Producto> productos) {
-        this.productos = productos;
-    }
 
     /**
      * @return the ingredientes

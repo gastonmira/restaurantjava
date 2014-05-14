@@ -67,7 +67,6 @@ public class Persister {
             BufferedWriter buw = new BufferedWriter(new FileWriter(fichero));
             buw.write(lista.toString());
             buw.close();
-            JOptionPane.showMessageDialog(null,"Reporte generado");
         }catch(IOException ioe) {
             ioe.printStackTrace();
         }

@@ -11,7 +11,7 @@ import tprestaurant.model.enums.UnidadesDeMedida;
  *
  * @author Usuario
  */
-public class Ingrediente {
+public class Ingrediente implements Comparable{
 
     public Ingrediente() {
         this.costoPorUnidad = 0;
@@ -79,5 +79,11 @@ public class Ingrediente {
             return false;
         
         return this.descripcion.equals(((Ingrediente)o).getDescripcion());
+    }
+    
+    @Override
+    public int compareTo(Object o){
+        Ingrediente i = (Ingrediente)o;
+        return this.getDescripcion().compareTo(i.getDescripcion());
     }
 }

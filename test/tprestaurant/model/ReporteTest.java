@@ -25,13 +25,14 @@ import tprestaurant.model.productos.*;
 public class ReporteTest {
     
     public Restaurant rest;
-    
+    public Menu menu;
     public ReporteTest() {
     }
     
     @Before
     public void setUp() {
         rest = new Restaurant();
+        menu = new Menu();
         Producto p1 = new Entrada(10, 15,"jamon con rusa");
         Producto p2 = new Entrada(20, 15,"jamon crudo con rusa");
         Producto p3 = new Vino(Varietales.Cabernet,Provincias.Buenos_Aires);
@@ -46,6 +47,13 @@ public class ReporteTest {
             rest.agregarProducto(p2);
             rest.agregarProducto(p3);
             rest.agregarProducto(p4);
+            menu.agregarProducto(p1);
+            menu.agregarProducto(p2);
+            menu.agregarProducto(p3);
+            menu.agregarProducto(p4);
+            ArrayList<Menu> menus = new ArrayList<Menu>();
+            menus.add(menu);
+            rest.setMenus(menus);
         }
         catch(ExcepcionLogica ex)
         {
@@ -61,10 +69,30 @@ public class ReporteTest {
     /**
      * Test of menuModificacion method, of class Reporte.
      */
-//    @Test
-//    public void testMenuModificacion() {
-//      
-//    }
+    @Test
+    public void testMenuModificacion() {
+        Menu menu2 = new Menu();
+        Producto p1 = new Entrada(10, 15,"vitel thone");
+        menu2.agregarProducto(menu.getProductos().get(0).getProducto());
+        menu2.agregarProducto(menu.getProductos().get(1).getProducto());
+        menu2.agregarProducto(p1); //Producto Nuevo
+        menu2.getProductos().get(0).setPrecio(2000); //Producto Modificado
+        
+        ArrayList<Menu> menus = new ArrayList<Menu>();
+        menus.add(menu);
+        menus.add(menu2);
+        rest.setMenus(menus);
+        
+        Reporte instance = new Reporte();
+        List<Cambio> cambios = instance.menuModificacion(menu, menu2);
+        
+        assertEquals(cambios.get(0).getDescripcion(),"jamon con rusa");
+        assertEquals(cambios.get(0).getTransicion(),"Cambio de Precio");
+        assertEquals(cambios.get(0).getPrecioNuevo(),2000,0);
+        assertEquals(cambios.get(1).getTransicion(),"Producto Eliminado");
+        assertEquals(cambios.get(2).getTransicion(),"Producto Eliminado");
+        assertEquals(cambios.get(3).getTransicion(),"Nuevo Producto");
+    }
 
     /**
      * Test of rankingPrecios method, of class Reporte.

@@ -6,10 +6,12 @@
 
 package tprestaurant.model;
 
+import java.util.ArrayList;
 import org.junit.After;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-import static org.junit.Assert.*;
+import tprestaurant.model.enums.UnidadesDeMedida;
 
 /**
  *
@@ -17,15 +19,18 @@ import static org.junit.Assert.*;
  */
 public class CargaTest {
     
+    Restaurant rest;
     public CargaTest() {
     }
     
     @Before
     public void setUp() {
+        rest = new Restaurant();
     }
     
     @After
     public void tearDown() {
+        rest = null;
     }
 
     /**
@@ -34,13 +39,16 @@ public class CargaTest {
     @Test
     public void testCargaIngredientes() {
         System.out.println("cargaIngredientes");
-        String ubicacion = "";
-        String ingredientes = "";
-        Restaurant rest = null;
         Carga instance = new Carga();
-        instance.cargaIngredientes(ubicacion, ingredientes, rest);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+        rest.setIngredientes(instance.cargaIngredientes("ingredientesTest.txt"));
+        ArrayList<Ingrediente> ingredientes = new ArrayList<Ingrediente>(rest.getIngredientes());
+        assertEquals(rest.getIngredientes().size(), 2);
+        assertEquals(ingredientes.get(0).getUnidad(), UnidadesDeMedida.litro);
+        assertEquals(ingredientes.get(0).getDescripcion(), "crema");
+        assertEquals(ingredientes.get(0).getCostoPorUnidad(), 2.0, 0);
+        assertEquals(ingredientes.get(1).getUnidad(), UnidadesDeMedida.kg);
+        assertEquals(ingredientes.get(1).getDescripcion(), "lomo");
+        assertEquals(ingredientes.get(1).getCostoPorUnidad(), 10.0, 0);
     }
     
 }

@@ -15,38 +15,35 @@ public class Reporte {
     
     public List<Cambio> menuModificacion(Menu menu1, Menu menu2){
         List<Cambio> lista = new ArrayList<Cambio>();
+        ItemMenu aux = null;
         for(ItemMenu i: menu1.getProductos()){
-            Iterator<ItemMenu> it = menu2.getProductos().iterator();
-            while(it.hasNext() && !(i.getProducto().getDescripcion().equals(it.next().getProducto().getDescripcion()) ) && (i.getPrecio() == it.next().getPrecio() ) ){
-                
+            aux = buscarPorDescripcionDeProducto(menu2.getProductos(), i.getProducto().getDescripcion());
+            if(aux == null)
+            {
+                Cambio c = new Cambio();
+                c.setDescripcion(i.getProducto().getDescripcion());
+                c.setPrecioNuevo(0);
+                c.setPrecioViejo(i.getPrecio());
+                c.setTransicion("Producto Eliminado");
+                lista.add(c);
             }
-            
-            if(it.hasNext()){
-                if ((i.getProducto().getDescripcion().equals(it.next().getProducto().getDescripcion()) )&& (i.getPrecio() != it.next().getPrecio() )) {
+            else
+            {
+                if(aux.getPrecio() != i.getPrecio())
+                {
                     Cambio c = new Cambio();
-                    c.setDescripcion(it.next().getProducto().getDescripcion());
-                    c.setPrecioNuevo(it.next().getPrecio());
+                    c.setDescripcion(i.getProducto().getDescripcion());
+                    c.setPrecioNuevo(aux.getPrecio());
                     c.setPrecioViejo(i.getPrecio());
                     c.setTransicion("Cambio de Precio");
                     lista.add(c);
                 }
-            }else
-            {
-                Cambio c = new Cambio();
-                c.setDescripcion(it.next().getProducto().getDescripcion());
-                c.setPrecioNuevo(it.next().getPrecio());
-                c.setPrecioViejo(0);
-                c.setTransicion("Producto Eliminado");
-                lista.add(c);
             }
         }
         //Busco en el menu 2 recorriendo todos para ver si estan en el menu1.
         for(ItemMenu m2: menu2.getProductos()){
-            Iterator<ItemMenu> itm1 = menu1.getProductos().iterator();
-            while(itm1.hasNext() && !(m2.getProducto().getDescripcion().equals(itm1.next().getProducto().getDescripcion()))){
-            }
-            //Si recorri y itm1 no tiene siguiente entonces es un nuevo producto
-            if (!(itm1.hasNext())){
+            aux = buscarPorDescripcionDeProducto(menu1.getProductos(), m2.getProducto().getDescripcion());
+            if (aux == null){
                Cambio c = new Cambio();
                c.setDescripcion(m2.getProducto().getDescripcion());
                c.setPrecioNuevo(m2.getPrecio());
@@ -55,8 +52,9 @@ public class Reporte {
                lista.add(c);
             }
         }
-    Persister.generarTxt(lista, "Reporte_Modificacion_Menu.txt");
-    return lista;
+        
+        Persister.generarTxt(lista, "Reporte_Modificacion_Menu.txt");
+        return lista;
     }
     
     public List<Producto> rankingPrecios(List<String> grupos, Restaurant rest)
@@ -85,5 +83,18 @@ public class Reporte {
         }
        Persister.generarTxt(result, "Reporte_Ranking.txt");
        return result;
+    }
+    
+    private ItemMenu buscarPorDescripcionDeProducto(ArrayList<ItemMenu> productos, String desc)
+    {
+        for(ItemMenu i : productos)
+        {
+            if(i.getProducto().getDescripcion().equals(desc))
+            {
+                return i;
+            }
+        }
+        
+        return null;
     }
 }

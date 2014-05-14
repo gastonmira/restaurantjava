@@ -12,7 +12,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.TreeSet;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +19,7 @@ import javax.swing.JOptionPane;
  */
 public class Carga {
     
-    public void cargaIngredientes(String ubicacion, String ingredientes, Restaurant rest){
+    public TreeSet<Ingrediente> cargaIngredientes(String ubicacion){
         File archivo = new File(ubicacion);
         TreeSet<Ingrediente> listIngredientes = new TreeSet<Ingrediente>();
         try
@@ -37,14 +36,13 @@ public class Carga {
                 ingr.setCostoPorUnidad(Float.parseFloat(linea[2]));
                 listIngredientes.add(ingr);
             }
-            rest.setIngredientes(listIngredientes);
-         in.close();
+            in.close();
         }
         catch(IOException e)
         {
-           JOptionPane.showMessageDialog(null,"El archivo no se ha encontrado");
+            
         }
        
-    
+        return listIngredientes;
     }
 }
