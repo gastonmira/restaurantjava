@@ -84,6 +84,10 @@ public class Restaurant implements Serializable {
         this.ingredientes = ingredientes;
     }
     
+    public void agregarIngredientes(TreeSet<Ingrediente> ingredientes) {
+        this.ingredientes.addAll(ingredientes);
+    }
+    
     public void agregarProducto(Producto p) throws ExcepcionLogica
     {
         if(productos.contains(p))
@@ -147,6 +151,19 @@ public class Restaurant implements Serializable {
             if(p.getDescripcion().equalsIgnoreCase(key))
             {
                 return p;
+            } 
+        }
+        
+        return null;
+    }
+     
+     public Ingrediente getIngredientebyDesc(String key)
+    {
+        for (Ingrediente i:ingredientes) 
+        {
+            if(i.getDescripcion().equalsIgnoreCase(key))
+            {
+                return i;
             } 
         }
         
