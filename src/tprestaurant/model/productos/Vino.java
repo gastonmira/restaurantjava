@@ -53,4 +53,13 @@ public class Vino extends Bebida {
     public void setProvincia(Provincias provincia) {
         this.provincia = provincia;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        
+        if(!(o instanceof Vino))
+            return false;
+        
+        return this.getDescripcion().equals(((Vino)o).getDescripcion());
+    }
 }

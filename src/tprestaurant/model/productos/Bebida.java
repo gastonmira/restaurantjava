@@ -58,5 +58,14 @@ public class Bebida extends Producto implements Serializable {
     public void setPrecioVenta(float precioVenta) {
         this.precioVenta = precioVenta;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        
+        if(!(o instanceof Bebida))
+            return false;
+        
+        return this.getDescripcion().equals(((Bebida)o).getDescripcion());
+    }
 
 }

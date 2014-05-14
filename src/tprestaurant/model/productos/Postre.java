@@ -50,5 +50,14 @@ public class Postre extends Producto{
     public float precio() {
         return costo*((porcentajeGanancia/100)+1);
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        
+        if(!(o instanceof Postre))
+            return false;
+        
+        return this.getDescripcion().equals(((Postre)o).getDescripcion());
+    }
 
 }

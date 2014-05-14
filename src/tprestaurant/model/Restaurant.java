@@ -35,7 +35,7 @@ public class Restaurant implements Serializable {
      * @return the menus
      */
     public ArrayList<Menu> getMenus() {
-        return menus;
+        return new ArrayList<Menu>(menus);
     }
 
     /**
@@ -49,7 +49,7 @@ public class Restaurant implements Serializable {
      * @return the productos
      */
     public TreeSet<Producto> getProductos() {
-        return productos;
+        return new TreeSet<Producto>(productos);
     }
     
     /**
@@ -81,7 +81,7 @@ public class Restaurant implements Serializable {
      * @return the ingredientes
      */
     public TreeSet<Ingrediente> getIngredientes() {
-        return ingredientes;
+        return new TreeSet<Ingrediente>(ingredientes);
     }
 
     /**
@@ -106,7 +106,8 @@ public class Restaurant implements Serializable {
         {
             throw new ExcepcionLogica("El producto no existe");
         }
-        //como es un treeset reemplaza el objeto
+        
+        productos.remove(p);
         productos.add(p);
     }
     
@@ -122,7 +123,6 @@ public class Restaurant implements Serializable {
             throw new ExcepcionLogica("No se pudo eliminar el producto. Forma parte de un menu");
         }
         
-        //como es un treeset reemplaza el objeto
         productos.remove(p);
     }
     
@@ -195,9 +195,16 @@ public class Restaurant implements Serializable {
         return null;
     }
     
-    public void generarNuevoMenu(Date fechaInicio, String desc)
+    public void generarNuevoMenu(Date fechaInicio, String desc) throws ExcepcionLogica
     {
-        ajustarFechaFinalVigente(fechaInicio);
+        try
+        {
+            ajustarFechaFinalVigente(fechaInicio);
+        }
+        catch (ExcepcionLogica ex)
+        {
+            throw ex;
+        }
         
         Menu m = new Menu();
         m.setFechaVigenciaInicial(fechaInicio);
@@ -214,13 +221,17 @@ public class Restaurant implements Serializable {
         menus.add(m);
     }
 
-    private void ajustarFechaFinalVigente(Date fechaInicio) {
+    private void ajustarFechaFinalVigente(Date fechaInicio) throws ExcepcionLogica {
         Menu menuAnterior = getMenuVigente();
         if(menuAnterior != null)
         {
+            if(fechaInicio.compareTo(menuAnterior.getFechaVigenciaInicial()) != 1)
+            {
+                throw new ExcepcionLogica("La fecha de inicio del nuevo menu, debe ser posterior a la del ultimo menu vigente");
+            }
             Calendar cal = Calendar.getInstance();
             cal.setTime(fechaInicio);
-            cal.add(Calendar.DATE,1);
+            cal.add(Calendar.DATE,-1);
         
             menuAnterior.setFechaVigenciaFinal(cal.getTime());
         }

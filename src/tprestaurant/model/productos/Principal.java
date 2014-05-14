@@ -54,4 +54,13 @@ public class Principal extends Producto {
     public void setPorcentajeGanancia(float porcentajeGanancia) {
         this.porcentajeGanancia = porcentajeGanancia;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        
+        if(!(o instanceof Principal))
+            return false;
+        
+        return this.getDescripcion().equals(((Principal)o).getDescripcion());
+    }
 }

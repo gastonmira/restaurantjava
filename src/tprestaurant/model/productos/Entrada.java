@@ -54,4 +54,13 @@ public class Entrada extends Producto {
     public void setPorcentajeGanancia(float porcentajeGanancia) {
         this.porcentajeGanancia = porcentajeGanancia;
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        
+        if(!(o instanceof Entrada))
+            return false;
+        
+        return this.getDescripcion().equals(((Entrada)o).getDescripcion());
+    }
 }

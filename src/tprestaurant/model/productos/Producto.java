@@ -80,6 +80,7 @@ public abstract class Producto implements Comparable, Serializable{
         }
         String header =  "Descripcion: "+descripcion+"\n"+
                          "Activo: "+estaActivo+"\n"+
+                         "Precio: "+this.precio()+"\n"+
                          "-------------------------------------------\n\n";
         return header;
     }

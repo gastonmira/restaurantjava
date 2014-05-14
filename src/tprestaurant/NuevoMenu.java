@@ -16,6 +16,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.text.MaskFormatter;
 import tprestaurant.misc.Callback;
+import tprestaurant.model.ExcepcionLogica;
 import tprestaurant.model.ItemMenu;
 import tprestaurant.model.Menu;
 import tprestaurant.model.Restaurant;
@@ -137,6 +138,8 @@ Callback callback;
             Logger.getLogger(NuevoMenu.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showMessageDialog(rootPane, "Error al Generar el nuevo menu.");
               dispose();
+        } catch (ExcepcionLogica ex2) {
+            JOptionPane.showMessageDialog(rootPane, ex2.getMessage());
         }
       
        
