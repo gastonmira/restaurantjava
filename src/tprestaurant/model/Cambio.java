@@ -65,4 +65,15 @@ public class Cambio {
         this.transicion = transicion;
     }
     
+    @Override
+    public String toString()
+    {
+        String header =  "Descripcion: "+descripcion+"\n"+
+                         "Precio Nuevo: "+String.valueOf(precioNuevo)+"\n"+
+                         "Precio Viejo: "+String.valueOf(precioViejo)+"\n"+
+                         "Transicion: "+transicion+"\n"+
+                         "-------------------------------------------\n\n";
+        return header;
+    }
+    
 }

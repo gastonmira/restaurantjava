@@ -157,7 +157,7 @@ public class Restaurant implements Serializable {
         for (Iterator<Producto> it = productos.iterator(); it.hasNext();) 
         {
             Producto p = it.next();
-            if(p.getClass().getName().equals(type) 
+            if(p.getClass().getSimpleName().equals(type) 
                     && p.getDescripcion().toLowerCase().startsWith(key.toLowerCase()))
             {
                 result.add(p);

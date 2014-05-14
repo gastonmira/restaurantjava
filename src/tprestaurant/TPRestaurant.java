@@ -82,17 +82,17 @@ public class TPRestaurant extends javax.swing.JFrame {
         jMenu1.add(cargarIngredientes);
 
         cargarRestaurante.setText("Cargar Restaurante");
-        cargarRestaurante.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cargarRestauranteMouseClicked(evt);
+        cargarRestaurante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarRestauranteActionPerformed(evt);
             }
         });
         jMenu1.add(cargarRestaurante);
 
         guardarRestaurante.setText("Guardar Restaurante");
-        guardarRestaurante.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                guardarRestauranteMouseClicked(evt);
+        guardarRestaurante.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardarRestauranteActionPerformed(evt);
             }
         });
         jMenu1.add(guardarRestaurante);
@@ -150,17 +150,17 @@ public class TPRestaurant extends javax.swing.JFrame {
         reportesForm.setVisible(true);
     }//GEN-LAST:event_btnReportesMouseClicked
 
-    private void cargarRestauranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarRestauranteMouseClicked
-        restaurant = Persister.cargarRestaurant("ruta");
-    }//GEN-LAST:event_cargarRestauranteMouseClicked
-
-    private void guardarRestauranteMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_guardarRestauranteMouseClicked
-        Persister.guardarRestaurant("ruta",restaurant);
-    }//GEN-LAST:event_guardarRestauranteMouseClicked
-
     private void cargarIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarIngredientesMouseClicked
         
     }//GEN-LAST:event_cargarIngredientesMouseClicked
+
+    private void cargarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRestauranteActionPerformed
+       restaurant = Persister.cargarRestaurant("file.xml");
+    }//GEN-LAST:event_cargarRestauranteActionPerformed
+
+    private void guardarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarRestauranteActionPerformed
+       Persister.guardarRestaurant("file.xml",restaurant);
+    }//GEN-LAST:event_guardarRestauranteActionPerformed
 
     /**
      * @param args the command line arguments

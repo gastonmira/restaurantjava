@@ -27,7 +27,7 @@
                 <Property name="text" type="java.lang.String" value="Cargar Restaurante"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="cargarRestauranteMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cargarRestauranteActionPerformed"/>
               </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="guardarRestaurante">
@@ -35,7 +35,7 @@
                 <Property name="text" type="java.lang.String" value="Guardar Restaurante"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="guardarRestauranteMouseClicked"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="guardarRestauranteActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

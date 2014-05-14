@@ -2,12 +2,17 @@ package tprestaurant;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
+import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import tprestaurant.model.Restaurant;
 
 /*
@@ -53,5 +58,18 @@ public class Persister {
         }
         
         return rest;
+    }
+    
+    public static void generarTxt(List lista, String nombreArchivo){
+        String sFichero = nombreArchivo;
+        File fichero = new File(sFichero);
+        try{
+            BufferedWriter buw = new BufferedWriter(new FileWriter(fichero));
+            buw.write(lista.toString());
+            buw.close();
+            JOptionPane.showMessageDialog(null,"Reporte generado");
+        }catch(IOException ioe) {
+            ioe.printStackTrace();
+        }
     }
 }

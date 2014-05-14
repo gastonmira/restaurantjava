@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.List;
+import tprestaurant.Persister;
 import tprestaurant.model.productos.*;
 
 
@@ -54,6 +55,7 @@ public class Reporte {
                lista.add(c);
             }
         }
+    Persister.generarTxt(lista, "Reporte_Modificacion_Menu.txt");
     return lista;
     }
     
@@ -81,7 +83,7 @@ public class Reporte {
                 }
             });
         }
-       
+       Persister.generarTxt(result, "Reporte_Ranking.txt");
        return result;
     }
 }

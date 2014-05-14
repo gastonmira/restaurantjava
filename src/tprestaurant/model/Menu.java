@@ -101,9 +101,25 @@ public class Menu implements Serializable {
     @Override
     public String toString()
     {
+        String fechaFinal = "Menu Vigente";
+        if(fechaVigenciaFinal !=null)
+        {
+            fechaFinal = fechaVigenciaFinal.toString();
+        }
+        
+        return descripcion + " "+ fechaVigenciaInicial + "-" + fechaFinal;
+    }
+    
+    public String toStringParaArchivo()
+    {
+        String fechaFinal = "Menu Vigente";
+        if(fechaVigenciaFinal !=null)
+        {
+            fechaFinal = fechaVigenciaFinal.toString();
+        }
         String header =  "Descripcion: "+descripcion+"\n"+
                          "Fecha Inicio: "+fechaVigenciaInicial.toString()+"\n"+
-                         "Fecha Fin: "+fechaVigenciaFinal != null ? fechaVigenciaFinal.toString() : "menu vigente"+"\n"+
+                         "Fecha Fin: "+fechaFinal+"\n"+
                          "-------------------------------------------\n\n"+
                          "Ingredientes: \n";
         String productosString = "";

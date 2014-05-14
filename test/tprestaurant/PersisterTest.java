@@ -7,11 +7,13 @@
 package tprestaurant;
 
 import java.io.File;
+import java.util.ArrayList;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 import tprestaurant.model.ExcepcionLogica;
+import tprestaurant.model.Menu;
 import tprestaurant.model.Restaurant;
 import tprestaurant.model.enums.Provincias;
 import tprestaurant.model.enums.Varietales;
@@ -28,6 +30,7 @@ import tprestaurant.model.productos.Vino;
 public class PersisterTest {
     
     Restaurant rest;
+    Menu menu;
     private static final String filePath = "file.xml";
     
     public PersisterTest() {
@@ -36,6 +39,7 @@ public class PersisterTest {
     @Before
     public void setUp() {
         rest = new Restaurant();
+        menu = new Menu();
         Producto p1 = new Entrada(10, 15,"jamon con rusa");
         Producto p2 = new Entrada(20, 15,"jamon crudo con rusa");
         Producto p3 = new Vino(Varietales.Cabernet,Provincias.Buenos_Aires);
@@ -53,6 +57,13 @@ public class PersisterTest {
             rest.agregarProducto(p2);
             rest.agregarProducto(p3);
             rest.agregarProducto(p4);
+            menu.agregarProducto(p1);
+            menu.agregarProducto(p2);
+            menu.agregarProducto(p3);
+            menu.agregarProducto(p4);
+            ArrayList<Menu> menus = new ArrayList<Menu>();
+            menus.add(menu);
+            rest.setMenus(menus);
         }
         catch(ExcepcionLogica ex)
         {
