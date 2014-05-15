@@ -175,7 +175,7 @@ public class ReportesForm extends javax.swing.JFrame {
         Menu menu1 = restaurant.getMenubyDesc(comboMenu1.getSelectedItem().toString());
         Menu menu2 = restaurant.getMenubyDesc(comboMenu2.getSelectedItem().toString());
         reporte= new Reporte();
-        if(menu1!=null && menu2!= null){
+        if(comboMenu1.getSelectedItem()!= null && comboMenu2.getSelectedItem()!= null){
             JFrame reporteModForm = new ReporteModificacionForm(reporte.menuModificacion(menu1, menu2));
             reporteModForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             reporteModForm.setVisible(true);
