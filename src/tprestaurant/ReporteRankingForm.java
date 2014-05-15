@@ -8,7 +8,6 @@ package tprestaurant;
 
 import java.util.List;
 import tprestaurant.misc.MyJTableModel;
-import tprestaurant.model.Restaurant;
 import tprestaurant.model.productos.Producto;
 
 /**
@@ -16,15 +15,13 @@ import tprestaurant.model.productos.Producto;
  * @author gastonmira
  */
 public class ReporteRankingForm extends javax.swing.JFrame {
-    Restaurant restaurant;
     List<Producto> productos;
     private String[] colName = { "Nombre", "Tipo","Precio"};
     /**
      * Creates new form ReporteRankingForm
      */
-    public ReporteRankingForm(List<Producto> productos, Restaurant restaurant) {
+    public ReporteRankingForm(List<Producto> productos) {
         this.productos = productos;
-        this.restaurant = restaurant;
         initComponents();
         setModel(productos);
     }

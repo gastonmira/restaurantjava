@@ -7,15 +7,12 @@
 package tprestaurant;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import tprestaurant.model.Cambio;
 import tprestaurant.model.Menu;
 import tprestaurant.model.Reporte;
 import tprestaurant.model.Restaurant;
-import tprestaurant.model.productos.Producto;
 
 /**
  *
