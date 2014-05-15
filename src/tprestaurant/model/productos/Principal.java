@@ -55,6 +55,8 @@ public class Principal extends Producto {
         this.porcentajeGanancia = porcentajeGanancia;
     }
     
+    
+    
     @Override
     public boolean equals(Object o) {
         

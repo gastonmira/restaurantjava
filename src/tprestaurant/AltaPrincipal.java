@@ -6,6 +6,8 @@
 
 package tprestaurant;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.SortedSet;
@@ -13,7 +15,9 @@ import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import tprestaurant.misc.Callback;
 import tprestaurant.misc.MyJTableModel;
 import tprestaurant.model.ExcepcionLogica;
@@ -33,20 +37,43 @@ public class AltaPrincipal extends javax.swing.JFrame {
     Restaurant restaurant;
     Callback callback;
     MyJTableModel tbModel;
+    Principal principal;
     private String[] colName = { "Nombre", "Cantidad","Unidad de Medida"};
     ArrayList<IngredienteDePrincipal> ingredientes= new ArrayList<IngredienteDePrincipal>();
     /**
      * Creates new form AltaPrincipal
      */
-    public AltaPrincipal(Restaurant restaurant,Callback callback) {
+    public AltaPrincipal(Principal principal,Restaurant restaurant,Callback callback) {
          this.callback=callback;
        this.restaurant=restaurant;
-      
+      this.principal=principal;
        initComponents();
-        cargaIngredientes();
+        
+        AltaOMod(principal);      
+       
+       
+       cargaIngredientes(principal);
      
         setDefaultComboSelection();
+         createTableListeners();
     }
+    
+    private void AltaOMod(Principal principal){
+   if (principal != null){
+      txtNombrePrincipal.setText(principal.getDescripcion());
+      txtNombrePrincipal.setEnabled(false);
+      porcGananciaPrin.setText(String.valueOf(principal.getPorcentajeGanancia()));
+      setModel(principal);
+   }else{
+      txtNombrePrincipal.setText("");
+       txtNombrePrincipal.setEnabled(true);
+      porcGananciaPrin.setText("");
+   }
+    
+}
+    
+    
+    
     private void setDefaultComboSelection(){
     if (jComboBox1.getItemAt(0)!=null){
             
@@ -55,14 +82,35 @@ public class AltaPrincipal extends javax.swing.JFrame {
             
        }
     }
+    private void setModel(Principal principal){
+       MyJTableModel tbModel = new MyJTableModel();
+            tbModel.addColumn(colName[0]);
+            tbModel.addColumn(colName[1]);
+           tbModel.addColumn(colName[2]);
+           
+           ArrayList<IngredienteDePrincipal> list= principal.get;
+       
+        if (list!=null){
+            for (Producto p : list) {
+                String[] data = new String[2];
+
+                data[0] = p.getDescripcion();
+                data[1] = String.valueOf(p.precio());
+                
+                tbModel.addRow(data);
+         }    
+            table.setModel(tbModel);
+        }    
+            
+    }
     
     
-    
-      private void cargaIngredientes(){
+      private void cargaIngredientes(Principal principal){
           DefaultComboBoxModel<String> cbModel= new DefaultComboBoxModel<String>();
-          
-         
-          TreeSet<Ingrediente> ingredientes= restaurant.getIngredientes();
+          TreeSet<Ingrediente> ingredientes=null;
+       
+           ingredientes = restaurant.getIngredientes();
+       
           for (Iterator<Ingrediente> it = ingredientes.iterator(); it.hasNext();) 
         {
             Ingrediente i = it.next();
@@ -350,9 +398,26 @@ public class AltaPrincipal extends javax.swing.JFrame {
     private void btnCancelarPrinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPrinActionPerformed
        dispose();
     }//GEN-LAST:event_btnCancelarPrinActionPerformed
+private void createTableListeners(){
+    tableIngredientes.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mousePressed(MouseEvent me) {
+       
+        if (me.getClickCount() == 2) {
+        
+           // float p = Float.parseFloat((String) tablaBebida.getModel().getValueAt(tablaBebida.getSelectedRow(), 1));
+            String n = (String) tableIngredientes.getModel().getValueAt(tableIngredientes.getSelectedRow(), 0);
+            Integer cantidad = (Integer) tableIngredientes.getModel().getValueAt(tableIngredientes.getSelectedRow(), 1);
+            
+           Ingrediente ing= (Ingrediente)restaurant.getIngredientebyDesc(n);
+           IngredienteDePrincipal ingdp= new IngredienteDePrincipal(cantidad, ing.getCostoPorUnidad(), ing.getUnidad(), n);
 
-   
-
+           tbModel.removeRow(tableIngredientes.getSelectedRow());
+           ingredientes.remove(ingdp);
+        }
+     }
+    });
+}
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarPrin;
     private javax.swing.JButton btnEliminarPrin;

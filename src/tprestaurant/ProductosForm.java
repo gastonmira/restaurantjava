@@ -21,6 +21,7 @@ import tprestaurant.model.Restaurant;
 import tprestaurant.model.productos.Bebida;
 import tprestaurant.model.productos.Entrada;
 import tprestaurant.model.productos.Postre;
+import tprestaurant.model.productos.Principal;
 import tprestaurant.model.productos.Producto;
 
 /**
@@ -47,7 +48,10 @@ public class ProductosForm extends javax.swing.JFrame {
     public ProductosForm(Restaurant restaurant) {
          this.restaurant=restaurant;
         initComponents();
-       createTableListeners();
+      
+        
+        
+        createTableListeners();
     }
 
     /**
@@ -676,7 +680,7 @@ public class ProductosForm extends javax.swing.JFrame {
 
     private void btnAddPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPrincipalMouseClicked
         // TODO add your handling code here:
-           altaPrincipal = new AltaPrincipal(restaurant,new Callback<Restaurant>(){
+           altaPrincipal = new AltaPrincipal(null,restaurant,new Callback<Restaurant>(){
         
         @Override
         public void onSuccess(Restaurant restaurant) {
@@ -996,6 +1000,41 @@ public class ProductosForm extends javax.swing.JFrame {
         }
     }
 });
+     /*PRINCIPAL*/
+     
+     tablaPrincipal.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mousePressed(MouseEvent me) {
+       
+        if (me.getClickCount() == 2) {
+        
+            //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
+            String n = (String) tablaPrincipal.getModel().getValueAt(tablaPrincipal.getSelectedRow(), 0);
+            Principal pri= (Principal)restaurant.getProductobyDesc(n);
+            
+           // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
+            
+            
+            altaPrincipal = new AltaPrincipal(pri,restaurant,new Callback<Restaurant>(){
+        
+            @Override
+            public void onSuccess(Restaurant restaurant) {
+
+                setEntradaTableModel(tablaPrincipal, "Principal","",0);
+                altaPrincipal.dispose();
+             }   
+            });
+
+       
+        altaPrincipal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaPrincipal.setVisible(true);
+           
+        }
+    }
+});
+     
+     
+     
 }
     
     

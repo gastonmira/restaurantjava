@@ -18,7 +18,9 @@ public class IngredienteDePrincipal extends Ingrediente {
     public IngredienteDePrincipal(int cantidadUtilizada) {
         this.cantidadUtilizada = cantidadUtilizada;
     }
-
+public IngredienteDePrincipal() {
+        
+    }
     public IngredienteDePrincipal(int cantidadUtilizada, float costoPorUnidad, UnidadesDeMedida unidad, String descripcion) {
         super(costoPorUnidad, unidad, descripcion);
         this.cantidadUtilizada = cantidadUtilizada;
