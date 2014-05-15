@@ -6,14 +6,23 @@
 
 package tprestaurant;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.SortedSet;
 import java.util.TreeSet;
-import javax.swing.ComboBoxModel;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import tprestaurant.misc.Callback;
+import tprestaurant.misc.MyJTableModel;
+import tprestaurant.model.ExcepcionLogica;
 import tprestaurant.model.Ingrediente;
+import tprestaurant.model.IngredienteDePrincipal;
 import tprestaurant.model.Restaurant;
+import tprestaurant.model.enums.UnidadesDeMedida;
+import tprestaurant.model.productos.Bebida;
+import tprestaurant.model.productos.Principal;
 import tprestaurant.model.productos.Producto;
 
 /**
@@ -23,16 +32,32 @@ import tprestaurant.model.productos.Producto;
 public class AltaPrincipal extends javax.swing.JFrame {
     Restaurant restaurant;
     Callback callback;
+    MyJTableModel tbModel;
+    private String[] colName = { "Nombre", "Cantidad","Unidad de Medida"};
+    ArrayList<IngredienteDePrincipal> ingredientes= new ArrayList<IngredienteDePrincipal>();
     /**
      * Creates new form AltaPrincipal
      */
     public AltaPrincipal(Restaurant restaurant,Callback callback) {
          this.callback=callback;
        this.restaurant=restaurant;
-        initComponents();
+      
+       initComponents();
         cargaIngredientes();
-       
+     
+        setDefaultComboSelection();
     }
+    private void setDefaultComboSelection(){
+    if (jComboBox1.getItemAt(0)!=null){
+            
+            Ingrediente ing=restaurant.getIngredientebyDesc(jComboBox1.getItemAt(0).toString());
+            lblUnidadMedidaIngrediente.setText(ing.getUnidad().toString());
+            
+       }
+    }
+    
+    
+    
       private void cargaIngredientes(){
           DefaultComboBoxModel<String> cbModel= new DefaultComboBoxModel<String>();
           
@@ -69,11 +94,11 @@ public class AltaPrincipal extends javax.swing.JFrame {
         checkBoxPrin = new javax.swing.JCheckBox();
         jComboBox1 = new javax.swing.JComboBox();
         jSpinner1 = new javax.swing.JSpinner();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        lblUnidadMedidaIngrediente = new javax.swing.JLabel();
+        txtNombrePrincipal = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        tableIngredientes = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -92,10 +117,25 @@ public class AltaPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         btnGuardarPrin.setText("Guardar");
+        btnGuardarPrin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarPrinActionPerformed(evt);
+            }
+        });
 
         btnEliminarPrin.setText("Eliminar");
+        btnEliminarPrin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarPrinActionPerformed(evt);
+            }
+        });
 
         btnCancelarPrin.setText("Cancelar");
+        btnCancelarPrin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarPrinActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Alta Principal");
 
@@ -109,13 +149,17 @@ public class AltaPrincipal extends javax.swing.JFrame {
 
         checkBoxPrin.setText("¿Activo?");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
 
-        jLabel6.setText("jLabel6");
+        lblUnidadMedidaIngrediente.setText(" ");
 
         jLabel7.setText("Nombre");
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        tableIngredientes.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -126,9 +170,14 @@ public class AltaPrincipal extends javax.swing.JFrame {
                 "Nombre", "Cantidad", "Unidad de medida"
             }
         ));
-        jScrollPane4.setViewportView(jTable2);
+        jScrollPane4.setViewportView(tableIngredientes);
 
         jButton1.setText("Agregar Ingrediente");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -141,22 +190,22 @@ public class AltaPrincipal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 121, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
+                                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(18, 18, 18)
-                                        .addComponent(jLabel6)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(lblUnidadMedidaIngrediente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                         .addComponent(jButton1))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(6, 6, 6)
                                         .addComponent(jLabel7)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(txtNombrePrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addComponent(jScrollPane4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                                 .addGap(32, 32, 32)))
                         .addComponent(checkBoxPrin)
@@ -183,13 +232,13 @@ public class AltaPrincipal extends javax.swing.JFrame {
                     .addComponent(checkBoxPrin))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNombrePrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6)
+                    .addComponent(lblUnidadMedidaIngrediente)
                     .addComponent(jButton1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 382, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -225,6 +274,83 @@ public class AltaPrincipal extends javax.swing.JFrame {
         */
     }//GEN-LAST:event_porcGananciaPrinKeyReleased
 
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        if (jComboBox1.getSelectedItem()!=null){
+            
+            Ingrediente ing=restaurant.getIngredientebyDesc(jComboBox1.getSelectedItem().toString());
+            lblUnidadMedidaIngrediente.setText(ing.getUnidad().toString());
+            
+       }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+       if (tbModel==null)
+        {
+         tbModel= new MyJTableModel();
+        tbModel.addColumn(colName[0]);
+        tbModel.addColumn(colName[1]);
+        tbModel.addColumn(colName[2]);
+        
+         tableIngredientes.setModel(tbModel);
+        }
+         
+       Ingrediente ing=restaurant.getIngredientebyDesc(jComboBox1.getSelectedItem().toString());
+       IngredienteDePrincipal ingPrincipal= new IngredienteDePrincipal((Integer)jSpinner1.getValue(), ing.getCostoPorUnidad(), ing.getUnidad(),ing.getDescripcion());
+       
+       ingredientes.add(ingPrincipal);
+       String[] data = new String[3];
+        
+            data[0] = ing.getDescripcion();
+            data[1] = String.valueOf((Integer)jSpinner1.getValue());
+            data[2] = ing.getUnidad().toString();
+            tbModel.addRow(data);   
+      
+        
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void btnGuardarPrinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPrinActionPerformed
+       if (!("".equals(txtNombrePrincipal.getText()))&& !("".equals(porcGananciaPrin.getText()))){
+      
+                   
+           
+           Principal nuevoPrincipal = new Principal(ingredientes,Float.parseFloat(porcGananciaPrin.getText()),txtNombrePrincipal.getText());
+     try {
+      //  if (bebida==null){
+           
+            restaurant.agregarProducto(nuevoPrincipal);
+            JOptionPane.showMessageDialog(rootPane, "Nuevo Plato Principal agregado con exito ");
+          
+       /* }else{
+           
+            restaurant.modificarProducto(nuevoPrincipal);
+            JOptionPane.showMessageDialog(rootPane, "Bebida Modificada con exito ");
+        }*/
+         callback.onSuccess(restaurant);
+             } catch (ExcepcionLogica ex) {
+        Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
+         JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+        
+       
+        
+    
+        
+       }
+        
+        
+        
+        
+    }//GEN-LAST:event_btnGuardarPrinActionPerformed
+
+    private void btnEliminarPrinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPrinActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnEliminarPrinActionPerformed
+
+    private void btnCancelarPrinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPrinActionPerformed
+       dispose();
+    }//GEN-LAST:event_btnCancelarPrinActionPerformed
+
    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -236,14 +362,14 @@ public class AltaPrincipal extends javax.swing.JFrame {
     private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
-    private javax.swing.JTextField jTextField1;
+    private javax.swing.JLabel lblUnidadMedidaIngrediente;
     private javax.swing.JTextField porcGananciaPrin;
+    private javax.swing.JTable tableIngredientes;
+    private javax.swing.JTextField txtNombrePrincipal;
     // End of variables declaration//GEN-END:variables
 }
