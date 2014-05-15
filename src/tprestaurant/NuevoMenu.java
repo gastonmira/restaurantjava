@@ -129,23 +129,28 @@ Callback callback;
     }// </editor-fold>//GEN-END:initComponents
 
     private void crearMenuButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crearMenuButtonActionPerformed
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-        try {
-            Date date = sdf.parse(txtFechaInicioVigencia.getText());
-           restaurant.generarNuevoMenu(date, txtDescripcion.getText());
-            JOptionPane.showMessageDialog(rootPane, "El menu ha sido generado con exito.");
-            callback.onSuccess("");
-             dispose();
-        } catch (ParseException ex) {
-            Logger.getLogger(NuevoMenu.class.getName()).log(Level.SEVERE, null, ex);
-            JOptionPane.showMessageDialog(rootPane, "Error al Generar el nuevo menu.");
-              dispose();
-        } catch (ExcepcionLogica ex2) {
-            JOptionPane.showMessageDialog(rootPane, ex2.getMessage());
-        }
-      
        
         
+      if(Validator.isFechaValida(txtFechaInicioVigencia.getText())){
+            SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+            try {
+                Date date = sdf.parse(txtFechaInicioVigencia.getText());
+               restaurant.generarNuevoMenu(date, txtDescripcion.getText());
+                JOptionPane.showMessageDialog(rootPane, "El menu ha sido generado con exito.");
+                callback.onSuccess("");
+                 dispose();
+            } catch (ParseException ex) {
+                Logger.getLogger(NuevoMenu.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, "Error al Generar el nuevo menu.");
+                  dispose();
+            } catch (ExcepcionLogica ex2) {
+                JOptionPane.showMessageDialog(rootPane, ex2.getMessage());
+            }
+       }else{
+           JOptionPane.showMessageDialog(rootPane, "Formato de Fecha Invalida");
+      }
+       
+       
     }//GEN-LAST:event_crearMenuButtonActionPerformed
 
   
