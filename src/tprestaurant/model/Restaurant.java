@@ -169,6 +169,22 @@ public class Restaurant implements Serializable {
         
         return null;
     }
+      
+    public Menu getMenubyDesc(String key)
+    {
+        for (Menu m:menus) 
+        {
+            if(m.getDescripcion().equalsIgnoreCase(key))
+            {
+                return m;
+            } 
+        }
+        
+        return null;
+    }
+     
+     
+     
     
     /**
      * 
