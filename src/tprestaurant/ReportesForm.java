@@ -6,19 +6,43 @@
 
 package tprestaurant;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import tprestaurant.model.Cambio;
+import tprestaurant.model.Menu;
+import tprestaurant.model.Reporte;
+import tprestaurant.model.Restaurant;
+import tprestaurant.model.productos.Producto;
+
 /**
  *
  * @author gastonmira
  */
 public class ReportesForm extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ReportesForm
-     */
-    public ReportesForm() {
+    Restaurant restaurant;
+    Reporte reporte;
+    
+    public ReportesForm(Restaurant restaurant) {
+        this.restaurant = restaurant;
         initComponents();
+        cargaMenuEnComboBox();
+        
     }
-
+    
+    private void cargaMenuEnComboBox () {
+        DefaultComboBoxModel<String> cbModel= new DefaultComboBoxModel<String>();
+        
+        ArrayList<Menu> menus = restaurant.getMenus();
+        for (Menu m : menus) {
+            cbModel.addElement(m.getDescripcion());
+        }
+        comboMenu1.setModel(cbModel);
+        comboMenu2.setModel(cbModel);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -28,57 +52,187 @@ public class ReportesForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
+        comboMenu1 = new javax.swing.JComboBox();
+        comboMenu2 = new javax.swing.JComboBox();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        btnReporteMod = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        checkBoxEntrada = new javax.swing.JCheckBox();
+        checkBoxPrin = new javax.swing.JCheckBox();
+        checkBoxPostre = new javax.swing.JCheckBox();
+        checkBoxBebida = new javax.swing.JCheckBox();
+        checkBoxVino = new javax.swing.JCheckBox();
+        btnRepRanking = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel1.setText("Reporte de Modificación");
+
+        comboMenu1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        comboMenu2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel2.setText("Menú a seleccionar");
+
+        jLabel3.setText("Menú a seleccionar");
+
+        btnReporteMod.setText("Generar Reporte de Modificación");
+        btnReporteMod.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnReporteModMouseClicked(evt);
+            }
+        });
+
+        jLabel4.setText("Reporte Ranking");
+
+        checkBoxEntrada.setText("Entrada");
+
+        checkBoxPrin.setText("Principal");
+
+        checkBoxPostre.setText("Postre");
+
+        checkBoxBebida.setText("Bebida");
+
+        checkBoxVino.setText("Vino");
+
+        btnRepRanking.setText("Generar Reporte de Ranking");
+        btnRepRanking.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRepRankingMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(comboMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(6, 6, 6)
+                                .addComponent(jLabel2)))
+                        .addGap(80, 80, 80)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(comboMenu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(btnReporteMod)
+                    .addComponent(jLabel4)
+                    .addComponent(btnRepRanking)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkBoxEntrada)
+                            .addComponent(checkBoxBebida))
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(checkBoxVino)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(checkBoxPrin)
+                                .addGap(18, 18, 18)
+                                .addComponent(checkBoxPostre)))))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3))
+                .addGap(5, 5, 5)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(comboMenu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(comboMenu2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(btnReporteMod)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkBoxEntrada)
+                    .addComponent(checkBoxPrin)
+                    .addComponent(checkBoxPostre))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(checkBoxBebida)
+                    .addComponent(checkBoxVino))
+                .addGap(26, 26, 26)
+                .addComponent(btnRepRanking)
+                .addContainerGap(22, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ReportesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ReportesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ReportesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ReportesForm.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+    private void btnReporteModMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReporteModMouseClicked
+        
+        Menu menu1 = restaurant.getMenubyDesc(comboMenu1.getSelectedItem().toString());
+        Menu menu2 = restaurant.getMenubyDesc(comboMenu2.getSelectedItem().toString());
+        
+        if(menu1!=null && menu2!= null){
+            JFrame reporteModForm = new ReporteModificacionForm((Cambio) reporte.menuModificacion(menu1, menu2));
+            reporteModForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            reporteModForm.setVisible(true);
+            reporteModForm.setLocationRelativeTo(null);
+        }else{
+            JOptionPane.showMessageDialog(null,"Seleccione menus para reportar.");
         }
-        //</editor-fold>
+        
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new ReportesForm().setVisible(true);
-            }
-        });
-    }
+    }//GEN-LAST:event_btnReporteModMouseClicked
+
+    private void btnRepRankingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRepRankingMouseClicked
+        // TODO add your handling code here:
+        ArrayList <String> check = new ArrayList();
+        if(checkBoxEntrada.isSelected()){
+            check.add("Entrada");
+        }
+        if (checkBoxPrin.isSelected()){
+            check.add("Principal");
+        }
+        if(checkBoxPostre.isSelected()){
+            check.add("Postre");
+        }
+        if(checkBoxBebida.isSelected()){
+            check.add("Bebida");
+        }
+        if(checkBoxVino.isSelected()){
+            check.add("Vino");
+        }
+        
+        if(check.size() == 0){
+            JOptionPane.showMessageDialog(null,"Seleccione grupos de productos para reportar.");
+        }else{
+            JFrame reporteRanForm = new ReporteRankingForm((Producto) reporte.rankingPrecios(check, restaurant));
+            reporteRanForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            reporteRanForm.setVisible(true);
+            reporteRanForm.setLocationRelativeTo(null);
+        }
+    }//GEN-LAST:event_btnRepRankingMouseClicked
+
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnRepRanking;
+    private javax.swing.JButton btnReporteMod;
+    private javax.swing.JCheckBox checkBoxBebida;
+    private javax.swing.JCheckBox checkBoxEntrada;
+    private javax.swing.JCheckBox checkBoxPostre;
+    private javax.swing.JCheckBox checkBoxPrin;
+    private javax.swing.JCheckBox checkBoxVino;
+    private javax.swing.JComboBox comboMenu1;
+    private javax.swing.JComboBox comboMenu2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     // End of variables declaration//GEN-END:variables
 }
