@@ -33,7 +33,7 @@ public class Principal extends Producto {
     @Override
     public float costo() {
         float result = 0;
-        for(IngredienteDePrincipal ing: ingredientes)
+        for(IngredienteDePrincipal ing: getIngredientes())
         {
             result += ing.getCostoPorUnidad()*ing.getCantidadUtilizada();
         }
@@ -62,5 +62,19 @@ public class Principal extends Producto {
             return false;
         
         return this.getDescripcion().equals(((Principal)o).getDescripcion());
+    }
+
+    /**
+     * @return the ingredientes
+     */
+    public ArrayList<IngredienteDePrincipal> getIngredientes() {
+        return new ArrayList<IngredienteDePrincipal>(ingredientes);
+    }
+
+    /**
+     * @param ingredientes the ingredientes to set
+     */
+    public void setIngredientes(ArrayList<IngredienteDePrincipal> ingredientes) {
+        this.ingredientes = ingredientes;
     }
 }
