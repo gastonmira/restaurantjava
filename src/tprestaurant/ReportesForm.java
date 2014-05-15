@@ -207,7 +207,7 @@ public class ReportesForm extends javax.swing.JFrame {
             check.add("Vino");
         }
         
-        if(check.size() == 0){
+        if(check.isEmpty()){
             JOptionPane.showMessageDialog(null,"Seleccione grupos de productos para reportar.");
         }else{
             JFrame reporteRanForm = new ReporteRankingForm(reporte.rankingPrecios(check, restaurant));
