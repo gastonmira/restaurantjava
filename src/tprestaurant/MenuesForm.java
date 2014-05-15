@@ -6,6 +6,8 @@
 
 package tprestaurant;
 
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 import javax.swing.DefaultListModel;
 import javax.swing.JDialog;
@@ -14,6 +16,7 @@ import javax.swing.ListModel;
 import tprestaurant.misc.Callback;
 import tprestaurant.model.Menu;
 import tprestaurant.model.Restaurant;
+import tprestaurant.model.productos.Vino;
 
 /**
  *
@@ -27,12 +30,13 @@ Restaurant restaurant;
     
     public MenuesForm() {
         initComponents();
-           
+           addListenerToListaMenu();
     }
     public MenuesForm(Restaurant restaurant) {
+        this.restaurant=restaurant;
         initComponents();
         cargarListaMenus(restaurant.getMenus());
-        this.restaurant=restaurant;
+        addListenerToListaMenu();
     }
     private void cargarListaMenus(ArrayList<Menu> menus){
         DefaultListModel listModel = new DefaultListModel();   
@@ -41,6 +45,22 @@ Restaurant restaurant;
         }
         jList1.setModel(listModel);
     }
+    
+    private void addListenerToListaMenu(){
+       jList1.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mousePressed(MouseEvent me) {
+       
+        if (me.getClickCount() == 2) {
+            VisualizadorMenu  menuVis = new VisualizadorMenu((Menu)jList1.getSelectedValue());
+            menuVis.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+            menuVis.setVisible(true);
+            menuVis.setLocationRelativeTo(null);
+        }
+    }
+});}
+    
+    
     
     /**
      * This method is called from within the constructor to initialize the form.

@@ -35,8 +35,12 @@ private SimpleDateFormat sdf = new SimpleDateFormat("dd-mm-yyyy");
     private void CargarMenu(Menu menu){
     lblNombre.setText(menu.getDescripcion());
     lblFechaInicio.setText(sdf.format(menu.getFechaVigenciaInicial()));
-    lblFechaFin.setText(sdf.format(menu.getFechaVigenciaFinal()));
     
+    if (menu.getFechaVigenciaFinal()!=null)
+        lblFechaFin.setText(sdf.format(menu.getFechaVigenciaFinal()));
+    else{
+        lblFechaFin.setText("Menu Vigente");
+    }
     cargaProductos(menu);
     
     
