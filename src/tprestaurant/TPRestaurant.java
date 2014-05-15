@@ -73,15 +73,17 @@ public class TPRestaurant extends javax.swing.JFrame {
         jMenu1.setText("Archivo");
 
         jMenuItem1.setText("Cargar Porcentaje ganancia postres ");
+        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem1ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem1);
 
         cargarIngredientes.setText("Cargar Ingredientes");
-        cargarIngredientes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                cargarIngredientesMouseClicked(evt);
-            }
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                cargarIngredientesMouseReleased(evt);
+        cargarIngredientes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cargarIngredientesActionPerformed(evt);
             }
         });
         jMenu1.add(cargarIngredientes);
@@ -138,6 +140,7 @@ public class TPRestaurant extends javax.swing.JFrame {
         JFrame productosForm = new ProductosForm(restaurant);
         productosForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         productosForm.setVisible(true);
+        productosForm.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnProductosMouseClicked
 
     private void btnMenuesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuesMouseClicked
@@ -145,7 +148,7 @@ public class TPRestaurant extends javax.swing.JFrame {
         JFrame menuesForm = new MenuesForm(restaurant);
         menuesForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         menuesForm.setVisible(true);
-        
+         menuesForm.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnMenuesMouseClicked
 
     private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
@@ -153,16 +156,8 @@ public class TPRestaurant extends javax.swing.JFrame {
         JFrame reportesForm = new ReportesForm();
         reportesForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         reportesForm.setVisible(true);
+         reportesForm.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnReportesMouseClicked
-
-    private void cargarIngredientesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarIngredientesMouseClicked
-        try {
-           restaurant.agregarIngredientes(Carga.cargaIngredientes("ingredientes.txt"));
-           
-        } catch (ExcepcionLogica ex) {
-            Logger.getLogger(TPRestaurant.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_cargarIngredientesMouseClicked
 
     private void cargarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRestauranteActionPerformed
       
@@ -174,14 +169,21 @@ public class TPRestaurant extends javax.swing.JFrame {
        Persister.guardarRestaurant("file.xml",restaurant);
     }//GEN-LAST:event_guardarRestauranteActionPerformed
 
-    private void cargarIngredientesMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cargarIngredientesMouseReleased
-         try {
+    private void cargarIngredientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarIngredientesActionPerformed
+          try {
            restaurant.agregarIngredientes(Carga.cargaIngredientes("ingredientes.txt"));
             
         } catch (ExcepcionLogica ex) {
             Logger.getLogger(TPRestaurant.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_cargarIngredientesMouseReleased
+    }//GEN-LAST:event_cargarIngredientesActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+       JFrame gananciaPostres = new CargaGananciaPostres();
+        gananciaPostres.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        gananciaPostres.setVisible(true);
+         gananciaPostres.setLocationRelativeTo(null);
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -213,7 +215,10 @@ public class TPRestaurant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                  new TPRestaurant().setVisible(true);
+                  TPRestaurant tpRestaurant = new TPRestaurant();
+                  
+                   tpRestaurant.setLocationRelativeTo(null);
+                    tpRestaurant.setVisible(true);
             }
         });
     }

@@ -677,6 +677,7 @@ public class ProductosForm extends javax.swing.JFrame {
        
         altaEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaEntrada.setVisible(true);
+        altaEntrada.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddEntradaMouseClicked
 
     private void btnAddPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPrincipalMouseClicked
@@ -692,6 +693,7 @@ public class ProductosForm extends javax.swing.JFrame {
     });
         altaPrincipal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaPrincipal.setVisible(true);
+        altaPrincipal.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddPrincipalMouseClicked
 
     private void btnAddPostreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPostreMouseClicked
@@ -707,6 +709,7 @@ public class ProductosForm extends javax.swing.JFrame {
       
         altaPostre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaPostre.setVisible(true);
+        altaPostre.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddPostreMouseClicked
 
     private void btnAddBebidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddBebidaMouseClicked
@@ -724,6 +727,7 @@ public class ProductosForm extends javax.swing.JFrame {
     });
         altaBebida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaBebida.setVisible(true);
+        altaBebida.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddBebidaMouseClicked
 
     private void btnAddVinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddVinoMouseClicked
@@ -741,6 +745,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
         altaVino.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaVino.setVisible(true);
+        altaVino.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddVinoMouseClicked
 
     private void tabProductosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabProductosStateChanged
@@ -933,6 +938,7 @@ public class ProductosForm extends javax.swing.JFrame {
     });
         altaBebida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaBebida.setVisible(true); 
+        altaBebida.setLocationRelativeTo(null);
            
         }
     }
@@ -966,6 +972,7 @@ public class ProductosForm extends javax.swing.JFrame {
        
         altaEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaEntrada.setVisible(true);
+        altaEntrada.setLocationRelativeTo(null);
            
         }
     }
@@ -997,7 +1004,7 @@ public class ProductosForm extends javax.swing.JFrame {
       
         altaPostre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaPostre.setVisible(true);
-           
+           altaPostre.setLocationRelativeTo(null);
         }
     }
 });
@@ -1029,7 +1036,7 @@ public class ProductosForm extends javax.swing.JFrame {
        
         altaPrincipal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaPrincipal.setVisible(true);
-           
+           altaPrincipal.setLocationRelativeTo(null);
         }
     }
 });
@@ -1059,7 +1066,7 @@ public class ProductosForm extends javax.swing.JFrame {
       
         altaVino.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaVino.setVisible(true);
-           
+           altaVino.setLocationRelativeTo(null);
         }
     }
 });
