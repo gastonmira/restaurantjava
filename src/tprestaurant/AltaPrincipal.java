@@ -64,15 +64,21 @@ public class AltaPrincipal extends javax.swing.JFrame {
       txtNombrePrincipal.setEnabled(false);
       porcGananciaPrin.setText(String.valueOf(principal.getPorcentajeGanancia()));
       setModel(principal);
+      btnEliminar.setVisible(true);
+      checkBoxPrin.setSelected(principal.isActivo());
+           jLabel5.setText("Modificar Principal");     
    }else{
-      txtNombrePrincipal.setText("");
-       txtNombrePrincipal.setEnabled(true);
-      porcGananciaPrin.setText("");
-        tbModel = new MyJTableModel();
-            tbModel.addColumn(colName[0]);
-            tbModel.addColumn(colName[1]);
-           tbModel.addColumn(colName[2]);
-            tableIngredientes.setModel(tbModel);
+    txtNombrePrincipal.setText("");
+    txtNombrePrincipal.setEnabled(true);
+    porcGananciaPrin.setText("");
+    tbModel = new MyJTableModel();
+    tbModel.addColumn(colName[0]);
+    tbModel.addColumn(colName[1]);
+    tbModel.addColumn(colName[2]);
+    tableIngredientes.setModel(tbModel);
+    btnEliminar.setVisible(false);
+    checkBoxPrin.setSelected(true);
+     jLabel5.setText("Alta Principal");
    }
     
 }
@@ -139,7 +145,7 @@ public class AltaPrincipal extends javax.swing.JFrame {
         jScrollPane3 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnGuardarPrin = new javax.swing.JButton();
-        btnEliminarPrin = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         btnCancelarPrin = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -177,10 +183,10 @@ public class AltaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        btnEliminarPrin.setText("Eliminar");
-        btnEliminarPrin.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnEliminarPrinActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -280,7 +286,7 @@ public class AltaPrincipal extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(btnGuardarPrin)
                 .addGap(18, 18, 18)
-                .addComponent(btnEliminarPrin)
+                .addComponent(btnEliminar)
                 .addGap(18, 18, 18)
                 .addComponent(btnCancelarPrin)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -316,7 +322,7 @@ public class AltaPrincipal extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarPrin)
-                    .addComponent(btnEliminarPrin)
+                    .addComponent(btnEliminar)
                     .addComponent(btnGuardarPrin))
                 .addGap(18, 18, 18))
         );
@@ -387,11 +393,9 @@ public class AltaPrincipal extends javax.swing.JFrame {
 
     private void btnGuardarPrinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarPrinActionPerformed
        if (!("".equals(txtNombrePrincipal.getText()))&& !("".equals(porcGananciaPrin.getText()))){
-      
-                   
-           
-           Principal nuevoPrincipal = new Principal(ingredientesDePrincipal,Float.parseFloat(porcGananciaPrin.getText()),txtNombrePrincipal.getText());
-     try {
+            Principal nuevoPrincipal = new Principal(ingredientesDePrincipal,Float.parseFloat(porcGananciaPrin.getText()),txtNombrePrincipal.getText());
+            nuevoPrincipal.setActivo(checkBoxPrin.isSelected());
+            try {
         if (principal==null){
            
             restaurant.agregarProducto(nuevoPrincipal);
@@ -407,19 +411,15 @@ public class AltaPrincipal extends javax.swing.JFrame {
         Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
          JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-        
        
-        
-    
-        
-       }
-        
-        
+      }else{
+      JOptionPane.showMessageDialog(rootPane, "Campos faltantes o invalidos");
+      }
         
         
     }//GEN-LAST:event_btnGuardarPrinActionPerformed
 
-    private void btnEliminarPrinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPrinActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
  try {
         restaurant.eliminarProducto(principal);
         JOptionPane.showMessageDialog(rootPane, "Plato Principal Eliminado con exito ");
@@ -430,7 +430,7 @@ public class AltaPrincipal extends javax.swing.JFrame {
         Logger.getLogger(AltaPostre.class.getName()).log(Level.SEVERE, null, ex);
         JOptionPane.showMessageDialog(rootPane, ex.getMessage());
     }        // TODO add your handling code here:
-    }//GEN-LAST:event_btnEliminarPrinActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void btnCancelarPrinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPrinActionPerformed
        dispose();
@@ -458,8 +458,8 @@ public class AltaPrincipal extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelarPrin;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnEliminarIngrediente;
-    private javax.swing.JButton btnEliminarPrin;
     private javax.swing.JButton btnGuardarPrin;
     private javax.swing.JCheckBox checkBoxPrin;
     private javax.swing.JButton jButton1;

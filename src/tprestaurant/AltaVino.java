@@ -51,10 +51,18 @@ Callback callback;
       precioVino.setText(String.valueOf(vino.getPrecioVenta()));
      ComboVarietales.setSelectedItem(vino.getVarietal().toString());
      ComboProvincia.setSelectedItem(vino.getProvincia().toString());
+     jLabel1.setText("Modificar Entrada");
+      btnEliminar.setVisible(true);
+      checkBoxVino.setSelected(vino.isActivo());
+     
+     
    }else{
       txtDescripcionVino.setText("");
       txtDescripcionVino.setEnabled(true);
       precioVino.setText("");
+       jLabel1.setText("Alta Entrada");
+      btnEliminar.setVisible(false);
+      checkBoxVino.setSelected(true);
        
    }
  }
@@ -107,6 +115,7 @@ Callback callback;
         ComboProvincia = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         precioVino = new javax.swing.JTextField();
+        checkBoxVino = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -147,6 +156,8 @@ Callback callback;
             }
         });
 
+        checkBoxVino.setText("¿Activo?");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -154,38 +165,43 @@ Callback callback;
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3))
-                        .addGap(33, 33, 33)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txtDescripcionVino, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ComboVarietales, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel4)
+                        .addComponent(btnGuardar)
                         .addGap(18, 18, 18)
-                        .addComponent(ComboProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(precioVino))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(btnGuardar)
-                                .addGap(18, 18, 18)
-                                .addComponent(btnEliminar)))
+                        .addComponent(btnEliminar)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCancelar)))
+                        .addComponent(btnCancelar))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(18, 18, 18)
+                            .addComponent(precioVino))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(ComboProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(183, 183, 183)
+                            .addComponent(checkBoxVino))
+                        .addGroup(layout.createSequentialGroup()
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel3))
+                            .addGap(33, 33, 33)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txtDescripcionVino, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(ComboVarietales, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(checkBoxVino))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -207,7 +223,7 @@ Callback callback;
                     .addComponent(btnGuardar)
                     .addComponent(btnEliminar)
                     .addComponent(btnCancelar))
-                .addContainerGap(89, Short.MAX_VALUE))
+                .addContainerGap(84, Short.MAX_VALUE))
         );
 
         pack();
@@ -232,7 +248,9 @@ Callback callback;
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
       if (!("".equals(txtDescripcionVino.getText()))&& !("".equals(precioVino.getText()))){
              Vino nuevoVino = new Vino(Varietales.valueOf(ComboVarietales.getSelectedItem().toString()),Provincias.valueOf(ComboProvincia.getSelectedItem().toString()),Float.parseFloat(precioVino.getText()),txtDescripcionVino.getText());
-     try {
+            nuevoVino.setActivo(checkBoxVino.isSelected());
+             
+             try {
         if (vino==null){
            
             restaurant.agregarProducto(nuevoVino);
@@ -248,14 +266,8 @@ Callback callback;
         Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
          JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
-        
-       
-          
-          
-          
-          
-      }else{
-      JOptionPane.showMessageDialog(precioVino, "Campos faltantes o invalidos");
+       }else{
+      JOptionPane.showMessageDialog(rootPane, "Campos faltantes o invalidos");
       }
       
     }//GEN-LAST:event_btnGuardarActionPerformed
@@ -288,6 +300,7 @@ try {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JCheckBox checkBoxVino;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

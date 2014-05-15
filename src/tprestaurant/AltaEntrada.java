@@ -39,11 +39,18 @@ private void AltaOMod(Entrada entrada){
       txtNombreEnt.setText(entrada.getDescripcion());
       costoEnt.setText(String.valueOf(entrada.costo()));
       porcentajeEnt.setText(String.valueOf(entrada.getPorcentajeGanancia()));
-      checkBoxEnt.setSelected(entrada.isActivo());   
+      jLabel5.setText("Modificar Entrada");
+      btnEliminar.setVisible(true);
+      txtNombreEnt.setEnabled(false);
+      checkBoxEnt.setSelected(entrada.isActivo());
    }else{
       txtNombreEnt.setText("");
       costoEnt.setText("");
       porcentajeEnt.setText("");
+      jLabel5.setText("Alta Entrada");
+      btnEliminar.setVisible(false);
+      txtNombreEnt.setEnabled(true);
+      checkBoxEnt.setSelected(true);
    }
     
 }
@@ -65,7 +72,7 @@ private void AltaOMod(Entrada entrada){
         porcentajeEnt = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         btnAddEntradaAProd = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         checkBoxEnt = new javax.swing.JCheckBox();
 
@@ -98,10 +105,10 @@ private void AltaOMod(Entrada entrada){
             }
         });
 
-        jButton1.setText("Eliminar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnEliminarActionPerformed(evt);
             }
         });
 
@@ -123,40 +130,37 @@ private void AltaOMod(Entrada entrada){
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 224, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 181, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(checkBoxEnt))
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(costoEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                            .addComponent(jLabel1)
+                            .addGap(87, 87, 87)
+                            .addComponent(txtNombreEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel3)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(costoEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addComponent(jLabel1)
-                                    .addGap(87, 87, 87)
-                                    .addComponent(txtNombreEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(porcentajeEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(btnAddEntradaAProd)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(porcentajeEnt, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnAddEntradaAProd)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton2)))
+                .addContainerGap(169, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(checkBoxEnt))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(5, 5, 5)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
                     .addComponent(txtNombreEnt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -171,7 +175,7 @@ private void AltaOMod(Entrada entrada){
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAddEntradaAProd)
-                    .addComponent(jButton1)
+                    .addComponent(btnEliminar)
                     .addComponent(jButton2))
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -197,8 +201,8 @@ private void AltaOMod(Entrada entrada){
 
     private void porcentajeEntKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_porcentajeEntKeyReleased
         // TODO add your handling code here:
-        if (!Validator.esFloat(costoEnt.getText())){
-            costoEnt.setText("");
+        if (!Validator.esFloat(porcentajeEnt.getText())){
+            porcentajeEnt.setText("");
              JOptionPane.showMessageDialog(null,"Porcentaje de ganancia de Entrada Inválido");
         }
         /* try{
@@ -211,6 +215,9 @@ private void AltaOMod(Entrada entrada){
     }//GEN-LAST:event_porcentajeEntKeyReleased
 
     private void btnAddEntradaAProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddEntradaAProdActionPerformed
+       if (!("".equals(txtNombreEnt.getText()))&& !("".equals(costoEnt.getText()))&& !("".equals(porcentajeEnt.getText()))){
+        
+        
         Entrada nuevaEntrada = new Entrada(Float.parseFloat(costoEnt.getText()), Float.parseFloat(porcentajeEnt.getText()),txtNombreEnt.getText());
         nuevaEntrada.setActivo(checkBoxEnt.isSelected());
         try {
@@ -229,7 +236,9 @@ private void AltaOMod(Entrada entrada){
           JOptionPane.showMessageDialog(rootPane, ex.getMessage());
              
     }
-        
+      }else{
+      JOptionPane.showMessageDialog(rootPane, "Campos faltantes o invalidos");
+      }  
         
     }//GEN-LAST:event_btnAddEntradaAProdActionPerformed
 
@@ -237,7 +246,7 @@ private void AltaOMod(Entrada entrada){
        dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
     try {
         restaurant.eliminarProducto(entrada);
         JOptionPane.showMessageDialog(rootPane, "Entrada Eliminada con exito ");
@@ -247,14 +256,14 @@ private void AltaOMod(Entrada entrada){
           JOptionPane.showMessageDialog(rootPane, ex.getMessage());
     }
     
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAddEntradaAProd;
+    private javax.swing.JButton btnEliminar;
     private javax.swing.JCheckBox checkBoxEnt;
     private javax.swing.JTextField costoEnt;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;

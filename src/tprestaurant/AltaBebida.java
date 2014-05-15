@@ -38,10 +38,19 @@ Bebida bebida;
 private void AltaOMod(Bebida bebida){
    if (bebida != null){
       txtDescripcionBebida.setText(bebida.getDescripcion());
+      txtDescripcionBebida.setEnabled(false);
       precioBebida.setText(String.valueOf(bebida.precio()));
+      jLabel1.setText("Modificar Bebida");
+      btnEliminarBebida.setVisible(true);
+      txtDescripcionBebida.setEnabled(false);
+      checkBoxBeb.setSelected(bebida.isActivo());
    }else{
       txtDescripcionBebida.setText("");
       precioBebida.setText("");
+       jLabel1.setText("Alta Bebida");
+       btnEliminarBebida.setVisible(false);
+       txtDescripcionBebida.setEnabled(true);
+       checkBoxBeb.setSelected(true);
    }
     
 }
@@ -63,6 +72,7 @@ private void AltaOMod(Bebida bebida){
         btnEliminarBebida = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
+        checkBoxBeb = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,7 +114,9 @@ private void AltaOMod(Bebida bebida){
             }
         });
 
-        jLabel4.setText("Precio decimal con \",\"");
+        jLabel4.setText("Precio decimal con \".\"");
+
+        checkBoxBeb.setText("¿Activo?");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -112,35 +124,39 @@ private void AltaOMod(Bebida bebida){
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(40, 40, 40)
-                        .addComponent(txtDescripcionBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3)
-                            .addComponent(btnGuardarBebida))
-                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnEliminarBebida, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(precioBebida))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addComponent(btnCancelar))
+                                .addComponent(jLabel2)
+                                .addGap(40, 40, 40)
+                                .addComponent(txtDescripcionBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel4)
-                                .addGap(0, 0, Short.MAX_VALUE)))))
-                .addContainerGap(69, Short.MAX_VALUE))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(btnGuardarBebida))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnEliminarBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(precioBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))))
+                        .addContainerGap(69, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(checkBoxBeb)
+                        .addGap(25, 25, 25))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel1)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(checkBoxBeb))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
@@ -155,7 +171,7 @@ private void AltaOMod(Bebida bebida){
                     .addComponent(btnGuardarBebida)
                     .addComponent(btnEliminarBebida)
                     .addComponent(btnCancelar))
-                .addContainerGap(157, Short.MAX_VALUE))
+                .addContainerGap(152, Short.MAX_VALUE))
         );
 
         pack();
@@ -183,12 +199,14 @@ private void AltaOMod(Bebida bebida){
     }//GEN-LAST:event_precioBebidaKeyReleased
 
     private void btnGuardarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarBebidaActionPerformed
-    
+if (!("".equals(txtDescripcionBebida.getText()))&& !("".equals(precioBebida.getText()))){
+          
         
-        Producto nuevaBebida = new Bebida(Float.parseFloat(precioBebida.getText()), txtDescripcionBebida.getText());
-     try {
+        Bebida nuevaBebida = new Bebida(Float.parseFloat(precioBebida.getText()), txtDescripcionBebida.getText());
+        nuevaBebida.setActivo(checkBoxBeb.isSelected());
+        try {
         if (bebida==null){
-           
+          
             restaurant.agregarProducto(nuevaBebida);
             JOptionPane.showMessageDialog(rootPane, "Nueva Bebida agregada con exito ");
           
@@ -203,7 +221,9 @@ private void AltaOMod(Bebida bebida){
          JOptionPane.showMessageDialog(rootPane, ex.getMessage());
         }
         
-       
+      }else{
+      JOptionPane.showMessageDialog(rootPane, "Campos faltantes o invalidos");
+      }  
         
     
         
@@ -230,6 +250,7 @@ private void AltaOMod(Bebida bebida){
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminarBebida;
     private javax.swing.JButton btnGuardarBebida;
+    private javax.swing.JCheckBox checkBoxBeb;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

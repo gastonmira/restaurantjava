@@ -920,7 +920,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
            // float p = Float.parseFloat((String) tablaBebida.getModel().getValueAt(tablaBebida.getSelectedRow(), 1));
             String n = (String) tablaBebida.getModel().getValueAt(tablaBebida.getSelectedRow(), 0);
-           Bebida beb= (Bebida)restaurant.getProductobyDesc(n);
+           Bebida beb= (Bebida)restaurant.getProductobyDescTipo("Bebida",n);
            // Bebida beb= new Bebida(p,n);
            altaBebida = new AltaBebida(beb,restaurant,new Callback<Restaurant>(){
         
@@ -948,7 +948,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
             //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
             String n = (String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 0);
-            Entrada ent= (Entrada)restaurant.getProductobyDesc(n);
+            Entrada ent= (Entrada)restaurant.getProductobyDescTipo("Entrada",n);
             
            // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
             
@@ -981,7 +981,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
             //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
             String n = (String) tablaPostre.getModel().getValueAt(tablaPostre.getSelectedRow(), 0);
-            Postre pos= (Postre)restaurant.getProductobyDesc(n);
+            Postre pos= (Postre)restaurant.getProductobyDescTipo("Postre",n);
             
            // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
             
@@ -1011,7 +1011,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
             //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
             String n = (String) tablaPrincipal.getModel().getValueAt(tablaPrincipal.getSelectedRow(), 0);
-            Principal pri= (Principal)restaurant.getProductobyDesc(n);
+            Principal pri= (Principal)restaurant.getProductobyDescTipo("Principal",n);
             
            // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
             
@@ -1043,7 +1043,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
             //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
             String n = (String) tablaVino.getModel().getValueAt(tablaVino.getSelectedRow(), 0);
-            Vino vino= (Vino)restaurant.getProductobyDesc(n);
+            Vino vino= (Vino)restaurant.getProductobyDescTipo("Vino",n);
             
            // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
             
