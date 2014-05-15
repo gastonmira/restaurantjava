@@ -193,6 +193,7 @@ public class ReportesForm extends javax.swing.JFrame {
     private void btnRepRankingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRepRankingMouseClicked
         // TODO add your handling code here:
         ArrayList <String> check = new ArrayList();
+        reporte= new Reporte();
         if(checkBoxEntrada.isSelected()){
             check.add("Entrada");
         }
@@ -212,7 +213,7 @@ public class ReportesForm extends javax.swing.JFrame {
         if(check.size() == 0){
             JOptionPane.showMessageDialog(null,"Seleccione grupos de productos para reportar.");
         }else{
-            JFrame reporteRanForm = new ReporteRankingForm((Producto) reporte.rankingPrecios(check, restaurant));
+            JFrame reporteRanForm = new ReporteRankingForm(reporte.rankingPrecios(check, restaurant));
             reporteRanForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             reporteRanForm.setVisible(true);
             reporteRanForm.setLocationRelativeTo(null);

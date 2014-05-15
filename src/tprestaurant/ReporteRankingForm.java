@@ -6,6 +6,9 @@
 
 package tprestaurant;
 
+import java.util.List;
+import tprestaurant.misc.MyJTableModel;
+import tprestaurant.model.Restaurant;
 import tprestaurant.model.productos.Producto;
 
 /**
@@ -13,15 +16,38 @@ import tprestaurant.model.productos.Producto;
  * @author gastonmira
  */
 public class ReporteRankingForm extends javax.swing.JFrame {
-    Producto producto;
+    Restaurant restaurant;
+    List<Producto> productos;
+    private String[] colName = { "Nombre", "Tipo","Precio"};
     /**
      * Creates new form ReporteRankingForm
      */
-    public ReporteRankingForm(Producto producto) {
-        this.producto = producto;
+    public ReporteRankingForm(List<Producto> productos, Restaurant restaurant) {
+        this.productos = productos;
+        this.restaurant = restaurant;
         initComponents();
+        setModel(productos);
     }
+    
+    private void setModel(List<Producto> productos){
+        MyJTableModel tbModel = new MyJTableModel();
+        tbModel.addColumn(colName[0]);
+        tbModel.addColumn(colName[1]);
+        tbModel.addColumn(colName[2]);
+         if (productos!=null){
+            for (Producto p : productos) {
+                String[] data = new String[3];
 
+                data[0] = p.getDescripcion();
+                data[1] = p.getDescripcion();
+                data[2] = String.valueOf(p.precio());
+               
+                tbModel.addRow(data);
+         }    
+            tablaReporteRanking.setModel(tbModel);
+        }    
+            
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -32,12 +58,12 @@ public class ReporteRankingForm extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaReporteRanking = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaReporteRanking.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null},
                 {null, null, null},
@@ -48,7 +74,7 @@ public class ReporteRankingForm extends javax.swing.JFrame {
                 "Nombre", "Tipo", "Precio"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaReporteRanking);
 
         jLabel1.setText("Ranking de Productos");
 
@@ -80,6 +106,6 @@ public class ReporteRankingForm extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tablaReporteRanking;
     // End of variables declaration//GEN-END:variables
 }
