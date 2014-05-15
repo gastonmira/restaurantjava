@@ -6,8 +6,12 @@
 
 package tprestaurant;
 
+import java.util.ArrayList;
 import java.util.List;
+import tprestaurant.misc.MyJTableModel;
 import tprestaurant.model.Cambio;
+import tprestaurant.model.IngredienteDePrincipal;
+import tprestaurant.model.productos.Principal;
 
 /**
  *
@@ -15,14 +19,37 @@ import tprestaurant.model.Cambio;
  */
 public class ReporteModificacionForm extends javax.swing.JFrame {
     List<Cambio> cambios;
-    /**
+     private String[] colName = { "Descripcion", "Precio Anterior","Precio Nuevo","Transicion"};
+    
+     /**
      * Creates new form ReporteModificacion
      */
     public ReporteModificacionForm(List<Cambio> cambios) {
         this.cambios = cambios;
         initComponents();
+        setModel(cambios);
     }
+ private void setModel(List<Cambio> cambios){
+        MyJTableModel tbModel = new MyJTableModel();
+        tbModel.addColumn(colName[0]);
+        tbModel.addColumn(colName[1]);
+        tbModel.addColumn(colName[2]);
+        tbModel.addColumn(colName[3]);
+         if (cambios!=null){
+            for (Cambio p : cambios) {
+                String[] data = new String[4];
 
+                data[0] = p.getDescripcion();
+                data[1] = String.valueOf(p.getPrecioViejo());
+                data[2] = String.valueOf(p.getPrecioNuevo());
+                data[3] = p.getTransicion();
+               
+                tbModel.addRow(data);
+         }    
+            tablaReporte.setModel(tbModel);
+        }    
+            
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
