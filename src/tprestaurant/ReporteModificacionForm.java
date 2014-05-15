@@ -6,6 +6,7 @@
 
 package tprestaurant;
 
+import java.util.List;
 import tprestaurant.model.Cambio;
 
 /**
@@ -13,12 +14,12 @@ import tprestaurant.model.Cambio;
  * @author gastonmira
  */
 public class ReporteModificacionForm extends javax.swing.JFrame {
-    Cambio cambio;
+    List<Cambio> cambios;
     /**
      * Creates new form ReporteModificacion
      */
-    public ReporteModificacionForm(Cambio cambio) {
-        this.cambio = cambio;
+    public ReporteModificacionForm(List<Cambio> cambios) {
+        this.cambios = cambios;
         initComponents();
     }
 

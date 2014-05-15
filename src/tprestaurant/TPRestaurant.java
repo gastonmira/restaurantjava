@@ -64,9 +64,9 @@ public class TPRestaurant extends javax.swing.JFrame {
         });
 
         btnReportes.setText("Reportes");
-        btnReportes.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnReportesMouseClicked(evt);
+        btnReportes.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnReportesActionPerformed(evt);
             }
         });
 
@@ -151,14 +151,6 @@ public class TPRestaurant extends javax.swing.JFrame {
          menuesForm.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnMenuesMouseClicked
 
-    private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
-        // TODO add your handling code here: BOTON REPORTES CLICKEADO
-        JFrame reportesForm = new ReportesForm(restaurant);
-        reportesForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        reportesForm.setVisible(true);
-         reportesForm.setLocationRelativeTo(null);
-    }//GEN-LAST:event_btnReportesMouseClicked
-
     private void cargarRestauranteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cargarRestauranteActionPerformed
       
         
@@ -184,6 +176,13 @@ public class TPRestaurant extends javax.swing.JFrame {
         gananciaPostres.setVisible(true);
          gananciaPostres.setLocationRelativeTo(null);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void btnReportesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnReportesActionPerformed
+        JFrame reportesForm = new ReportesForm(restaurant);
+        reportesForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        reportesForm.setVisible(true);
+         reportesForm.setLocationRelativeTo(null);
+    }//GEN-LAST:event_btnReportesActionPerformed
 
     /**
      * @param args the command line arguments

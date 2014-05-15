@@ -34,14 +34,15 @@ public class ReportesForm extends javax.swing.JFrame {
     }
     
     private void cargaMenuEnComboBox () {
-        DefaultComboBoxModel<String> cbModel= new DefaultComboBoxModel<String>();
-        
+        DefaultComboBoxModel<String> cbModel2= new DefaultComboBoxModel<String>();
+        DefaultComboBoxModel<String> cbModel1= new DefaultComboBoxModel<String>();
         ArrayList<Menu> menus = restaurant.getMenus();
         for (Menu m : menus) {
-            cbModel.addElement(m.getDescripcion());
+            cbModel1.addElement(m.getDescripcion());
+            cbModel2.addElement(m.getDescripcion());
         }
-        comboMenu1.setModel(cbModel);
-        comboMenu2.setModel(cbModel);
+        comboMenu1.setModel(cbModel1);
+        comboMenu2.setModel(cbModel2);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -176,9 +177,9 @@ public class ReportesForm extends javax.swing.JFrame {
         
         Menu menu1 = restaurant.getMenubyDesc(comboMenu1.getSelectedItem().toString());
         Menu menu2 = restaurant.getMenubyDesc(comboMenu2.getSelectedItem().toString());
-        
+        reporte= new Reporte();
         if(menu1!=null && menu2!= null){
-            JFrame reporteModForm = new ReporteModificacionForm((Cambio) reporte.menuModificacion(menu1, menu2));
+            JFrame reporteModForm = new ReporteModificacionForm(reporte.menuModificacion(menu1, menu2));
             reporteModForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
             reporteModForm.setVisible(true);
             reporteModForm.setLocationRelativeTo(null);
