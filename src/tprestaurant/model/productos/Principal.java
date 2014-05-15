@@ -6,6 +6,7 @@
 package tprestaurant.model.productos;
 
 import java.util.ArrayList;
+import tprestaurant.model.Ingrediente;
 import tprestaurant.model.IngredienteDePrincipal;
 
 /**
@@ -78,5 +79,18 @@ public class Principal extends Producto {
      */
     public void setIngredientes(ArrayList<IngredienteDePrincipal> ingredientes) {
         this.ingredientes = ingredientes;
+    }
+    
+    public IngredienteDePrincipal getIngredienteDePrincipalbyDesc(String key)
+    {
+        for (IngredienteDePrincipal i:ingredientes) 
+        {
+            if(i.getDescripcion().equalsIgnoreCase(key))
+            {
+                return i;
+            } 
+        }
+        
+        return null;
     }
 }
