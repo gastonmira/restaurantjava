@@ -1,27 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package tprestaurant.model;
 
 import tprestaurant.model.enums.UnidadesDeMedida;
 
-/**
- *
- * @author jmdapice
- */
 public class IngredienteDePrincipal extends Ingrediente {
-    private int cantidadUtilizada;
-    
-    public IngredienteDePrincipal(int cantidadUtilizada) {
+
+    private float cantidadUtilizada;
+
+    public IngredienteDePrincipal(float cantidadUtilizada) {
         this.cantidadUtilizada = cantidadUtilizada;
     }
-public IngredienteDePrincipal() {
-        
+
+    public IngredienteDePrincipal() {
+
     }
-    public IngredienteDePrincipal(int cantidadUtilizada, float costoPorUnidad, UnidadesDeMedida unidad, String descripcion) {
+
+    public IngredienteDePrincipal(float cantidadUtilizada, float costoPorUnidad, UnidadesDeMedida unidad, String descripcion) {
         super(costoPorUnidad, unidad, descripcion);
         this.cantidadUtilizada = cantidadUtilizada;
     }
@@ -29,15 +22,14 @@ public IngredienteDePrincipal() {
     /**
      * @return the cantidadUtilizada
      */
-    public int getCantidadUtilizada() {
+    public float getCantidadUtilizada() {
         return cantidadUtilizada;
     }
 
     /**
      * @param cantidadUtilizada the cantidadUtilizada to set
      */
-    public void setCantidadUtilizada(int cantidadUtilizada) {
+    public void setCantidadUtilizada(float cantidadUtilizada) {
         this.cantidadUtilizada = cantidadUtilizada;
     }
-    
 }

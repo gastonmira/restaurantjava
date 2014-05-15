@@ -1,10 +1,4 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-package tprestaurant.model;
+package tprestaurant.misc;
 
 import tprestaurant.model.enums.UnidadesDeMedida;
 import java.io.BufferedReader;
@@ -13,22 +7,19 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.TreeSet;
 
-/**
- *
- * @author wahnishjorge
- */
+import tprestaurant.model.ExcepcionLogica;
+import tprestaurant.model.Ingrediente;
+
 public class Carga {
-    
+
     public static TreeSet<Ingrediente> cargaIngredientes(String ubicacion) throws ExcepcionLogica {
         File archivo = new File(ubicacion);
         TreeSet<Ingrediente> listIngredientes = new TreeSet<Ingrediente>();
-        try
-        {
+        try {
             BufferedReader in = new BufferedReader(new FileReader(archivo));
             String data;
             String linea[] = new String[7];
-            while((data=in.readLine())!=null)
-            {
+            while ((data = in.readLine()) != null) {
                 Ingrediente ingr = new Ingrediente();
                 linea = data.split(",");
                 ingr.setDescripcion(linea[0]);
@@ -37,12 +28,10 @@ public class Carga {
                 listIngredientes.add(ingr);
             }
             in.close();
-        }
-        catch(IOException e)
-        {
+        } catch (IOException e) {
             throw new ExcepcionLogica(e.getMessage());
         }
-       
+        
         return listIngredientes;
     }
 }

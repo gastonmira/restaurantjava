@@ -1,4 +1,4 @@
-package tprestaurant;
+package tprestaurant.misc;
 
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
@@ -10,65 +10,57 @@ import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
+import tprestaurant.model.ExcepcionLogica;
 import tprestaurant.model.Restaurant;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
-/**
- *
- * @author jmdapice
- */
 public class Persister {
- 
-    public static void guardarRestaurant(String path, Restaurant rest)
-    {
+
+    public static void guardarRestaurant(String path, Restaurant rest) throws ExcepcionLogica {
         XStream xs = new XStream();
         try {
             FileOutputStream fileOutPut = new FileOutputStream(path);
             xs.toXML(rest, fileOutPut);
             fileOutPut.close();
         } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
+            throw new ExcepcionLogica(e1.getMessage());
         } catch (IOException ex) {
-            ex.printStackTrace();
+            throw new ExcepcionLogica(ex.getMessage());
         }
     }
-    
-    public static Restaurant cargarRestaurant(String path)
-    {
+
+    public static Restaurant cargarRestaurant(String path) throws ExcepcionLogica {
         Restaurant rest = null;
         XStream xs = new XStream(new DomDriver());
         try {
             FileInputStream fileInput = new FileInputStream(path);
-            rest = (Restaurant)xs.fromXML(fileInput);
+            rest = (Restaurant) xs.fromXML(fileInput);
             fileInput.close();
+        } catch (FileNotFoundException ex) {
+            throw new ExcepcionLogica(ex.getMessage());
+        } catch (IOException ex) {
+            throw new ExcepcionLogica(ex.getMessage());
         }
-        catch (FileNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        
+
         return rest;
     }
-    
-    public static void generarTxt(List lista, String nombreArchivo){
+
+    public static void generarTxt(List lista, String nombreArchivo) throws ExcepcionLogica {
+        try {
+            Persister.generarTxt(lista.toString(), nombreArchivo);
+        } catch (ExcepcionLogica ex) {
+            throw ex;
+        }
+    }
+
+    public static void generarTxt(String texto, String nombreArchivo) throws ExcepcionLogica {
         String sFichero = nombreArchivo;
         File fichero = new File(sFichero);
-        try{
+        try {
             BufferedWriter buw = new BufferedWriter(new FileWriter(fichero));
-            buw.write(lista.toString());
+            buw.write(texto);
             buw.close();
-        }catch(IOException ioe) {
-            ioe.printStackTrace();
+        } catch (IOException ioe) {
+            throw new ExcepcionLogica(ioe.getMessage());
         }
     }
 }

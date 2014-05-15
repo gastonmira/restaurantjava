@@ -1,14 +1,5 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package tprestaurant.model.productos;
 
-/**
- *
- * @author Usuario
- */
 public class Postre extends Producto{
 
     public Postre() {
@@ -59,5 +50,4 @@ public class Postre extends Producto{
         
         return this.getDescripcion().equals(((Postre)o).getDescripcion());
     }
-
 }

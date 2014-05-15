@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package tprestaurant.model;
 
+import tprestaurant.reporting.Cambio;
+import tprestaurant.reporting.Reporte;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.After;
@@ -23,26 +24,26 @@ import tprestaurant.model.productos.*;
  * @author jmdapice
  */
 public class ReporteTest {
-    
+
     public Restaurant rest;
     public Menu menu;
+
     public ReporteTest() {
     }
-    
+
     @Before
     public void setUp() {
         rest = new Restaurant();
         menu = new Menu();
-        Producto p1 = new Entrada(10, 15,"jamon con rusa");
-        Producto p2 = new Entrada(20, 15,"jamon crudo con rusa");
-        Producto p3 = new Vino(Varietales.Cabernet,Provincias.Buenos_Aires);
+        Producto p1 = new Entrada(10, 15, "jamon con rusa");
+        Producto p2 = new Entrada(20, 15, "jamon crudo con rusa");
+        Producto p3 = new Vino(Varietales.Cabernet, Provincias.Buenos_Aires);
         p3.setDescripcion("valmont");
-        ((Bebida)p3).setPrecioVenta(100);
+        ((Bebida) p3).setPrecioVenta(100);
         Producto p4 = new Postre(23, "flan");
         Postre.setPorcentajeGanancia(100);
-        
-        try
-        {
+
+        try {
             rest.agregarProducto(p1);
             rest.agregarProducto(p2);
             rest.agregarProducto(p3);
@@ -54,13 +55,11 @@ public class ReporteTest {
             ArrayList<Menu> menus = new ArrayList<Menu>();
             menus.add(menu);
             rest.setMenus(menus);
-        }
-        catch(ExcepcionLogica ex)
-        {
-                
+        } catch (ExcepcionLogica ex) {
+
         }
     }
-    
+
     @After
     public void tearDown() {
         rest = null;
@@ -72,26 +71,31 @@ public class ReporteTest {
     @Test
     public void testMenuModificacion() {
         Menu menu2 = new Menu();
-        Producto p1 = new Entrada(10, 15,"vitel thone");
+        Producto p1 = new Entrada(10, 15, "vitel thone");
         menu2.agregarProducto(menu.getProductos().get(0).getProducto());
         menu2.agregarProducto(menu.getProductos().get(1).getProducto());
         menu2.agregarProducto(p1); //Producto Nuevo
         menu2.getProductos().get(0).setPrecio(2000); //Producto Modificado
-        
+
         ArrayList<Menu> menus = new ArrayList<Menu>();
         menus.add(menu);
         menus.add(menu2);
         rest.setMenus(menus);
-        
+
         Reporte instance = new Reporte();
-        List<Cambio> cambios = instance.menuModificacion(menu, menu2);
-        
-        assertEquals(cambios.get(0).getDescripcion(),"jamon con rusa");
-        assertEquals(cambios.get(0).getTransicion(),"Cambio de Precio");
-        assertEquals(cambios.get(0).getPrecioNuevo(),2000,0);
-        assertEquals(cambios.get(1).getTransicion(),"Producto Eliminado");
-        assertEquals(cambios.get(2).getTransicion(),"Producto Eliminado");
-        assertEquals(cambios.get(3).getTransicion(),"Nuevo Producto");
+        List<Cambio> cambios = null;
+        try {
+            cambios = instance.menuModificacion(menu, menu2);
+        } catch (ExcepcionLogica ex) {
+            fail(ex.getMessage());
+        }
+
+        assertEquals(cambios.get(0).getDescripcion(), "jamon con rusa");
+        assertEquals(cambios.get(0).getTransicion(), "Cambio de Precio");
+        assertEquals(cambios.get(0).getPrecioNuevo(), 2000, 0);
+        assertEquals(cambios.get(1).getTransicion(), "Producto Eliminado");
+        assertEquals(cambios.get(2).getTransicion(), "Producto Eliminado");
+        assertEquals(cambios.get(3).getTransicion(), "Nuevo Producto");
     }
 
     /**
@@ -104,10 +108,14 @@ public class ReporteTest {
         grupos.add("Entrada");
         grupos.add("Vino");
         grupos.add("Postre");
-        
+
         Reporte instance = new Reporte();
-        
-        ArrayList<Producto> result = (ArrayList<Producto>)instance.rankingPrecios(grupos, rest);
+        ArrayList<Producto> result = null;
+        try {
+            result = (ArrayList<Producto>) instance.rankingPrecios(grupos, rest);
+        } catch (ExcepcionLogica ex) {
+            fail(ex.getMessage());
+        }
         assertEquals("valmont", result.get(0).getDescripcion());
         assertEquals("flan", result.get(1).getDescripcion());
         assertEquals("jamon crudo con rusa", result.get(2).getDescripcion());

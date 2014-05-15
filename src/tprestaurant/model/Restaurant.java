@@ -7,19 +7,16 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.TreeSet;
+import tprestaurant.misc.Persister;
 
-/**
- *
- * @author jmdapice
- */
 public class Restaurant implements Serializable {
-    
+
     private ArrayList<Menu> menus;
     private TreeSet<Producto> productos;
     private TreeSet<Ingrediente> ingredientes;
-    
-    public Restaurant()
-    {
+    private float porcentajeGananciaPostres = 0;
+
+    public Restaurant() {
         menus = new ArrayList<Menu>();
         productos = new TreeSet<Producto>();
         ingredientes = new TreeSet<Ingrediente>();
@@ -51,22 +48,20 @@ public class Restaurant implements Serializable {
     public TreeSet<Producto> getProductos() {
         return new TreeSet<Producto>(productos);
     }
-    
+
     /**
      * @return productos por tipo
      * @param type recibe nombre de la clase a filtrar
      */
     public TreeSet<Producto> getProductosByType(String type) {
         TreeSet<Producto> result = new TreeSet<Producto>();
-        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) 
-        {
+        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) {
             Producto p = it.next();
-            if(p.getClass().getSimpleName().equals(type))
-            {
+            if (p.getClass().getSimpleName().equals(type)) {
                 result.add(p);
-            } 
+            }
         }
-        
+
         return result;
     }
 
@@ -83,213 +78,188 @@ public class Restaurant implements Serializable {
     public void setIngredientes(TreeSet<Ingrediente> ingredientes) {
         this.ingredientes = ingredientes;
     }
-    
+
     public void agregarIngredientes(TreeSet<Ingrediente> ingredientes) {
         this.ingredientes.addAll(ingredientes);
     }
-    
-    public void agregarProducto(Producto p) throws ExcepcionLogica
-    {
-        if(productos.contains(p))
-        {
+
+    public void agregarProducto(Producto p) throws ExcepcionLogica {
+        if (productos.contains(p)) {
             throw new ExcepcionLogica("El producto ya existe");
         }
         productos.add(p);
     }
-    
-    public void modificarProducto(Producto p) throws ExcepcionLogica
-    {
-        if(!productos.contains(p))
-        {
+
+    public void modificarProducto(Producto p) throws ExcepcionLogica {
+        if (!productos.contains(p)) {
             throw new ExcepcionLogica("El producto no existe");
         }
-        
+
         productos.remove(p);
         productos.add(p);
     }
-    
-    public void eliminarProducto(Producto p) throws ExcepcionLogica
-    {
-        if(!productos.contains(p))
-        {
+
+    public void eliminarProducto(Producto p) throws ExcepcionLogica {
+        if (!productos.contains(p)) {
             throw new ExcepcionLogica("El producto no existe");
         }
-        
-        if(productoActivoEnMenu(p))
-        {
+
+        if (productoActivoEnMenu(p)) {
             throw new ExcepcionLogica("No se pudo eliminar el producto. Forma parte de un menu");
         }
-        
+
         productos.remove(p);
     }
-    
+
     /**
-     * 
+     *
      * @param key cadena parcial a buscar en descripcion
-     * @return 
+     * @return
      */
-    public TreeSet<Producto> buscarProducto(String key)
-    {
+    public TreeSet<Producto> buscarProducto(String key) {
         TreeSet<Producto> result = new TreeSet<Producto>();
-        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) 
-        {
+        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) {
             Producto p = it.next();
-            if(p.getDescripcion().toLowerCase().startsWith(key.toLowerCase()))
-            {
+            if (p.getDescripcion().toLowerCase().startsWith(key.toLowerCase())) {
                 result.add(p);
-            } 
+            }
         }
-        
+
         return result;
     }
-     public Producto getProductobyDesc(String key)
-    {
-        
-        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) 
-        {
+
+    public Producto getProductobyDesc(String key) {
+
+        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) {
             Producto p = it.next();
-            if(p.getDescripcion().equalsIgnoreCase(key))
-            {
+            if (p.getDescripcion().equalsIgnoreCase(key)) {
                 return p;
-            } 
+            }
         }
-        
+
         return null;
     }
-     public Producto getProductobyDescTipo(String type, String key)
-    {
-        
-        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) 
-        {
+
+    public Producto getProductobyDescTipo(String type, String key) {
+
+        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) {
             Producto p = it.next();
-            if(p.getClass().getSimpleName().equals(type) 
-                    && p.getDescripcion().toLowerCase().startsWith(key.toLowerCase()))
-            {
+            if (p.getClass().getSimpleName().equals(type)
+                    && p.getDescripcion().toLowerCase().startsWith(key.toLowerCase())) {
                 return p;
-            } 
+            }
         }
-        
+
         return null;
     }
-     public Ingrediente getIngredientebyDesc(String key)
-    {
-        for (Ingrediente i:ingredientes) 
-        {
-            if(i.getDescripcion().equalsIgnoreCase(key))
-            {
+
+    public Ingrediente getIngredientebyDesc(String key) {
+        for (Ingrediente i : ingredientes) {
+            if (i.getDescripcion().equalsIgnoreCase(key)) {
                 return i;
-            } 
+            }
         }
-        
+
         return null;
     }
-      
-    public Menu getMenubyDesc(String key)
-    {
-        for (Menu m:menus) 
-        {
-            if(m.getDescripcion().equalsIgnoreCase(key))
-            {
-                return m;
-            } 
-        }
-        
-        return null;
-    }
-     
-     
-     
-    
-    /**
-     * 
-     * @param type tipo del objeto a buscar
-     * @param key cadena parcial a buscar en descripcion
-     * @return 
-     */
-    public TreeSet<Producto> buscarProductoPorTipo(String type, String key)
-    {
-        TreeSet<Producto> result = new TreeSet<Producto>();
-        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) 
-        {
-            Producto p = it.next();
-            if(p.getClass().getSimpleName().equals(type) 
-                    && p.getDescripcion().toLowerCase().startsWith(key.toLowerCase()))
-            {
-                result.add(p);
-            } 
-        }
-        
-        return result;
-    }
-    
-    public Menu getMenuVigente()
-    {
-        for(Menu m : menus)
-        {
-            if(m.getFechaVigenciaFinal() == null)
-            {
+
+    public Menu getMenubyDesc(String key) {
+        for (Menu m : menus) {
+            if (m.getDescripcion().equalsIgnoreCase(key)) {
                 return m;
             }
         }
-        
+
         return null;
     }
-    
-    public void generarNuevoMenu(Date fechaInicio, String desc) throws ExcepcionLogica
-    {
-        try
-        {
-            ajustarFechaFinalVigente(fechaInicio);
+
+    /**
+     *
+     * @param type tipo del objeto a buscar
+     * @param key cadena parcial a buscar en descripcion
+     * @return
+     */
+    public TreeSet<Producto> buscarProductoPorTipo(String type, String key) {
+        TreeSet<Producto> result = new TreeSet<Producto>();
+        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) {
+            Producto p = it.next();
+            if (p.getClass().getSimpleName().equals(type)
+                    && p.getDescripcion().toLowerCase().startsWith(key.toLowerCase())) {
+                result.add(p);
+            }
         }
-        catch (ExcepcionLogica ex)
-        {
+
+        return result;
+    }
+
+    public Menu getMenuVigente() {
+        for (Menu m : menus) {
+            if (m.getFechaVigenciaFinal() == null) {
+                return m;
+            }
+        }
+
+        return null;
+    }
+
+    public void generarNuevoMenu(Date fechaInicio, String desc) throws ExcepcionLogica {
+        try {
+            ajustarFechaFinalVigente(fechaInicio);
+        } catch (ExcepcionLogica ex) {
             throw ex;
         }
-        
+
         Menu m = new Menu();
         m.setFechaVigenciaInicial(fechaInicio);
         m.setDescripcion(desc);
-        
-        for(Producto p : productos)
-        {
-            if(p.isActivo())
-            {
+
+        for (Producto p : productos) {
+            if (p.isActivo()) {
                 m.agregarProducto(p);
             }
         }
-        
+
         menus.add(m);
+        Persister.generarTxt(m.toStringParaArchivo(), "MenuGenerado_" + m.getDescripcion() + ".txt");
     }
 
     private void ajustarFechaFinalVigente(Date fechaInicio) throws ExcepcionLogica {
         Menu menuAnterior = getMenuVigente();
-        if(menuAnterior != null)
-        {
-            if(fechaInicio.compareTo(menuAnterior.getFechaVigenciaInicial()) != 1)
-            {
+        if (menuAnterior != null) {
+            if (fechaInicio.compareTo(menuAnterior.getFechaVigenciaInicial()) != 1) {
                 throw new ExcepcionLogica("La fecha de inicio del nuevo menu, debe ser posterior a la del ultimo menu vigente");
             }
             Calendar cal = Calendar.getInstance();
             cal.setTime(fechaInicio);
-            cal.add(Calendar.DATE,-1);
-        
+            cal.add(Calendar.DATE, -1);
+
             menuAnterior.setFechaVigenciaFinal(cal.getTime());
         }
     }
 
-    private boolean productoActivoEnMenu(Producto p) 
-    {
-        for(Menu m: menus)
-        {
-            for(ItemMenu i : m.getProductos())
-            {
-                if(i.getProducto().equals(p))
-                {
+    private boolean productoActivoEnMenu(Producto p) {
+        for (Menu m : menus) {
+            for (ItemMenu i : m.getProductos()) {
+                if (i.getProducto().equals(p)) {
                     return true;
                 }
             }
         }
-        
+
         return false;
+    }
+
+    /**
+     * @return the porcentajeGananciaPostres
+     */
+    public float getPorcentajeGananciaPostres() {
+        return porcentajeGananciaPostres;
+    }
+
+    /**
+     * @param porcentajeGananciaPostres the porcentajeGananciaPostres to set
+     */
+    public void setPorcentajeGananciaPostres(float porcentajeGananciaPostres) {
+        this.porcentajeGananciaPostres = porcentajeGananciaPostres;
     }
 }

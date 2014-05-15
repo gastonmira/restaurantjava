@@ -6,6 +6,7 @@
 
 package tprestaurant.model;
 
+import tprestaurant.misc.Carga;
 import java.util.ArrayList;
 import org.junit.After;
 import static org.junit.Assert.*;

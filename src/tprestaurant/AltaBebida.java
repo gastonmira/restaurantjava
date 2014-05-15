@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package tprestaurant;
 
+import tprestaurant.misc.Validator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -15,45 +10,46 @@ import tprestaurant.model.Restaurant;
 import tprestaurant.model.productos.Bebida;
 import tprestaurant.model.productos.Producto;
 
-/**
- *
- * @author gastonmira
- */
 public class AltaBebida extends javax.swing.JFrame {
-Restaurant restaurant;
-Callback<Restaurant> callback;
-Bebida bebida;
+
+    Restaurant restaurant;
+    Callback<Restaurant> callback;
+    Bebida bebida;
+
     /**
      * Creates new form AltaBebida
+     *
      * @param restaurant
      * @param callback
      */
-    public AltaBebida(Bebida bebida,Restaurant restaurant,Callback<Restaurant> callback) {
-       this.callback=callback;
-       this.restaurant=restaurant;
-       this.bebida=bebida;
+    public AltaBebida(Bebida bebida, Restaurant restaurant, Callback<Restaurant> callback) {
+        this.callback = callback;
+        this.restaurant = restaurant;
+        this.bebida = bebida;
         initComponents();
-        AltaOMod(bebida);      
+        AltaOMod(bebida);
     }
-private void AltaOMod(Bebida bebida){
-   if (bebida != null){
-      txtDescripcionBebida.setText(bebida.getDescripcion());
-      txtDescripcionBebida.setEnabled(false);
-      precioBebida.setText(String.valueOf(bebida.precio()));
-      jLabel1.setText("Modificar Bebida");
-      btnEliminarBebida.setVisible(true);
-      txtDescripcionBebida.setEnabled(false);
-      checkBoxBeb.setSelected(bebida.isActivo());
-   }else{
-      txtDescripcionBebida.setText("");
-      precioBebida.setText("");
-       jLabel1.setText("Alta Bebida");
-       btnEliminarBebida.setVisible(false);
-       txtDescripcionBebida.setEnabled(true);
-       checkBoxBeb.setSelected(true);
-   }
-    
-}
+
+    private void AltaOMod(Bebida bebida) {
+        if (bebida != null) {
+            txtDescripcionBebida.setText(bebida.getDescripcion());
+            txtDescripcionBebida.setEnabled(false);
+            precioBebida.setText(String.valueOf(bebida.precio()));
+            jLabel1.setText("Modificar Bebida");
+            btnEliminarBebida.setVisible(true);
+            txtDescripcionBebida.setEnabled(false);
+            checkBoxBeb.setSelected(bebida.isActivo());
+        } else {
+            txtDescripcionBebida.setText("");
+            precioBebida.setText("");
+            jLabel1.setText("Alta Bebida");
+            btnEliminarBebida.setVisible(false);
+            txtDescripcionBebida.setEnabled(true);
+            checkBoxBeb.setSelected(true);
+        }
+
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -139,11 +135,15 @@ private void AltaOMod(Bebida bebida){
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(btnEliminarBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 77, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(precioBebida, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(btnCancelar, javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING))))
-                        .addContainerGap(69, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(0, 34, Short.MAX_VALUE)
+                                        .addComponent(jLabel4))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(btnCancelar)
+                                        .addGap(0, 0, Short.MAX_VALUE)))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -167,85 +167,73 @@ private void AltaOMod(Bebida bebida){
                     .addComponent(precioBebida, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4))
                 .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnGuardarBebida)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(btnCancelar)
                     .addComponent(btnEliminarBebida)
-                    .addComponent(btnCancelar))
-                .addContainerGap(152, Short.MAX_VALUE))
+                    .addComponent(btnGuardarBebida))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void precioBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precioBebidaActionPerformed
-       
-       
+
+
     }//GEN-LAST:event_precioBebidaActionPerformed
 
     private void precioBebidaKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_precioBebidaKeyReleased
         // TODO add your handling code here:
-    
-         if (!Validator.esFloat(precioBebida.getText())){
+
+        if (!Validator.esFloat(precioBebida.getText())) {
             precioBebida.setText("");
-            JOptionPane.showMessageDialog(null,"Precio de Bebida Inválido");
-          }
-        
-        /*  try{
-           Float.parseFloat(precioBebida.getText());
-       }catch(NumberFormatException e){
-          precioBebida.setText("");
-          JOptionPane.showMessageDialog(null,"Precio de Bebida Inválido");
-       }*/
+            JOptionPane.showMessageDialog(null, "Precio de Bebida Inválido");
+        }
     }//GEN-LAST:event_precioBebidaKeyReleased
 
     private void btnGuardarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarBebidaActionPerformed
-if (!("".equals(txtDescripcionBebida.getText()))&& !("".equals(precioBebida.getText()))){
-          
-        
-        Bebida nuevaBebida = new Bebida(Float.parseFloat(precioBebida.getText()), txtDescripcionBebida.getText());
-        nuevaBebida.setActivo(checkBoxBeb.isSelected());
-        try {
-        if (bebida==null){
-          
-            restaurant.agregarProducto(nuevaBebida);
-            JOptionPane.showMessageDialog(rootPane, "Nueva Bebida agregada con exito ");
-          
-        }else{
-           
-            restaurant.modificarProducto(nuevaBebida);
-            JOptionPane.showMessageDialog(rootPane, "Bebida Modificada con exito ");
+        if (!("".equals(txtDescripcionBebida.getText())) && !("".equals(precioBebida.getText()))) {
+
+            Bebida nuevaBebida = new Bebida(Float.parseFloat(precioBebida.getText()), txtDescripcionBebida.getText());
+            nuevaBebida.setActivo(checkBoxBeb.isSelected());
+            try {
+                if (bebida == null) {
+
+                    restaurant.agregarProducto(nuevaBebida);
+                    JOptionPane.showMessageDialog(rootPane, "Nueva Bebida agregada con exito ");
+
+                } else {
+
+                    restaurant.modificarProducto(nuevaBebida);
+                    JOptionPane.showMessageDialog(rootPane, "Bebida Modificada con exito ");
+                }
+                callback.onSuccess(restaurant);
+            } catch (ExcepcionLogica ex) {
+                Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Campos faltantes o invalidos");
         }
-         callback.onSuccess(restaurant);
-             } catch (ExcepcionLogica ex) {
-        Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
-         JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-        }
-        
-      }else{
-      JOptionPane.showMessageDialog(rootPane, "Campos faltantes o invalidos");
-      }  
-        
-    
-        
-        
     }//GEN-LAST:event_btnGuardarBebidaActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-       dispose();
+        dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnEliminarBebidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarBebidaActionPerformed
-    try {
-        restaurant.eliminarProducto(bebida);
-         JOptionPane.showMessageDialog(rootPane, "Bebida Eilminada con exito ");
-        callback.onSuccess(restaurant);
-    } catch (ExcepcionLogica ex) {
-        Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
-        JOptionPane.showMessageDialog(rootPane, ex.getMessage());
-    }
+        try {
+            restaurant.eliminarProducto(bebida);
+            JOptionPane.showMessageDialog(rootPane, "Bebida Eilminada con exito ");
+            callback.onSuccess(restaurant);
+        } catch (ExcepcionLogica ex) {
+            Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
     }//GEN-LAST:event_btnEliminarBebidaActionPerformed
 
-   
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnEliminarBebida;

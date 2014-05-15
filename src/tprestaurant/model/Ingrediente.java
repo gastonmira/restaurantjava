@@ -1,34 +1,25 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package tprestaurant.model;
 
 import tprestaurant.model.enums.UnidadesDeMedida;
 
-/**
- *
- * @author Usuario
- */
-public class Ingrediente implements Comparable{
+public class Ingrediente implements Comparable {
 
     public Ingrediente() {
         this.costoPorUnidad = 0;
         this.unidad = UnidadesDeMedida.kg;
         this.descripcion = "";
     }
-    
+
     public Ingrediente(float costoPorUnidad, UnidadesDeMedida unidad, String descripcion) {
         this.costoPorUnidad = costoPorUnidad;
         this.unidad = unidad;
         this.descripcion = descripcion;
     }
-    
+
     private float costoPorUnidad;
     private UnidadesDeMedida unidad;
     private String descripcion;
-    
+
     /**
      * @return the costoPorUnidad
      */
@@ -70,20 +61,20 @@ public class Ingrediente implements Comparable{
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    
-    
+
     @Override
     public boolean equals(Object o) {
-        
-        if(!(o instanceof Ingrediente))
+
+        if (!(o instanceof Ingrediente)) {
             return false;
-        
-        return this.descripcion.equals(((Ingrediente)o).getDescripcion());
+        }
+
+        return this.descripcion.equals(((Ingrediente) o).getDescripcion());
     }
-    
+
     @Override
-    public int compareTo(Object o){
-        Ingrediente i = (Ingrediente)o;
+    public int compareTo(Object o) {
+        Ingrediente i = (Ingrediente) o;
         return this.getDescripcion().compareTo(i.getDescripcion());
     }
 }

@@ -1,18 +1,8 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package tprestaurant.model.productos;
 
 import java.util.ArrayList;
-import tprestaurant.model.Ingrediente;
 import tprestaurant.model.IngredienteDePrincipal;
 
-/**
- *
- * @author Usuario
- */
 public class Principal extends Producto {
 
     public Principal() {

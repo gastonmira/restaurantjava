@@ -1,6 +1,6 @@
 
 
-package tprestaurant.model;
+package tprestaurant.reporting;
 
 
 public class Cambio {

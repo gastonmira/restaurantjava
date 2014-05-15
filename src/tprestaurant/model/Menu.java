@@ -2,42 +2,37 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package tprestaurant.model;
 
 import tprestaurant.model.productos.Producto;
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- *
- * @author Usuario
- */
 public class Menu implements Serializable {
 
     //Coleccion de items (productos)
     private ArrayList<ItemMenu> productos;
+    private static final SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY");
 
     private Date fechaVigenciaInicial;
     private Date fechaVigenciaFinal;
-    
+
     private String descripcion;
 
-    public Menu()
-    {
+    public Menu() {
         productos = new ArrayList<ItemMenu>();
-        
+
         fechaVigenciaInicial = new Date();
         fechaVigenciaFinal = null;
         descripcion = "";
     }
 
-    public void agregarProducto(Producto p)
-    {
+    public void agregarProducto(Producto p) {
         productos.add(new ItemMenu(p));
     }
-    
+
     /**
      * @return the fechaVigenciaInicial
      */
@@ -92,35 +87,30 @@ public class Menu implements Serializable {
      * @return
      */
     @Override
-    public String toString()
-    {
+    public String toString() {
         String fechaFinal = "Menu Vigente";
-        if(fechaVigenciaFinal !=null)
-        {
-            fechaFinal = fechaVigenciaFinal.toString();
+        if (fechaVigenciaFinal != null) {
+            fechaFinal = sdf.format(fechaVigenciaFinal);
         }
-        
-        return descripcion + " "+ fechaVigenciaInicial + "-" + fechaFinal;
+
+        return descripcion + " " + sdf.format(fechaVigenciaInicial) + "-" + fechaFinal;
     }
-    
-    public String toStringParaArchivo()
-    {
+
+    public String toStringParaArchivo() {
         String fechaFinal = "Menu Vigente";
-        if(fechaVigenciaFinal !=null)
-        {
-            fechaFinal = fechaVigenciaFinal.toString();
+        if (fechaVigenciaFinal != null) {
+            fechaFinal = sdf.format(fechaVigenciaFinal);
         }
-        String header =  "Descripcion: "+descripcion+"\n"+
-                         "Fecha Inicio: "+fechaVigenciaInicial.toString()+"\n"+
-                         "Fecha Fin: "+fechaFinal+"\n"+
-                         "-------------------------------------------\n\n"+
-                         "Ingredientes: \n";
+        String header = "Descripcion: " + descripcion + "\n"
+                + "Fecha Inicio: " + sdf.format(fechaVigenciaInicial) + "\n"
+                + "Fecha Fin: " + fechaFinal + "\n"
+                + "-------------------------------------------\n\n"
+                + "Ingredientes: \n";
         String productosString = "";
-        for(ItemMenu i : productos)
-        {
-            productosString+=i.getProducto().getDescripcion()+" $"+Float.toString(i.getPrecio())+"\n";
+        for (ItemMenu i : productos) {
+            productosString += i.getProducto().getDescripcion() + " $" + Float.toString(i.getPrecio()) + "\n";
         }
-        
-        return header+productosString;
+
+        return header + productosString;
     }
 }

@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package tprestaurant;
 
+import tprestaurant.misc.Persister;
 import java.io.File;
 import java.util.ArrayList;
 import org.junit.After;
@@ -28,31 +28,30 @@ import tprestaurant.model.productos.Vino;
  * @author jmdapice
  */
 public class PersisterTest {
-    
+
     Restaurant rest;
     Menu menu;
     private static final String filePath = "fileTest.xml";
-    
+
     public PersisterTest() {
     }
-            
+
     @Before
     public void setUp() {
         rest = new Restaurant();
         menu = new Menu();
-        Producto p1 = new Entrada(10, 15,"jamon con rusa");
-        Producto p2 = new Entrada(20, 15,"jamon crudo con rusa");
-        Producto p3 = new Vino(Varietales.Cabernet,Provincias.Buenos_Aires);
+        Producto p1 = new Entrada(10, 15, "jamon con rusa");
+        Producto p2 = new Entrada(20, 15, "jamon crudo con rusa");
+        Producto p3 = new Vino(Varietales.Cabernet, Provincias.Buenos_Aires);
         p3.setDescripcion("valmont");
-        ((Bebida)p3).setPrecioVenta(100);
+        ((Bebida) p3).setPrecioVenta(100);
         Producto p4 = new Postre(23, "flan");
         Postre.setPorcentajeGanancia(100);
-        
+
         File file = new File(filePath);
         file.delete();
-        
-        try
-        {
+
+        try {
             rest.agregarProducto(p1);
             rest.agregarProducto(p2);
             rest.agregarProducto(p3);
@@ -64,13 +63,11 @@ public class PersisterTest {
             ArrayList<Menu> menus = new ArrayList<Menu>();
             menus.add(menu);
             rest.setMenus(menus);
-        }
-        catch(ExcepcionLogica ex)
-        {
-                
+        } catch (ExcepcionLogica ex) {
+
         }
     }
-    
+
     @After
     public void tearDown() {
         rest = null;
@@ -81,13 +78,17 @@ public class PersisterTest {
     @Test
     public void testGuardarCargarRestaurant() {
         System.out.println("cargarRestaurant");
-        Persister.guardarRestaurant(filePath, rest);
-        rest = null;
-        rest = Persister.cargarRestaurant(filePath);
-        assertEquals(rest.getProductos().size(),4);
-        assertEquals("jamon con rusa", ((Producto)rest.getProductos().toArray()[0]).getDescripcion());
-        assertEquals("jamon crudo con rusa", ((Producto)rest.getProductos().toArray()[1]).getDescripcion());
-        assertEquals("flan", ((Producto)rest.getProductos().toArray()[2]).getDescripcion());
-        assertEquals("valmont", ((Producto)rest.getProductos().toArray()[3]).getDescripcion());
+        try {
+            Persister.guardarRestaurant(filePath, rest);
+            rest = null;
+            rest = Persister.cargarRestaurant(filePath);
+        } catch (ExcepcionLogica ex) {
+            fail(ex.getMessage());
+        }
+        assertEquals(rest.getProductos().size(), 4);
+        assertEquals("jamon con rusa", ((Producto) rest.getProductos().toArray()[0]).getDescripcion());
+        assertEquals("jamon crudo con rusa", ((Producto) rest.getProductos().toArray()[1]).getDescripcion());
+        assertEquals("flan", ((Producto) rest.getProductos().toArray()[2]).getDescripcion());
+        assertEquals("valmont", ((Producto) rest.getProductos().toArray()[3]).getDescripcion());
     }
 }

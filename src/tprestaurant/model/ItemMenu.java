@@ -1,21 +1,13 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package tprestaurant.model;
 
 import tprestaurant.model.productos.Producto;
 import java.io.Serializable;
 
-/**
- *
- * @author Usuario
- */
 public class ItemMenu implements Serializable {
+
     private Producto producto;
     private float precio;
-    
+
     public ItemMenu(Producto producto) {
         this.producto = producto;
         this.precio = producto.precio();

@@ -1,17 +1,10 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package tprestaurant.model.productos;
 
 import tprestaurant.model.enums.Provincias;
 import tprestaurant.model.enums.Varietales;
 
-/**
- *
- * @author Usuario
- */
 public class Vino extends Bebida {
+
     private Varietales varietal;
     private Provincias provincia;
 
@@ -53,13 +46,14 @@ public class Vino extends Bebida {
     public void setProvincia(Provincias provincia) {
         this.provincia = provincia;
     }
-    
+
     @Override
     public boolean equals(Object o) {
-        
-        if(!(o instanceof Vino))
+
+        if (!(o instanceof Vino)) {
             return false;
-        
-        return this.getDescripcion().equals(((Vino)o).getDescripcion());
+        }
+
+        return this.getDescripcion().equals(((Vino) o).getDescripcion());
     }
 }

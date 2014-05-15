@@ -1,16 +1,7 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package tprestaurant.model.productos;
 
 import java.io.Serializable;
 
-/**
- *
- * @author Usuario
- */
 public class Bebida extends Producto implements Serializable {
 
     private float precioVenta;
@@ -67,5 +58,4 @@ public class Bebida extends Producto implements Serializable {
         
         return this.getDescripcion().equals(((Bebida)o).getDescripcion());
     }
-
 }
