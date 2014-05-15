@@ -150,7 +150,7 @@ public class TPRestaurant extends javax.swing.JFrame {
 
     private void btnReportesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnReportesMouseClicked
         // TODO add your handling code here: BOTON REPORTES CLICKEADO
-        JFrame reportesForm = new ReportesForm();
+        JFrame reportesForm = new ReportesForm(restaurant);
         reportesForm.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         reportesForm.setVisible(true);
     }//GEN-LAST:event_btnReportesMouseClicked
