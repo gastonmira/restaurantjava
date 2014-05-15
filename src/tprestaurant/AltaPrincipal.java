@@ -420,7 +420,16 @@ public class AltaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_btnGuardarPrinActionPerformed
 
     private void btnEliminarPrinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarPrinActionPerformed
-        // TODO add your handling code here:
+ try {
+        restaurant.eliminarProducto(principal);
+        JOptionPane.showMessageDialog(rootPane, "Plato Principal Eliminado con exito ");
+                   
+            
+        callback.onSuccess(restaurant); 
+    } catch (ExcepcionLogica ex) {
+        Logger.getLogger(AltaPostre.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+    }        // TODO add your handling code here:
     }//GEN-LAST:event_btnEliminarPrinActionPerformed
 
     private void btnCancelarPrinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarPrinActionPerformed

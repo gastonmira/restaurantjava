@@ -23,6 +23,7 @@ import tprestaurant.model.productos.Entrada;
 import tprestaurant.model.productos.Postre;
 import tprestaurant.model.productos.Principal;
 import tprestaurant.model.productos.Producto;
+import tprestaurant.model.productos.Vino;
 
 /**
  *
@@ -727,7 +728,7 @@ public class ProductosForm extends javax.swing.JFrame {
 
     private void btnAddVinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddVinoMouseClicked
         // TODO add your handling code here:
-         altaVino = new AltaVino(restaurant,new Callback<Restaurant>(){
+         altaVino = new AltaVino(null,restaurant,new Callback<Restaurant>(){
         
         @Override
         public void onSuccess(Restaurant restaurant) {
@@ -1033,7 +1034,35 @@ public class ProductosForm extends javax.swing.JFrame {
     }
 });
      
-     
+     /*VINOS*/
+       tablaVino.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mousePressed(MouseEvent me) {
+       
+        if (me.getClickCount() == 2) {
+        
+            //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
+            String n = (String) tablaVino.getModel().getValueAt(tablaVino.getSelectedRow(), 0);
+            Vino vino= (Vino)restaurant.getProductobyDesc(n);
+            
+           // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
+            
+            
+               altaVino = new AltaVino(vino,restaurant,new Callback<Restaurant>(){
+        
+        @Override
+        public void onSuccess(Restaurant restaurant) {
+            setTableModel(tablaVino, "Vino","",0);
+            altaVino.dispose();
+        }
+    });
+      
+        altaVino.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaVino.setVisible(true);
+           
+        }
+    }
+});
      
 }
     

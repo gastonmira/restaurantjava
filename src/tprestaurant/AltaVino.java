@@ -6,9 +6,21 @@
 
 package tprestaurant;
 
+import java.util.Iterator;
+import java.util.TreeSet;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
 import tprestaurant.misc.Callback;
+import tprestaurant.misc.MyJTableModel;
+import tprestaurant.model.ExcepcionLogica;
+import tprestaurant.model.Ingrediente;
 import tprestaurant.model.Restaurant;
+import tprestaurant.model.enums.Provincias;
+import tprestaurant.model.enums.Varietales;
+import tprestaurant.model.productos.Principal;
+import tprestaurant.model.productos.Vino;
 
 /**
  *
@@ -17,15 +29,63 @@ import tprestaurant.model.Restaurant;
 public class AltaVino extends javax.swing.JFrame {
 Callback callback;
     Restaurant restaurant;
+    Vino vino;
     /**
      * Creates new form AltaVino
      */
-    public AltaVino(Restaurant restaurant,Callback callback) {
-        initComponents();
-        this.callback=callback;
+    public AltaVino(Vino vino,Restaurant restaurant,Callback callback) {
+         this.callback=callback;
        this.restaurant=restaurant;
+        this.vino=vino;
+        initComponents();
+       cargaVarietales();
+       cargaProvincias();
+       
+       
+        AltaOMod(vino);      
     }
-
+ private void AltaOMod(Vino vino){
+   if (vino != null){
+      txtDescripcionVino.setText(vino.getDescripcion());
+      txtDescripcionVino.setEnabled(false);
+      precioVino.setText(String.valueOf(vino.getPrecioVenta()));
+     ComboVarietales.setSelectedItem(vino.getVarietal().toString());
+     ComboProvincia.setSelectedItem(vino.getProvincia().toString());
+   }else{
+      txtDescripcionVino.setText("");
+      txtDescripcionVino.setEnabled(true);
+      precioVino.setText("");
+       
+   }
+ }
+     private void cargaProvincias(){
+          DefaultComboBoxModel<String> cbModel= new DefaultComboBoxModel<String>();
+          Provincias[] provincias = Provincias.values();
+       for (int i=0; i< provincias.length; i++){
+        {
+            cbModel.addElement(provincias[i].toString());
+        }
+         ComboProvincia.setModel(cbModel);
+      }
+     }
+    private void cargaVarietales(){
+          DefaultComboBoxModel<String> cbModel= new DefaultComboBoxModel<String>();
+          Varietales[] varietales = Varietales.values();
+       for (int i=0; i< varietales.length; i++){
+        {
+            cbModel.addElement(varietales[i].toString());
+        }
+         ComboVarietales.setModel(cbModel);
+      }
+    }
+    
+    
+    
+    
+    
+    
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -35,26 +95,41 @@ Callback callback;
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnGuardar = new javax.swing.JButton();
+        btnEliminar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtDescripcionVino = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        ComboVarietales = new javax.swing.JComboBox();
         jLabel4 = new javax.swing.JLabel();
-        jComboBox2 = new javax.swing.JComboBox();
+        ComboProvincia = new javax.swing.JComboBox();
         jLabel5 = new javax.swing.JLabel();
         precioVino = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Guardar");
+        btnGuardar.setText("Guardar");
+        btnGuardar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGuardarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Eliminar");
+        btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
-        jButton3.setText("Cancelar");
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Alta Vino");
 
@@ -62,11 +137,7 @@ Callback callback;
 
         jLabel3.setText("Varietal");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
         jLabel4.setText("Provincia de procedencia");
-
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel5.setText("Precio de venta");
 
@@ -90,12 +161,12 @@ Callback callback;
                             .addComponent(jLabel3))
                         .addGap(33, 33, 33)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txtDescripcionVino, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(ComboVarietales, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addGap(18, 18, 18)
-                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(ComboProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -103,11 +174,11 @@ Callback callback;
                                 .addGap(18, 18, 18)
                                 .addComponent(precioVino))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btnGuardar)
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton2)))
+                                .addComponent(btnEliminar)))
                         .addGap(18, 18, 18)
-                        .addComponent(jButton3)))
+                        .addComponent(btnCancelar)))
                 .addContainerGap(79, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -118,24 +189,24 @@ Callback callback;
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtDescripcionVino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboVarietales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(ComboProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(precioVino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
-                    .addComponent(jButton3))
+                    .addComponent(btnGuardar)
+                    .addComponent(btnEliminar)
+                    .addComponent(btnCancelar))
                 .addContainerGap(89, Short.MAX_VALUE))
         );
 
@@ -158,20 +229,71 @@ Callback callback;
        */
     }//GEN-LAST:event_precioVinoKeyReleased
 
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+      if (!("".equals(txtDescripcionVino.getText()))&& !("".equals(precioVino.getText()))){
+             Vino nuevoVino = new Vino(Varietales.valueOf(ComboVarietales.getSelectedItem().toString()),Provincias.valueOf(ComboProvincia.getSelectedItem().toString()),Float.parseFloat(precioVino.getText()),txtDescripcionVino.getText());
+     try {
+        if (vino==null){
+           
+            restaurant.agregarProducto(nuevoVino);
+            JOptionPane.showMessageDialog(rootPane, "Nuevo Vino agregado con exito ");
+          
+        }else{
+           
+            restaurant.modificarProducto(nuevoVino);
+            JOptionPane.showMessageDialog(rootPane, "Vino Modificado con exito ");
+        }
+         callback.onSuccess(restaurant);
+             } catch (ExcepcionLogica ex) {
+        Logger.getLogger(AltaBebida.class.getName()).log(Level.SEVERE, null, ex);
+         JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+        }
+        
+       
+          
+          
+          
+          
+      }else{
+      JOptionPane.showMessageDialog(precioVino, "Campos faltantes o invalidos");
+      }
+      
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+try {
+        restaurant.eliminarProducto(vino);
+        JOptionPane.showMessageDialog(rootPane, "Vino Eliminado con exito ");
+                   
+            
+        callback.onSuccess(restaurant); 
+    } catch (ExcepcionLogica ex) {
+        Logger.getLogger(AltaPostre.class.getName()).log(Level.SEVERE, null, ex);
+        JOptionPane.showMessageDialog(rootPane, ex.getMessage());
+    }            
+        
+        
+        
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
+    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarActionPerformed
+
   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox ComboProvincia;
+    private javax.swing.JComboBox ComboVarietales;
+    private javax.swing.JButton btnCancelar;
+    private javax.swing.JButton btnEliminar;
+    private javax.swing.JButton btnGuardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField precioVino;
+    private javax.swing.JTextField txtDescripcionVino;
     // End of variables declaration//GEN-END:variables
 }
