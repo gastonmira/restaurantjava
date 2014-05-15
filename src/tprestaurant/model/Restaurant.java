@@ -156,7 +156,21 @@ public class Restaurant implements Serializable {
         
         return null;
     }
-     
+     public Producto getProductobyDescTipo(String type, String key)
+    {
+        
+        for (Iterator<Producto> it = productos.iterator(); it.hasNext();) 
+        {
+            Producto p = it.next();
+            if(p.getClass().getSimpleName().equals(type) 
+                    && p.getDescripcion().toLowerCase().startsWith(key.toLowerCase()))
+            {
+                return p;
+            } 
+        }
+        
+        return null;
+    }
      public Ingrediente getIngredientebyDesc(String key)
     {
         for (Ingrediente i:ingredientes) 

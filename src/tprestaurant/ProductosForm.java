@@ -21,7 +21,9 @@ import tprestaurant.model.Restaurant;
 import tprestaurant.model.productos.Bebida;
 import tprestaurant.model.productos.Entrada;
 import tprestaurant.model.productos.Postre;
+import tprestaurant.model.productos.Principal;
 import tprestaurant.model.productos.Producto;
+import tprestaurant.model.productos.Vino;
 
 /**
  *
@@ -47,7 +49,10 @@ public class ProductosForm extends javax.swing.JFrame {
     public ProductosForm(Restaurant restaurant) {
          this.restaurant=restaurant;
         initComponents();
-       createTableListeners();
+      
+        
+        
+        createTableListeners();
     }
 
     /**
@@ -672,11 +677,12 @@ public class ProductosForm extends javax.swing.JFrame {
        
         altaEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaEntrada.setVisible(true);
+        altaEntrada.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddEntradaMouseClicked
 
     private void btnAddPrincipalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPrincipalMouseClicked
         // TODO add your handling code here:
-           altaPrincipal = new AltaPrincipal(restaurant,new Callback<Restaurant>(){
+           altaPrincipal = new AltaPrincipal(null,restaurant,new Callback<Restaurant>(){
         
         @Override
         public void onSuccess(Restaurant restaurant) {
@@ -687,6 +693,7 @@ public class ProductosForm extends javax.swing.JFrame {
     });
         altaPrincipal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaPrincipal.setVisible(true);
+        altaPrincipal.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddPrincipalMouseClicked
 
     private void btnAddPostreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddPostreMouseClicked
@@ -702,6 +709,7 @@ public class ProductosForm extends javax.swing.JFrame {
       
         altaPostre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaPostre.setVisible(true);
+        altaPostre.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddPostreMouseClicked
 
     private void btnAddBebidaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddBebidaMouseClicked
@@ -719,11 +727,12 @@ public class ProductosForm extends javax.swing.JFrame {
     });
         altaBebida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaBebida.setVisible(true);
+        altaBebida.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddBebidaMouseClicked
 
     private void btnAddVinoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAddVinoMouseClicked
         // TODO add your handling code here:
-         altaVino = new AltaVino(restaurant,new Callback<Restaurant>(){
+         altaVino = new AltaVino(null,restaurant,new Callback<Restaurant>(){
         
         @Override
         public void onSuccess(Restaurant restaurant) {
@@ -736,6 +745,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
         altaVino.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaVino.setVisible(true);
+        altaVino.setLocationRelativeTo(null);
     }//GEN-LAST:event_btnAddVinoMouseClicked
 
     private void tabProductosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_tabProductosStateChanged
@@ -915,7 +925,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
            // float p = Float.parseFloat((String) tablaBebida.getModel().getValueAt(tablaBebida.getSelectedRow(), 1));
             String n = (String) tablaBebida.getModel().getValueAt(tablaBebida.getSelectedRow(), 0);
-           Bebida beb= (Bebida)restaurant.getProductobyDesc(n);
+           Bebida beb= (Bebida)restaurant.getProductobyDescTipo("Bebida",n);
            // Bebida beb= new Bebida(p,n);
            altaBebida = new AltaBebida(beb,restaurant,new Callback<Restaurant>(){
         
@@ -928,6 +938,7 @@ public class ProductosForm extends javax.swing.JFrame {
     });
         altaBebida.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaBebida.setVisible(true); 
+        altaBebida.setLocationRelativeTo(null);
            
         }
     }
@@ -943,7 +954,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
             //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
             String n = (String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 0);
-            Entrada ent= (Entrada)restaurant.getProductobyDesc(n);
+            Entrada ent= (Entrada)restaurant.getProductobyDescTipo("Entrada",n);
             
            // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
             
@@ -961,6 +972,7 @@ public class ProductosForm extends javax.swing.JFrame {
        
         altaEntrada.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaEntrada.setVisible(true);
+        altaEntrada.setLocationRelativeTo(null);
            
         }
     }
@@ -976,7 +988,7 @@ public class ProductosForm extends javax.swing.JFrame {
         
             //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
             String n = (String) tablaPostre.getModel().getValueAt(tablaPostre.getSelectedRow(), 0);
-            Postre pos= (Postre)restaurant.getProductobyDesc(n);
+            Postre pos= (Postre)restaurant.getProductobyDescTipo("Postre",n);
             
            // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
             
@@ -992,10 +1004,73 @@ public class ProductosForm extends javax.swing.JFrame {
       
         altaPostre.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         altaPostre.setVisible(true);
-           
+           altaPostre.setLocationRelativeTo(null);
         }
     }
 });
+     /*PRINCIPAL*/
+     
+     tablaPrincipal.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mousePressed(MouseEvent me) {
+       
+        if (me.getClickCount() == 2) {
+        
+            //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
+            String n = (String) tablaPrincipal.getModel().getValueAt(tablaPrincipal.getSelectedRow(), 0);
+            Principal pri= (Principal)restaurant.getProductobyDescTipo("Principal",n);
+            
+           // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
+            
+            
+            altaPrincipal = new AltaPrincipal(pri,restaurant,new Callback<Restaurant>(){
+        
+            @Override
+            public void onSuccess(Restaurant restaurant) {
+
+                setEntradaTableModel(tablaPrincipal, "Principal","",0);
+                altaPrincipal.dispose();
+             }   
+            });
+
+       
+        altaPrincipal.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaPrincipal.setVisible(true);
+           altaPrincipal.setLocationRelativeTo(null);
+        }
+    }
+});
+     
+     /*VINOS*/
+       tablaVino.addMouseListener(new MouseAdapter() {
+    @Override
+    public void mousePressed(MouseEvent me) {
+       
+        if (me.getClickCount() == 2) {
+        
+            //float p = Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 1));
+            String n = (String) tablaVino.getModel().getValueAt(tablaVino.getSelectedRow(), 0);
+            Vino vino= (Vino)restaurant.getProductobyDescTipo("Vino",n);
+            
+           // float pg=Float.parseFloat((String) tablaEntrada.getModel().getValueAt(tablaEntrada.getSelectedRow(), 2));
+            
+            
+               altaVino = new AltaVino(vino,restaurant,new Callback<Restaurant>(){
+        
+        @Override
+        public void onSuccess(Restaurant restaurant) {
+            setTableModel(tablaVino, "Vino","",0);
+            altaVino.dispose();
+        }
+    });
+      
+        altaVino.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        altaVino.setVisible(true);
+           altaVino.setLocationRelativeTo(null);
+        }
+    }
+});
+     
 }
     
     
